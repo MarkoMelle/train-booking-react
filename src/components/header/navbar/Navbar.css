@@ -1,0 +1,46 @@
+.nav {
+  width: 100%;
+}
+
+.nav-list {
+  position: relative;
+  display: flex;
+  padding: 27px 258px;
+  background: #292929;
+}
+
+.nav-item {
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 35px;
+  transition: color 0.3s ease; 
+}
+
+.nav-item:not(:last-child) {
+  margin-right: 88px;
+}
+
+/* 
+  pixel perfect fix
+ */
+.nav-item:last-child {
+  margin-left: -14px;
+}
+
+.nav-item-logo {
+  position: absolute;
+  top: -50%;
+  font-weight: 900;
+  font-size: 36px;
+}
+
+
+.nav-item:hover {
+  color: #FFCA62;
+}
+
+.nav-item a:focus-visible {
+  outline: none;
+  border-radius: 5px;
+  color: #FFCA62;
+}
