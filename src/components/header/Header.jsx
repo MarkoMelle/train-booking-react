@@ -9,15 +9,15 @@ export default function Header() {
   switch (location.pathname) {
     case "/":
       background = "home-background";
-      Widget = "WidgetHome";
+      Widget = "Filter-home";
       break;
-    case "/about":
+    case "/....":
       background = "about-background";
       Widget = "WidgetAbout";
       break;
-    case "/contact":
+    case "/.....":
       background = "contact-background";
-      Widget = "WidgetContact";
+      Widget = "Filter-full";
       break;
     default:
       background = "";
