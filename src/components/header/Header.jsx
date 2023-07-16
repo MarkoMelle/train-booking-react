@@ -5,24 +5,25 @@ import "./Header.css";
 
 export default function Header() {
   const location = useLocation();
-  let background, Widget;
+  let background;
+  // let Widget;
 
   switch (location.pathname) {
     case "/":
       background = "home-background";
-      Widget = "Filter-home";
+      // Widget = "Filter-home";
       break;
     case "/....":
       background = "about-background";
-      Widget = "WidgetAbout";
+      // Widget = "WidgetAbout";
       break;
     case "/.....":
       background = "contact-background";
-      Widget = "Filter-full";
+      // Widget = "Filter-full";
       break;
     default:
       background = "";
-      Widget = null;
+      // Widget = null;
   }
 
   return (
