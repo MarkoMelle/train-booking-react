@@ -1,5 +1,42 @@
 .header {
+   position: relative;
    padding-top: 64px;
    background-image: url("../../assets/images/header-bg-home.png");
-   height: 100vh;
+   
+}
+
+.header__content {
+   width: 100%;
+   display: flex;
+   gap: 146px;
+   margin: 259px auto 0;
+   padding: 0 232px 0 20px;
+   justify-content: flex-end;
+}
+
+@media screen and (max-width: 1440px) {
+   .header__content {
+      gap: 100px;
+      padding: 0 100px 0 20px;
+   }
+}
+
+
+.header__title {
+   /* position: absolute;
+   top: 572px;
+   left: 349px; */
+   margin-top: 160px;
+   font-size: 72px;
+   line-height: 84.38px;
+   color: #fff;
+}
+
+.header__title--light {
+   display: block;
+   font-weight: 100;
+}
+
+.header__title--bold {
+   font-weight: 700;
 }

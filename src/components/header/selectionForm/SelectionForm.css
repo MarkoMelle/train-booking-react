@@ -1,0 +1,159 @@
+.selection-form {
+   flex-shrink: 0;
+  display: flex;
+  flex-direction: column;
+  max-width: 730px;
+  padding: 80px 20px 54px 20px;
+  background: rgba(41, 41, 41, 0.8);
+  /* transform: translateX(50%);
+  top: 258px;
+  left: 594px;
+  position: relative; */
+}
+
+.selection-form__group {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin-bottom: 60px;
+  column-gap: 40px;
+}
+
+ .selection-form__group:last-of-type {
+  margin-bottom: 92px;
+} 
+
+.selection-form__group-title {
+  flex: 1 1 100%;
+  margin-bottom: 15px;
+  margin-left: 6px;
+  font-size: 30px;
+  font-weight: 300;
+  line-height: 35px;
+}
+
+.selection-form__input {
+  padding: 20px;
+  width: 324px;
+  border-radius: 3px;
+  border: none;
+  background: #fff;
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.selection-form__input:focus {
+  outline: none;
+}
+
+.selection-form__input::placeholder {
+  color: rgb(229, 229, 229);
+  font-size: 18px;
+  font-weight: 400;
+}
+
+.selection-form__input--text {
+  background-image: url("../../../assets/images/location-icon.svg");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
+}
+
+.selection-form__suggestions {
+  color: #000;
+  position: absolute;
+  width: 325px;
+  margin-top: 120px;
+  z-index: 999;
+}
+
+.selection-form__suggestion {
+  display: block;
+  padding: 10px 20px;
+  border-radius: 3px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.selection-form__swap-btn {
+  margin: 0 -38px;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  line-height: 28.13px;
+}
+
+.selection-form__input--date {
+}
+
+.selection-form__submit-btn {
+   margin-left: auto;
+   text-transform: uppercase;
+}
+
+/* datepicker */
+
+.react-datepicker {
+}
+
+.react-datepicker__triangle {
+}
+
+.react-datepicker__aria-live {
+}
+
+.react-datepicker__navigation {
+}
+
+.react-datepicker__navigation--previous {
+}
+
+.react-datepicker__navigation-icon {
+}
+
+.react-datepicker__navigation-icon--previous {
+}
+
+.react-datepicker__navigation--next {
+}
+
+.react-datepicker__navigation-icon--next {
+}
+
+.react-datepicker__month-container {
+}
+
+.react-datepicker__header {
+}
+
+.react-datepicker__current-month {
+}
+
+.react-datepicker__header__dropdown {
+}
+
+.react-datepicker__header__dropdown--scroll {
+}
+
+.react-datepicker__day-names {
+}
+
+.react-datepicker__day-name {
+}
+
+.react-datepicker__month {
+}
+
+.react-datepicker__week {
+}
+
+.react-datepicker__day {
+}
+
+.react-datepicker__day--weekend {
+}
+
+.react-datepicker__day--outside-month {
+}
+
+.react-datepicker__day--keyboard-selected {
+}
