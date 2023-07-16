@@ -1,7 +1,7 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import HomePage from "./pages/HomePage";
 import "./App.css";
-import Footer from "./components/footer/Footer";
+// import Footer from "./components/footer/Footer";
 
 export default function App() {
   console.log(import.meta.env.VITE_PUBLIC_URL);
@@ -10,7 +10,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
       </Routes>
-      <Footer />
+      {/* <Footer /> */}
     </Router>
   );
 }
