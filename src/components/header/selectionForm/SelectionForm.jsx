@@ -14,9 +14,9 @@ export default function SelectionForm() {
   const [returnDate, setReturnDate] = useState("");
 
   const handleSubmit = (event) => {
-      event.preventDefault();
-      console.log("Отправлено");
-   }
+    event.preventDefault();
+    console.log("Отправлено");
+  };
 
   const handleInputChange = (event, setInput) => {
     setInput(event.target.value);
@@ -109,7 +109,10 @@ export default function SelectionForm() {
           onChange={(e) => handleDateChange(e, setReturnDate)}
         />
       </div>
-      <button className={`${block}__submit-btn primary-btn primary-btn--big--black`} type="submit" >
+      <button
+        className={`${block}__submit-btn primary-btn primary-btn--big--black`}
+        type="submit"
+      >
         Найти билеты
       </button>
     </form>

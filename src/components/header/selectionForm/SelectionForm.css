@@ -1,44 +1,40 @@
 .selection-form {
-   flex-shrink: 0;
+  flex-shrink: 0;
   display: flex;
   flex-direction: column;
-  max-width: 730px;
-  padding: 80px 20px 54px 20px;
+  max-width: 45.625rem;
+  padding: 5rem 1.25rem 3.375rem 1.25rem;
   background: rgba(41, 41, 41, 0.8);
-  /* transform: translateX(50%);
-  top: 258px;
-  left: 594px;
-  position: relative; */
 }
 
 .selection-form__group {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  margin-bottom: 60px;
-  column-gap: 40px;
+  margin-bottom: 3.75rem;
+  column-gap: 2.5rem;
 }
 
- .selection-form__group:last-of-type {
-  margin-bottom: 92px;
-} 
+.selection-form__group:last-of-type {
+  margin-bottom: 5.75rem;
+}
 
 .selection-form__group-title {
   flex: 1 1 100%;
-  margin-bottom: 15px;
-  margin-left: 6px;
-  font-size: 30px;
+  margin-bottom: 0.9375rem;
+  margin-left: 0.375rem;
+  font-size: 1.875rem;
   font-weight: 300;
-  line-height: 35px;
+  line-height: 2.1875rem;
 }
 
 .selection-form__input {
-  padding: 20px;
-  width: 324px;
-  border-radius: 3px;
+  padding: 1.25rem;
+  width: 20.25rem;
+  border-radius: 0.1875rem;
   border: none;
   background: #fff;
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
 }
 
@@ -48,7 +44,7 @@
 
 .selection-form__input::placeholder {
   color: rgb(229, 229, 229);
-  font-size: 18px;
+  font-size: 1.125rem;
   font-weight: 400;
 }
 
@@ -86,8 +82,8 @@
 }
 
 .selection-form__submit-btn {
-   margin-left: auto;
-   text-transform: uppercase;
+  margin-left: auto;
+  text-transform: uppercase;
 }
 
 /* datepicker */

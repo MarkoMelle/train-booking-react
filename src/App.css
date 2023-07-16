@@ -1,14 +1,14 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap");
 
 .wrapper {
-  max-width: 1920px;
+  max-width: 120rem;
   margin: 0 auto;
 }
 
 .primary-btn {
   border: none;
   display: inline-block;
-  border-radius: 5px;
+  border-radius: 0.3125rem;
   background: #ffa800;
   transition: background 0.3s ease;
   cursor: pointer;
@@ -16,19 +16,49 @@
 
 .primary-btn:active {
   background: #fff;
-  outline: 1px solid rgba(255, 168, 0, 1);
-  box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+  outline: 0.0625rem solid rgba(255, 168, 0, 1);
+  box-shadow: 0 0.25rem 0.25rem 0 rgba(0, 0, 0, 0.25);
   color: rgba(255, 168, 0, 1);
   border: none;
 }
 
 .primary-btn--big--black {
-  font-size: 24px;
+  font-size: 1.5rem;
   font-weight: 700;
   color: #000;
-  padding: 16px 70px;
+  padding: 1rem 4.375rem;
 }
 
 .primary-btn--white {
   color: #fff;
+}
+
+@media screen and (max-width: 1600px) {
+  html {
+    font-size: 93.75%;
+  }
+}
+
+@media screen and (max-width: 1440px) {
+  html {
+    font-size: 87.5%;
+  }
+}
+
+@media screen and (max-width: 1024px) {
+  html {
+    font-size: 75%;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  html {
+    font-size: 62.5%;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  html {
+    font-size: 50%;
+  }
 }
