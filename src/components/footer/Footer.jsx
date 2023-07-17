@@ -55,7 +55,7 @@ export default function Footer() {
               <a
                 href="https://yandex.ru/maps/-/CCUjZ0dbsC"
                 className="footer__link footer__link--address"
-                target="_blank"
+                target="_blank" rel="noreferrer"
               >
                 <span className="footer__link-text">г. Москва</span>
                 <span className="footer__link-text">ул. Московская 27-35</span>
