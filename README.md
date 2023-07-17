@@ -11,5 +11,5 @@ https://markomelle.github.io/train-booking-react/
 3.  Установите зависимости проекта:
     `npm/yarn install` 
 4.  Запуск проекта в режиме разработки:
-    `npm run dev/yarn dev 
+    `npm run dev/yarn dev`
     После запуска проекта, откройте в браузере и перейдите по URL http://localhost:3000
