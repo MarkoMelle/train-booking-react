@@ -27,7 +27,7 @@ export default function Header() {
   }
 
   return (
-    <header className={`header wrapper ${background}`}>
+    <header className={`header wrapper ${background}`} id="header">
       <Navbar />
       <div className="header__content">
         <h2 className="header__title">

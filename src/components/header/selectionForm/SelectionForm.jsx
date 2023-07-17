@@ -69,7 +69,7 @@ export default function SelectionForm() {
       <div className={`${block}__group`}>
         <h3 className={`${block}__group-title`}>Направление</h3>
         <input
-          className={`${block}__input ${block}__input--text`}
+          className={`${block}__input ${block}__input--text form-input`}
           type="text"
           name="from"
           value={fromInput}
@@ -85,7 +85,7 @@ export default function SelectionForm() {
           <img src={swapIcon} alt="swap" />
         </button>
         <input
-          className={`${block}__input ${block}__input--text`}
+          className={`${block}__input ${block}__input--text form-input`}
           type="text"
           name="to"
           value={toInput}
@@ -97,13 +97,13 @@ export default function SelectionForm() {
       <div className={`${block}__group`}>
         <h3 className={`${block}__group-title`}>Дата</h3>
         <DataPicker
-          className={`${block}__input ${block}__input--date`}
+          className={`${block}__input ${block}__input--date form-input`}
           name="departureDate"
           selected={departureDate}
           onChange={(e) => handleDateChange(e, setDepartureDate)}
         />
         <DataPicker
-          className={`${block}__input ${block}__input--date`}
+          className={`${block}__input ${block}__input--date form-input`}
           name="returnDate"
           selected={returnDate}
           onChange={(e) => handleDateChange(e, setReturnDate)}

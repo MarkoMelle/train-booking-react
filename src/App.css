@@ -33,6 +33,25 @@
   color: #fff;
 }
 
+.form-input {
+  padding: 1.25rem;
+  border-radius: 0.1875rem;
+  border: none;
+  background: #fff;
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
+.form-input:focus {
+  outline: none;
+}
+
+.form-input::placeholder {
+  color: rgb(229, 229, 229);
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
 @media screen and (max-width: 1600px) {
   html {
     font-size: 93.75%;

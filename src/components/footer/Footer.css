@@ -1,3 +1,142 @@
 .footer {
-   background: rgba(45, 43, 47, 1);
+  background: rgba(45, 43, 47, 1);
+  padding: 50px 0 0;
+}
+
+.footer__container {
+  display: grid;
+  grid-template-columns: calc(50% - 20px) 50%;
+  row-gap: 1.5rem;
+  margin-bottom: 50px;
+  padding: 0 50px;
+}
+
+.footer__contact {
+  grid-row: 1 / 3;
+  margin: auto;
+}
+
+.footer__title {
+  font-size: 1.875rem;
+  font-weight: 500;
+  line-height: 2.1875rem;
+  margin-bottom: 1.8rem;
+}
+
+.footer__contact-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1.9rem;
+}
+
+.footer__contact-item {
+}
+
+.footer__link {
+  padding-left: 66px;
+  background-repeat: no-repeat;
+  background-position: left center;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.758125rem;
+  min-height: 30px;
+}
+
+.footer__link--phone {
+  background-image: url("../../assets/icons/phone.svg");
+}
+
+.footer__link--email {
+  background-image: url("../../assets/icons/email.svg");
+}
+
+.footer__link--skype {
+  background-image: url("../../assets/icons/skype.svg");
+}
+
+.footer__link--address {
+  background-image: url("../../assets/icons/location-footer.svg");
+  display: flex;
+  flex-direction: column;
+  background-position: 0 0;
+}
+
+.footer__form {
+}
+
+.footer__fieldset {
+  border: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+}
+
+.footer__legend {
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+  margin-bottom: 1rem;
+}
+
+.footer__input {
+  width: 28rem;
+  margin-right: 30px;
+}
+
+.footer__input::placeholder {
+  font-size: 1.5rem;
+}
+
+.footer__button {
+  border: 1px solid #fff;
+  padding: 15px 15px;
+  text-transform: uppercase;
+  background: transparent;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: 1.75rem;
+  border-radius: 3px;
+  cursor: pointer;
+}
+
+.footer__social {
+}
+
+.footer__social-list {
+  display: flex;
+  gap: 3rem;
+}
+
+.footer__social-item {
+}
+
+.footer__social-link {
+}
+
+.footer__nav {
+  border-top: 1px solid #fff;
+  padding: 20px 16rem 30px;
+}
+
+.footer__nav-list {
+  display: flex;
+  justify-content: space-between;
+}
+
+.footer__nav-item {
+  display: flex;
+  align-items: center;
+}
+
+.footer__nav-logo {
+  font-size: 2.25rem;
+  font-weight: 900;
+  line-height: 2.625rem;
+}
+
+.footer__nav-link {
+  font-size: 24px;
+  font-weight: 300;
+  line-height: 28px;
 }
