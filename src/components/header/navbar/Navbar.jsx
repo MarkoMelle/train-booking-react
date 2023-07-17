@@ -7,7 +7,6 @@ export default function Navbar() {
       <ul className="nav-list nav-list">
         <li className="nav-item nav-item-logo">
           <Link to="/">
-            {/* <img src={logo} alt="logo" /> */}
             Лого
           </Link>
         </li>

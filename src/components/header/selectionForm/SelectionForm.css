@@ -49,7 +49,7 @@
 }
 
 .selection-form__input--text {
-  background-image: url("../../../assets/images/location-icon.svg");
+  background-image: url("../../../assets/icons/location-icon.svg");
   background-repeat: no-repeat;
   background-position: right 20px center;
 }
@@ -79,6 +79,9 @@
 }
 
 .selection-form__input--date {
+  background-image: url("../../../assets/icons/calendar-icon.svg");
+  background-repeat: no-repeat;
+  background-position: right 20px center;
 }
 
 .selection-form__submit-btn {

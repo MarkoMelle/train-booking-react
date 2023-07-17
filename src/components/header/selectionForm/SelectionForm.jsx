@@ -2,7 +2,7 @@ import { useState } from "react";
 import DataPicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import "./SelectionForm.css";
-import swapIcon from "../../../assets/images/swap-icon.svg";
+import swapIcon from "../../../assets/icons/swap-icon.svg";
 
 const locations = ["Aнгарск", "Астрахань", "Барнаул", "Москва"];
 
