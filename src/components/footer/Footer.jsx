@@ -75,7 +75,7 @@ export default function Footer() {
                 <a
                   href="https://www.youtube.com/"
                   className="footer__link"
-                  target="_blank"
+                  target="_blank" rel="noreferrer"
                 >
                   <img src={youtubeIcon} alt="youtube" />
                 </a>
@@ -84,7 +84,7 @@ export default function Footer() {
                 <a
                   href="https://www.linkedin.com/"
                   className="footer__link"
-                  target="_blank"
+                  target="_blank" rel="noreferrer"
                 >
                   <img src={linkedinIcon} alt="linkedin" />
                 </a>
@@ -93,7 +93,7 @@ export default function Footer() {
                 <a
                   href="https://www.plus.google.com/"
                   className="footer__link"
-                  target="_blank"
+                  target="_blank" rel="noreferrer"
                 >
                   <img src={googlePlusIcon} alt="google plus" />
                 </a>
@@ -102,7 +102,7 @@ export default function Footer() {
                 <a
                   href="https://www.facebook.com/"
                   className="footer__link"
-                  target="_blank"
+                  target="_blank" rel="noreferrer"
                 >
                   <img src={facebookIcon} alt="facebook" />
                 </a>
@@ -111,7 +111,7 @@ export default function Footer() {
                 <a
                   href="https://www.twitter.com/"
                   className="footer__link"
-                  target="_blank"
+                  target="_blank" rel="noreferrer"
                 >
                   <img src={twitterIcon} alt="twitter" />
                 </a>
