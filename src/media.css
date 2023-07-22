@@ -1,0 +1,29 @@
+@media screen and (max-width: 1600px) {
+   html {
+     font-size: 93.75%;
+   }
+ }
+ 
+ @media screen and (max-width: 1440px) {
+   html {
+     font-size: 87.5%;
+   }
+ }
+ 
+ @media screen and (max-width: 1024px) {
+   html {
+     font-size: 75%;
+   }
+ }
+ 
+ @media screen and (max-width: 768px) {
+   html {
+     font-size: 62.5%;
+   }
+ }
+ 
+ @media screen and (max-width: 480px) {
+   html {
+     font-size: 50%;
+   }
+ }

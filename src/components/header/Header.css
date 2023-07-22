@@ -3,15 +3,17 @@
   padding-top: 4rem;
   background-image: url("../../assets/images/header-bg-home.png");
   background-color: #ffa800;
+  border-bottom: 8px solid #ffa800;
   background-repeat: no-repeat;
   background-position: center;
+  background-size: cover;
 }
 
 .header__content {
   width: 100%;
   display: flex;
   gap: 9.125rem;
-  margin: 16.1875rem auto 0;
+  margin: 16.1rem auto 0;
   padding: 0 14.5rem 0 1.25rem;
   justify-content: flex-end;
 }

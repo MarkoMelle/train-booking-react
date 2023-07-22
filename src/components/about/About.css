@@ -1,0 +1,35 @@
+.about {
+  padding: 9rem 16.125rem 7.3rem;
+}
+
+.about__title {
+  margin-bottom: 1.875rem;
+  color: #292929;
+  font-family: Roboto;
+  font-size: 2.25rem;
+  font-weight: 500;
+  line-height: normal;
+  text-transform: uppercase;
+}
+
+.about__content {
+  padding: 0 14rem 0.5rem 1.25rem;
+  display: flex;
+  gap:  1.5rem;
+  flex-direction: column;
+  border-left: 9px solid #ffa800;
+}
+
+.about__text {
+  color: #292929;
+  font-family: Roboto;
+  font-size: 1.5rem;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.about__text--bold {
+  font-weight: bold;
+  display: flex;
+  flex-direction: column;
+}

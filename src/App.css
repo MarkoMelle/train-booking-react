@@ -1,4 +1,4 @@
-@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;700;900&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
 
 .wrapper {
   max-width: 120rem;
@@ -37,6 +37,7 @@
   padding: 1.25rem;
   border-radius: 0.1875rem;
   border: none;
+  font-size: 1.125rem;
   background: #fff;
   font-size: 1.125rem;
   font-weight: 400;
@@ -52,32 +53,3 @@
   font-weight: 400;
 }
 
-@media screen and (max-width: 1600px) {
-  html {
-    font-size: 93.75%;
-  }
-}
-
-@media screen and (max-width: 1440px) {
-  html {
-    font-size: 87.5%;
-  }
-}
-
-@media screen and (max-width: 1024px) {
-  html {
-    font-size: 75%;
-  }
-}
-
-@media screen and (max-width: 768px) {
-  html {
-    font-size: 62.5%;
-  }
-}
-
-@media screen and (max-width: 480px) {
-  html {
-    font-size: 50%;
-  }
-}
