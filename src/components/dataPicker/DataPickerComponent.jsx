@@ -83,7 +83,7 @@ CustomHeader.propTypes = {
  };
  
  DataPickerComponent.propTypes = {
-   date: PropTypes.instanceOf(Date).isRequired,
+   date: PropTypes.string.isRequired,
    setDate: PropTypes.func.isRequired,
    block: PropTypes.string.isRequired,
  };
