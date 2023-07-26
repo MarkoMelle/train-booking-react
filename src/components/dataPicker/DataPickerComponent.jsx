@@ -5,20 +5,6 @@ import ru from "date-fns/locale/ru";
 import { format } from "date-fns";
 registerLocale("ru", ru);
 
-CustomHeader.propTypes = {
-  date: PropTypes.instanceOf(Date).isRequired,
-  decreaseMonth: PropTypes.func.isRequired,
-  increaseMonth: PropTypes.func.isRequired,
-  prevMonthButtonDisabled: PropTypes.bool.isRequired,
-  nextMonthButtonDisabled: PropTypes.bool.isRequired,
-};
-
-DataPickerComponent.propTypes = {
-  date: PropTypes.instanceOf(Date).isRequired,
-  setDate: PropTypes.func.isRequired,
-  block: PropTypes.string.isRequired,
-};
-
 const handleDateChange = (date, setDate) => {
   setDate(date);
 };
@@ -86,3 +72,17 @@ export default function DataPickerComponent({ date, setDate, block }) {
     />
   );
 }
+
+CustomHeader.propTypes = {
+   date: PropTypes.instanceOf(Date).isRequired,
+   decreaseMonth: PropTypes.func.isRequired,
+   increaseMonth: PropTypes.func.isRequired,
+   prevMonthButtonDisabled: PropTypes.bool.isRequired,
+   nextMonthButtonDisabled: PropTypes.bool.isRequired,
+ };
+ 
+ DataPickerComponent.propTypes = {
+   date: PropTypes.instanceOf(Date).isRequired,
+   setDate: PropTypes.func.isRequired,
+   block: PropTypes.string.isRequired,
+ };

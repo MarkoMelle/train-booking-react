@@ -1,5 +1,5 @@
 import { useState } from "react";
-import DataPickerComponent from "../../dataPicker/dataPicker";
+import DataPickerComponent from "../../dataPicker/DataPickerComponent";
 import "./SelectionForm.css";
 import swapIcon from "../../../assets/icons/swap-icon.svg";
 import { useNavigate } from "react-router-dom";
@@ -7,9 +7,6 @@ import PropTypes from "prop-types";
 
 const locations = ["Aнгарск", "Астрахань", "Барнаул", "Москва"];
 
-SelectionForm.propTypes = {
-  modifier: PropTypes.string.isRequired,
-};
 
 export default function SelectionForm({ modifier }) {
   const block = "selection-form";
@@ -131,3 +128,8 @@ export default function SelectionForm({ modifier }) {
     </form>
   );
 }
+
+
+SelectionForm.propTypes = {
+  modifier: PropTypes.string.isRequired,
+};
