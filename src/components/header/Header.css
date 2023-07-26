@@ -1,12 +1,20 @@
 .header {
   position: relative;
   padding-top: 4rem;
-  background-image: url("../../assets/images/header-bg-home.png");
   background-color: #ffa800;
   border-bottom: 8px solid #ffa800;
   background-repeat: no-repeat;
-  background-position: center;
+  background-position: top center;
+}
+
+.header--bg--home {
+  background-image: url("../../assets/images/header-bg-home.png");
   background-size: cover;
+}
+
+.header--bg--tickets {
+  background-image: url("../../assets/images/header-bg-tickets.png");
+  border-bottom: none;
 }
 
 .header__content {
@@ -16,6 +24,13 @@
   margin: 16.1rem auto 0;
   padding: 0 14.5rem 0 1.25rem;
   justify-content: flex-end;
+}
+
+.header__content--tickets {
+  display: block;
+  padding: 0;
+  margin: 0 auto;
+  padding: 6.875rem 2.5rem 0 2.5rem;
 }
 
 @media screen and (max-width: 1600px) {

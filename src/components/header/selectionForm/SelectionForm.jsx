@@ -1,16 +1,19 @@
-import { useState, useEffect } from "react";
-import DataPicker, { registerLocale } from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import { useState } from "react";
+import DataPickerComponent from "../../dataPicker/dataPicker";
 import "./SelectionForm.css";
 import swapIcon from "../../../assets/icons/swap-icon.svg";
-import ru from "date-fns/locale/ru";
-import { format } from "date-fns";
-registerLocale("ru", ru);
+import { useNavigate } from "react-router-dom";
+import PropTypes from "prop-types";
 
 const locations = ["Aнгарск", "Астрахань", "Барнаул", "Москва"];
 
-export default function SelectionForm() {
+SelectionForm.propTypes = {
+  modifier: PropTypes.string.isRequired,
+};
+
+export default function SelectionForm({ modifier }) {
   const block = "selection-form";
+  const navigate = useNavigate();
   const [fromInput, setFromInput] = useState("");
   const [toInput, setToInput] = useState("");
   const [fromInputFocus, setFromInputFocus] = useState(false);
@@ -19,30 +22,24 @@ export default function SelectionForm() {
   const [returnDate, setReturnDate] = useState("");
   const [isRotated, setIsRotated] = useState(false);
 
-
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Отправлено");
+    navigate("/tickets");
   };
 
   const handleInputChange = (event, setInput) => {
     setInput(event.target.value);
   };
 
-  const handleDateChange = (date, setDate) => {
-    setDate(date);
-  };
-
   const handleSuggestionClick = (location, setInput) => {
     setInput(location);
   };
-
 
   const handleSwapButtonClick = () => {
     const temp = fromInput;
     setFromInput(toInput);
     setToInput(temp);
-  
+
     setIsRotated(true);
     setTimeout(() => {
       setIsRotated(false);
@@ -78,123 +75,51 @@ export default function SelectionForm() {
     );
   };
 
-  const CustomHeader = ({
-    date,
-    changeYear,
-    changeMonth,
-    decreaseMonth,
-    increaseMonth,
-    prevMonthButtonDisabled,
-    nextMonthButtonDisabled,
-  }) => {
-    const monthName = format(date, "LLLL", { locale: ru });
-
-    return (
-      <>
-        <button
-          onClick={decreaseMonth}
-          disabled={prevMonthButtonDisabled}
-          className="react-datepicker__navigation react-datepicker__navigation--previous"
-        >
-          <svg
-            className="react-datepicker__navigation-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <path d="M24 22h-24l12-20z" />
-          </svg>
-        </button>
-        <h3>{monthName}</h3>
-        <button
-          onClick={increaseMonth}
-          disabled={nextMonthButtonDisabled}
-          className="react-datepicker__navigation react-datepicker__navigation--next"
-        >
-          <svg
-            className="react-datepicker__navigation-icon"
-            xmlns="http://www.w3.org/2000/svg"
-            viewBox="0 0 24 24"
-          >
-            <path d="M24 22h-24l12-20z" />
-          </svg>
-        </button>
-      </>
-    );
-  };
-
   return (
-    <form className={block} onSubmit={handleSubmit}>
-      <div className={`${block}__group`}>
+    <form className={`${block} ${block}--${modifier}`} onSubmit={handleSubmit}>
+      <div className={`${block}__group ${block + `__group--${modifier}`}`}>
         <h3 className={`${block}__group-title`}>Направление</h3>
-        <div className={`${block}__input-container`}>
-          <input
-            className={`${block}__input ${block}__input--text form-input`}
-            type="text"
-            name="from"
-            value={fromInput}
-            onInput={(e) => handleInputChange(e, setFromInput)}
-            onFocus={() => setFromInputFocus(true)}
-            onBlur={() => setFromInputFocus(false)}
-            placeholder="Откуда"
-          />
-          {renderSuggestions(fromInput, setFromInput, fromInputFocus)}
-        </div>
+        <input
+          className={`${block}__input ${block}__input--text form-input`}
+          type="text"
+          name="from"
+          value={fromInput}
+          onInput={(e) => handleInputChange(e, setFromInput)}
+          onFocus={() => setFromInputFocus(true)}
+          onBlur={() => setFromInputFocus(false)}
+          placeholder="Откуда"
+        />
+        {renderSuggestions(fromInput, setFromInput, fromInputFocus)}
         <button
-          className={`${block}__swap-btn ${isRotated ? 'rotating' : ''}`}
+          className={`${block}__swap-btn ${isRotated ? "rotating" : ""}`}
           type="button"
           onClick={handleSwapButtonClick}
         >
           <img src={swapIcon} alt="swap" />
         </button>
-        <div className={`${block}__input-container`}>
-          <input
-            className={`${block}__input ${block}__input--text form-input`}
-            type="text"
-            name="to"
-            value={toInput}
-            onChange={(e) => handleInputChange(e, setToInput)}
-            onFocus={() => setToInputFocus(true)}
-            onBlur={() => setToInputFocus(false)}
-            placeholder="Куда"
-          />
-          {renderSuggestions(toInput, setToInput, toInputFocus)}
-        </div>
-      </div>
-      <div className={`${block}__group`}>
-        <h3 className={`${block}__group-title`}>Дата</h3>
-        <DataPicker
-          className={`${block}__input ${block}__input--date form-input`}
-          name="departureDate"
-          selected={departureDate}
-          onChange={(date) => handleDateChange(date, setDepartureDate)}
-          locale="ru"
-          renderCustomHeader={CustomHeader}
-          popperModifiers={[
-            {
-              name: "eventListeners",
-              options: {
-                scroll: false,
-                resize: false,
-              },
-            },
-          ]}
+        <input
+          className={`${block}__input ${block}__input--text form-input`}
+          type="text"
+          name="to"
+          value={toInput}
+          onChange={(e) => handleInputChange(e, setToInput)}
+          onFocus={() => setToInputFocus(true)}
+          onBlur={() => setToInputFocus(false)}
+          placeholder="Куда"
         />
-        <DataPicker
-          className={`${block}__input ${block}__input--date form-input`}
-          name="returnDate"
-          selected={returnDate}
-          onChange={(date) => handleDateChange(date, setReturnDate)}
-          locale="ru"
-          renderCustomHeader={CustomHeader}
-          popperModifiers={[
-            {
-              name: "eventListeners",
-              options: {
-                scroll: false,
-                resize: false,
-              },
-            },
-          ]}
+        {renderSuggestions(toInput, setToInput, toInputFocus)}
+      </div>
+      <div className={`${block}__group ${block + `__group--${modifier}`}`}>
+        <h3 className={`${block}__group-title`}>Дата</h3>
+        <DataPickerComponent
+          date={departureDate}
+          setDate={setDepartureDate}
+          block={block}
+        />
+        <DataPickerComponent
+          date={returnDate}
+          setDate={setReturnDate}
+          block={block}
         />
       </div>
       <button

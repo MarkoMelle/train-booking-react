@@ -7,16 +7,33 @@
   background: rgba(41, 41, 41, 0.8);
 }
 
+.selection-form--tickets {
+  max-width: 93.125rem;
+  padding: 2rem 2.5rem 1.25rem 2.5rem;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin: 0 auto;
+}
+
 .selection-form__group {
   position: relative;
   display: flex;
+  flex: 1 1 50%;
   flex-wrap: wrap;
+  align-content: flex-start;
   align-items: center;
   margin-bottom: 3.75rem;
   column-gap: 2.5rem;
 }
 
-.selection-form__group:last-of-type {
+.selection-form__group--tickets {
+  flex: 0;
+  flex-basis: 48.8%;
+  margin-bottom: 45px;
+}
+
+.selection-form__group--home:last-of-type {
   margin-bottom: 5.75rem;
 }
 
@@ -29,9 +46,6 @@
   line-height: 2.1875rem;
 }
 
-.selection-form__input-container {
-  position: relative;
-}
 .selection-form__input {
   width: 20.25rem;
 }
@@ -199,7 +213,7 @@
 
 .react-datepicker__month {
   display: flex;
-  flex-direction: column ;
+  flex-direction: column;
   gap: 0.5rem;
 }
 
@@ -232,9 +246,8 @@
 }
 
 .react-datepicker__day--selected {
-  border: 2px solid #FFA800;
+  border: 2px solid #ffa800;
   background-color: rgba(255, 168, 0, 0.31);
   color: #333333;
   font-weight: 600;
 }
-

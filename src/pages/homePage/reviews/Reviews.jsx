@@ -1,14 +1,13 @@
-import { useState } from "react";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Reviews.css";
-import user1 from "../../assets/images/user1.png";
-import user2 from "../../assets/images/user2.png";
+import user1 from "../../../assets/images/user1.png";
+import user2 from "../../../assets/images/user2.png";
 
 function repeatArray(array, times) {
   let result = [];
-  for(let i = 0; i < times; i++) {
+  for (let i = 0; i < times; i++) {
     result = result.concat(array);
   }
   return result;
@@ -41,7 +40,7 @@ export default function Reviews() {
 
   const settings = {
     dots: true,
-    customPaging: (i) => <div className="custom-dot"></div>,
+    customPaging: () => <div className="custom-dot"></div>,
     infinite: true,
     speed: 500,
     slidesToShow: 1,

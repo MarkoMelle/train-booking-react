@@ -107,13 +107,13 @@
 }
 
 .footer__button:hover {
-  background: #FFCA62;
+  background: #ffca62;
   color: #2d2b2f;
   outline: none;
 }
 
 .footer__button:focus {
-  background: #FFCA62;
+  background: #ffca62;
   color: #2d2b2f;
   outline: none;
 }
@@ -137,8 +137,8 @@
 .footer__social-link {
 }
 
- .footer__social-icon{
-  fill: #E5E5E5;
+.footer__social-icon {
+  fill: #e5e5e5;
 }
 
 .footer__social-icon:hover {
@@ -152,7 +152,6 @@
 .footer__social-icon:active {
   fill: #fff;
 }
-
 
 .footer__nav {
   border-top: 1px solid #fff;
@@ -169,14 +168,13 @@
   align-items: center;
 }
 
-
 .footer__nav-link {
   font-size: 1.5rem;
   font-weight: 300;
 }
 
 .footer__nav-link:hover {
-  color: #FFCA62;
+  color: #ffca62;
 }
 
 .footer__nav-link--logo {
@@ -184,16 +182,15 @@
   font-weight: 900;
 }
 
-.footer__nav-icon:hover  {
-  fill: #FCDC9D;
+.footer__nav-icon:hover {
+  fill: #fcdc9d;
 }
 
 .footer__nav-icon:hover circle {
-  stroke: #FCDC9D;
+  stroke: #fcdc9d;
 }
 
-
-.footer__nav-icon:active  {
+.footer__nav-icon:active {
   fill: #fff;
 }
 

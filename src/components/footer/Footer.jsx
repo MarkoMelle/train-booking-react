@@ -1,6 +1,7 @@
 import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./Footer.css";
+import { handleScroll } from "../../utils";
 
 export default function Footer() {
   const [email, setEmail] = useState("");
@@ -15,7 +16,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="footer wrapper">
+    <footer className="footer wrapper" id="contact">
       <div className="footer__container">
         <div className="footer__contact">
           <h3 className="footer__title">Свяжитесь с нами</h3>
@@ -185,12 +186,19 @@ export default function Footer() {
       <div className="footer__nav">
         <ul className="footer__nav-list">
           <li className="footer__nav-item">
-            <Link to="/" className="footer__nav-link footer__nav-link--logo"> 
+            <Link to="/" className="footer__nav-link footer__nav-link--logo">
               Лого
             </Link>
           </li>
           <li className="footer__nav-item">
-            <a href="#header" className="footer__nav-link">
+            <a
+              href="#header"
+              className="footer__nav-link"
+              onClick={(e) => {
+                e.preventDefault();
+                handleScroll("header");
+              }}
+            >
               <svg
                 className="footer__nav-icon"
                 fill="currentColor"
@@ -207,10 +215,7 @@ export default function Footer() {
                   strokeWidth="1"
                   fill="none"
                 />
-                <path
-                  d="M18.3 16.7569C19.9256 18.3882 21.4531 19.9325 22.9667 21.4552C23.3758 21.8668 24.0742 21.835 24.4853 21.4256C24.8978 21.0149 24.8646 20.3803 24.4521 19.9696C22.6174 18.1427 20.7773 16.3107 18.9612 14.5024C18.571 14.114 17.9403 14.1139 17.5503 14.5026C15.8016 16.2458 13.9963 18.0515 12.1839 19.8493C11.7543 20.2753 11.7195 20.9344 12.1606 21.3485C12.579 21.7412 13.272 21.7659 13.6799 21.3622C15.1455 19.912 16.6793 18.383 18.3 16.7569Z"
-                 
-                />
+                <path d="M18.3 16.7569C19.9256 18.3882 21.4531 19.9325 22.9667 21.4552C23.3758 21.8668 24.0742 21.835 24.4853 21.4256C24.8978 21.0149 24.8646 20.3803 24.4521 19.9696C22.6174 18.1427 20.7773 16.3107 18.9612 14.5024C18.571 14.114 17.9403 14.1139 17.5503 14.5026C15.8016 16.2458 13.9963 18.0515 12.1839 19.8493C11.7543 20.2753 11.7195 20.9344 12.1606 21.3485C12.579 21.7412 13.272 21.7659 13.6799 21.3622C15.1455 19.912 16.6793 18.383 18.3 16.7569Z" />
               </svg>
             </a>
           </li>
