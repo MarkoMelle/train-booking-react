@@ -3,6 +3,7 @@ import PropTypes from "prop-types";
 import "react-datepicker/dist/react-datepicker.css";
 import ru from "date-fns/locale/ru";
 import { format } from "date-fns";
+import "./DataPickerComponent.css";
 registerLocale("ru", ru);
 
 const handleDateChange = (date, setDate) => {
