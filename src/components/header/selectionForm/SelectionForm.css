@@ -48,6 +48,15 @@
 
 .selection-form__input {
   width: 20.25rem;
+  padding: 1.25rem;
+  font-size: 1.125rem;
+  background-color: #fff;
+  font-weight: 400;
+}
+
+.selection-form__input::placeholder {
+  font-size: 1.125rem;
+  font-weight: 400;
 }
 
 .selection-form__input--text {
@@ -111,14 +120,7 @@
   }
 }
 
-.selection-form__input--date {
-  background-image: url("../../../assets/icons/calendar-icon.svg");
-  background-repeat: no-repeat;
-  background-position: right 20px center;
-}
-
 .selection-form__submit-btn {
   margin-left: auto;
   text-transform: uppercase;
 }
-

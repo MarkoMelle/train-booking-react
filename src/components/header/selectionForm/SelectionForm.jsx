@@ -7,7 +7,6 @@ import PropTypes from "prop-types";
 
 const locations = ["Aнгарск", "Астрахань", "Барнаул", "Москва"];
 
-
 export default function SelectionForm({ modifier }) {
   const block = "selection-form";
   const navigate = useNavigate();
@@ -128,7 +127,6 @@ export default function SelectionForm({ modifier }) {
     </form>
   );
 }
-
 
 SelectionForm.propTypes = {
   modifier: PropTypes.string.isRequired,

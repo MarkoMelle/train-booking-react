@@ -1,9 +1,14 @@
+import "./BookingSteps.css";
 import ProgressBar from "./progressBar/ProgressBar";
+import TicketsDetails from "./ticketsDetails/TicketsDetails";
 
 export default function BookingSteps() {
   return (
-    <div className="booking-steps">
+    <main className="booking-steps wrapper">
       <ProgressBar />
-    </div>
+      <aside className="booking-steps__aside">
+        <TicketsDetails />
+      </aside>
+    </main>
   );
 }

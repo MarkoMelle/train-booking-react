@@ -55,10 +55,12 @@ const CustomHeader = ({
 export default function DataPickerComponent({ date, setDate, block }) {
   return (
     <DataPicker
-      className={`${block}__input ${block}__input--date form-input`}
+      className={`${block}__input input--date form-input`}
+      placeholderText="ДД/ММ/ГГГГ"
       name="departureDate"
       selected={date}
       onChange={(date) => handleDateChange(date, setDate)}
+      dateFormat="dd.MM.yyyy"
       locale="ru"
       renderCustomHeader={CustomHeader}
       popperModifiers={[
@@ -75,15 +77,16 @@ export default function DataPickerComponent({ date, setDate, block }) {
 }
 
 CustomHeader.propTypes = {
-   date: PropTypes.instanceOf(Date).isRequired,
-   decreaseMonth: PropTypes.func.isRequired,
-   increaseMonth: PropTypes.func.isRequired,
-   prevMonthButtonDisabled: PropTypes.bool.isRequired,
-   nextMonthButtonDisabled: PropTypes.bool.isRequired,
- };
- 
- DataPickerComponent.propTypes = {
-   date: PropTypes.string.isRequired,
-   setDate: PropTypes.func.isRequired,
-   block: PropTypes.string.isRequired,
- };
+  date: PropTypes.instanceOf(Date).isRequired,
+  decreaseMonth: PropTypes.func.isRequired,
+  increaseMonth: PropTypes.func.isRequired,
+  prevMonthButtonDisabled: PropTypes.bool.isRequired,
+  nextMonthButtonDisabled: PropTypes.bool.isRequired,
+};
+
+DataPickerComponent.propTypes = {
+  date: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)])
+    .isRequired,
+  setDate: PropTypes.func.isRequired,
+  block: PropTypes.string.isRequired,
+};

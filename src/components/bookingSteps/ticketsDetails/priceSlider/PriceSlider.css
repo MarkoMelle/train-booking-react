@@ -1,0 +1,7 @@
+.MuiSlider-markLabel:first-of-type {
+  transform: translateX(0) !important;
+}
+
+.MuiSlider-markLabel:last-of-type {
+  transform: translateX(-100%) !important;
+}

@@ -2,7 +2,7 @@ import "./ProgressBar.css";
 
 export default function ProgressBar() {
   return (
-    <div className="progress-bar wrapper">
+    <div className="progress-bar">
       <div className="progress-bar__item progress-bar__item--active">
         <span className="progress-bar__item-number">1</span>
         <span className="progress-bar__item-text">Билеты</span>

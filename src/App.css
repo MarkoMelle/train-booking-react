@@ -34,12 +34,9 @@
 }
 
 .form-input {
-  padding: 1.25rem;
   border-radius: 0.1875rem;
   border: none;
-  font-size: 1.125rem;
   background-color: #fff;
-  font-size: 1.125rem;
   font-weight: 400;
 }
 
@@ -49,6 +46,4 @@
 
 .form-input::placeholder {
   color: rgb(229, 229, 229);
-  font-size: 1.125rem;
-  font-weight: 400;
 }
