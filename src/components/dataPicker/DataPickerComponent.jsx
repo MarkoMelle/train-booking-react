@@ -22,6 +22,7 @@ const CustomHeader = ({
   return (
     <>
       <button
+        type="button"
         onClick={decreaseMonth}
         disabled={prevMonthButtonDisabled}
         className="react-datepicker__navigation react-datepicker__navigation--previous"
@@ -36,6 +37,7 @@ const CustomHeader = ({
       </button>
       <h3>{monthName}</h3>
       <button
+        type="button"
         onClick={increaseMonth}
         disabled={nextMonthButtonDisabled}
         className="react-datepicker__navigation react-datepicker__navigation--next"

@@ -10,11 +10,17 @@ export default function SliderComponent({
   max,
   step = 10,
   marks,
+  markLabel,
+  className,
 }) {
   return (
     <StyledSlider
+      className={className ? className : ""}
       slots={{
         markLabel: `div`,
+      }}
+      slotProps={{
+        markLabel: markLabel ? { className: markLabel } : {},
       }}
       type={type}
       value={value}
@@ -121,16 +127,13 @@ const StyledSlider = styled(Slider)(
      width: ${type === "price" ? "24px" : "18px"};
      height: ${type === "price" ? "24px" : "18px"};
      top: ${type === "price" ? "-2.5px" : "-4px"};
-     margin-left: ${type === "price" ? "-12px" : "-9px"};
+    //  margin-left: ${type === "price" ? "-6px" : "-4.5px"};
+    //  transform: translateX(25%);
      box-sizing: border-box;
      border-radius: 50%;
      outline: 0;
      background-color: #fff;
- 
-     :hover,
-     &.${sliderClasses.focusVisible} {
-       transform: scale(1.25);
-     }
+
  
      &.${sliderClasses.active} {
        box-shadow: 0 0 0 0.25rem ${alpha(
@@ -149,8 +152,8 @@ const StyledSlider = styled(Slider)(
    }
    & .${sliderClasses.markLabel} {
        position: absolute;
-       bottom: calc(-100% - 8px);
-       transform: translateX(-50%);
+       bottom: calc(-100% - 16px);
+       transform: translateX(calc(-100% + ${type === "price" ? "6px" : "0px"}));
        white-space: nowrap;
        color: #E5E5E5;
        font-family: Roboto;
@@ -172,4 +175,6 @@ SliderComponent.propTypes = {
   max: PropTypes.number,
   step: PropTypes.number,
   marks: PropTypes.array,
+  markLabel: PropTypes.string,
+  className: PropTypes.string,
 };

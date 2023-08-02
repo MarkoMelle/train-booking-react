@@ -1,0 +1,86 @@
+.time-sliders {
+  padding: 30px;
+  transition: height 0.3s ease-in-out;
+}
+
+.time-sliders--opened {
+  /* padding-bottom: 60px; */
+}
+
+.time-sliders--opened > .time-sliders__header {
+  /* margin-bottom: 40px; */
+}
+
+.time-sliders--departure {
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.time-sliders__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.time-sliders__title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  padding-left: 40px;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+.time-sliders__title--departure {
+  background-image: url("../../../../assets/icons/departure-arrow.svg");
+}
+
+.time-sliders__title--arrival {
+  background-image: url("../../../../assets/icons/arrival-arrow.svg");
+}
+
+.time-sliders__slider:first-of-type {
+   margin-top: 40px;
+  margin-bottom: 80px;
+}
+
+.time-sliders__slider:last-of-type {
+  margin-bottom: 30px;
+}
+
+.time-sliders__slider-title {
+  color: #e5e5e5;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.time-sliders__slider-title--arrival {
+  text-align: right;
+}
+
+.time-sliders__button {
+  border: none;
+  background: none;
+  padding: 0;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.time-sliders__button:hover {
+  color: #fcdc9d;
+}
+
+.time-sliders__button:active {
+  color: #c4c4c4;
+}
+
+.time-sliders__mark-label {
+  font-size: 1rem;
+  bottom: calc(-100% - 24px) !important;
+}
+
+.mark-not-start .MuiSlider-markLabelActive[data-index="0"] {
+  transform: translateX(-20%) !important;
+}
+
+.mark-not-end .MuiSlider-markLabelActive[data-index="1"] {
+  transform: translateX(-70%) !important;
+}

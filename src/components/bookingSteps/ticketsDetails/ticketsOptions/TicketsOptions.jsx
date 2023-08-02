@@ -1,11 +1,12 @@
-import "./TicketOptions.css";
+import "./TicketsOptions.css";
 import Switch from "@mui/base/Switch";
 
-export default function TicketOptions() {
+export default function TicketsOptions() {
   return (
     <ul className="options">
       <li className="option">
-        <span className="option__text">Купе</span>
+        <span className="option__text option__text--kupe">
+          Купе</span>
         <Switch
           className="option__switch"
           slotProps={{
@@ -16,7 +17,8 @@ export default function TicketOptions() {
         />
       </li>
       <li className="option">
-        <span className="option__text">Плацкарт</span>
+        <span className="option__text option__text--plackart">
+          Плацкарт</span>
         <Switch
           className="option__switch"
           slotProps={{
@@ -27,7 +29,8 @@ export default function TicketOptions() {
         />
       </li>
       <li className="option">
-        <span className="option__text">Сидячий</span>
+        <span className="option__text option__text--sitting">
+          Сидячий</span>
         <Switch
           className="option__switch"
           slotProps={{
@@ -38,7 +41,8 @@ export default function TicketOptions() {
         />
       </li>
       <li className="option">
-        <span className="option__text">Люкс</span>
+        <span className="option__text option__text--lux">
+          Люкс</span>
         <Switch
           className="option__switch"
           slotProps={{
@@ -49,7 +53,8 @@ export default function TicketOptions() {
         />
       </li>
       <li className="option">
-        <span className="option__text">Wi-Fi</span>
+        <span className="option__text option__text--wifi">
+          Wi-Fi</span>
         <Switch
           className="option__switch"
           slotProps={{
@@ -60,7 +65,8 @@ export default function TicketOptions() {
         />
       </li>
       <li className="option">
-        <span className="option__text">Экспресс</span>
+        <span className="option__text option__text--express">
+          Экспресс</span>
         <Switch
           className="option__switch"
           slotProps={{
