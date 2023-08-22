@@ -1,6 +1,7 @@
 .progress-bar {
   display: flex;
   align-items: center;
+  width: 100%;
 }
 
 .progress-bar__item {

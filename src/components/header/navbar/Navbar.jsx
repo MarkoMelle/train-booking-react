@@ -1,8 +1,17 @@
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import "./Navbar.css";
 import { handleScroll } from "../../../utils";
 
 export default function Navbar() {
+  const location = useLocation();
+
+  const handleLinkClick = (sectionId) => (e) => {
+    if (location.pathname === "/") {
+      e.preventDefault();
+      handleScroll(sectionId);
+    }
+  };
+
   return (
     <nav className="nav">
       <ul className="nav-list nav-list">
@@ -10,27 +19,37 @@ export default function Navbar() {
           <Link to="/">Лого</Link>
         </li>
         <li className="nav-item">
-          <Link to="/" onClick={() => handleScroll("about")}>
+          <Link
+            to="/"
+            state={{ scrollTo: "about" }}
+            onClick={handleLinkClick("about")}
+          >
             О нас
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/" onClick={() => handleScroll("how-it-works")}>
+          <Link
+            to="/"
+            state={{ scrollTo: "how-it-works" }}
+            onClick={handleLinkClick("how-it-works")}
+          >
             Как это работает
           </Link>
         </li>
         <li className="nav-item">
-          <Link to="/" onClick={() => handleScroll("reviews")}>
+          <Link
+            to="/"
+            state={{ scrollTo: "reviews" }}
+            onClick={handleLinkClick("reviews")}
+          >
             Отзывы
           </Link>
         </li>
         <li className="nav-item">
           <Link
             to="/"
-            onClick={(e) => {
-              e.preventDefault();
-              handleScroll("contact");
-            }}
+            state={{ scrollTo: "footer" }}
+            onClick={handleLinkClick("footer")}
           >
             Контакты
           </Link>

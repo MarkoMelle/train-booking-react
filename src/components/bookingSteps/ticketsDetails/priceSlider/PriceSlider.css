@@ -6,7 +6,7 @@
   transform: translateX(-100%) !important;
 }
 
-.mark-not-null .MuiSlider-markLabelActive[data-index='1'] {
+.mark-not-null .MuiSlider-markLabelActive[data-index="1"] {
   transform: translateX(-20%) !important;
 }
 

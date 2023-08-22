@@ -57,9 +57,11 @@ const CustomHeader = ({
 export default function DataPickerComponent({ date, setDate, block }) {
   return (
     <DataPicker
+    popperClassName={`${block}__popper`}
       className={`${block}__input input--date form-input`}
       placeholderText="ДД/ММ/ГГГГ"
       name="departureDate"
+      autoComplete="off"
       selected={date}
       onChange={(date) => handleDateChange(date, setDate)}
       dateFormat="dd.MM.yyyy"

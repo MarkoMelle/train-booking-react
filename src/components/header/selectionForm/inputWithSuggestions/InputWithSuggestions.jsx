@@ -1,9 +1,15 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 
-export default function InputWithSuggestions ({ block, inputValue, setInputValue, placeholder, locations })  {
+export default function InputWithSuggestions({
+  block,
+  inputValue,
+  setInputValue,
+  placeholder,
+  locations,
+}) {
   const [inputFocus, setInputFocus] = useState(false);
-  
+
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
@@ -64,5 +70,3 @@ InputWithSuggestions.propTypes = {
   placeholder: PropTypes.string.isRequired,
   locations: PropTypes.arrayOf(PropTypes.string).isRequired,
 };
-
-

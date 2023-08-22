@@ -33,7 +33,7 @@ export default function SwitchStyles() {
          width: 28px;
          height: 28px;
          top: -4.5px;
-          left: 0;
+          left: -1px;
          border-radius: 50%;
          background-color: #C4C4C4;
          position: relative;
@@ -49,7 +49,7 @@ export default function SwitchStyles() {
        }
  
        .option__switch.${switchClasses.checked} .option__switch-thumb {
-         left: 44px;
+         left: 45px;
          top: -4.5px;
          background-color: #FFA800;
        }

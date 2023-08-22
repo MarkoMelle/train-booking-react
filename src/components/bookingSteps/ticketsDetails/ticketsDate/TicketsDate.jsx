@@ -5,8 +5,8 @@ import "./TicketsDate.css";
 export default function TicketsDate() {
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
-   return (
-      <div className="tickets-details__dates">
+  return (
+    <div className="tickets-details__dates">
       <div className="tickets-details__date">
         <h3 className="tickets-details__date-title">Дата поездки</h3>
         <DataPickerComponent
@@ -24,5 +24,5 @@ export default function TicketsDate() {
         />
       </div>
     </div>
-   )
+  );
 }

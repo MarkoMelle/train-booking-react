@@ -1,50 +1,50 @@
 .options {
-   padding: 25px 35px 25px 64px;
-   border-bottom: 1px solid #E5E5E5;
-   display: flex;
-   flex-direction: column;
-   gap: 30px;
-   align-items: flex-end;
+  padding: 25px 35px 25px 64px;
+  border-bottom: 1px solid #e5e5e5;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+  align-items: flex-end;
 }
 
 .option {
-   width: 100%;
+  width: 100%;
   display: flex;
   align-items: center;
 }
 
 .option__text {
-   flex: 1;
-   text-align: left;
+  flex: 1;
+  text-align: left;
   font-size: 1.125rem;
   font-weight: 400;
   background-position: left center;
-   background-repeat: no-repeat;
-   padding-left: 51px;
+  background-repeat: no-repeat;
+  padding-left: 51px;
 }
 
 .option__text--kupe {
-   background-image: url(../../../../assets/icons/kupe.svg);
+  background-image: url(../../../../assets/icons/kupe.svg);
 }
 
 .option__text--plackart {
-   background-image: url(../../../../assets/icons/plackart.svg);
+  background-image: url(../../../../assets/icons/plackart.svg);
 }
 
 .option__text--sitting {
-   background-image: url(../../../../assets/icons/sitting.svg);
+  background-image: url(../../../../assets/icons/sitting.svg);
 }
 
 .option__text--lux {
-   background-image: url(../../../../assets/icons/lux.svg);
+  background-image: url(../../../../assets/icons/lux.svg);
 }
 
 .option__text--wifi {
-   background-image: url(../../../../assets/icons/wifi.svg);
+  background-image: url(../../../../assets/icons/wifi.svg);
 }
 
 .option__text--express {
-   background-image: url(../../../../assets/icons/express.svg);
+  background-image: url(../../../../assets/icons/express.svg);
 }
 
 .option__switch {

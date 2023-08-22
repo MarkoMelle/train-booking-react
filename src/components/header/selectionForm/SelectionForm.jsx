@@ -65,6 +65,7 @@ export default function SelectionForm({ modifier }) {
           date={departureDate}
           setDate={setDepartureDate}
           block={block}
+          
         />
         <DataPickerComponent
           date={returnDate}

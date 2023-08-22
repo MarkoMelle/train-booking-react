@@ -174,7 +174,12 @@ SliderComponent.propTypes = {
   min: PropTypes.number,
   max: PropTypes.number,
   step: PropTypes.number,
-  marks: PropTypes.array,
+  marks: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.number,
+      label: PropTypes.string,
+    })
+  ),
   markLabel: PropTypes.string,
   className: PropTypes.string,
 };

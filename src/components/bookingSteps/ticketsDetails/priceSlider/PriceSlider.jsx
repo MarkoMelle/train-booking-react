@@ -19,7 +19,11 @@ export default function PriceSlider() {
     setValue(newValue);
   };
   return (
-    <div className={`price-slider ${marks[0].value / value[0] === 1 ? '': 'mark-not-null'}`}>
+    <div
+      className={`price-slider ${
+        marks[0].value / value[0] === 1 ? "" : "mark-not-null"
+      }`}
+    >
       <h3 className="price-slider__title">Стоимость</h3>
       <SliderComponent
         type={"price"}
@@ -30,7 +34,7 @@ export default function PriceSlider() {
         step={10}
         marks={[
           {
-            value: marks[0].value / value[0] === 1 ? null : marks[0].value,
+            value: marks[0].value / value[0] === 1 ? 0 : marks[0].value,
             label: marks[0].value / value[0] > 0.7 ? `` : marks[0].label,
           },
           {
@@ -42,7 +46,7 @@ export default function PriceSlider() {
             label: `${value[1]}`,
           },
           {
-            value: marks[1].value / value[1] === 1 ? null : marks[1].value,
+            value: marks[1].value / value[1] === 1 ? 0 : marks[1].value,
             label: marks[1].value / value[1] < 1.15 ? `` : marks[1].label,
           },
         ]}

@@ -1,0 +1,10 @@
+.booking-steps {
+  background: #f7f5f9;
+  display: flex;
+  flex-wrap: wrap;
+  padding: 95px 250px 195px;
+}
+
+.booking-steps__aside {
+  max-width: 360px;
+}

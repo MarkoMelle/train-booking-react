@@ -1,9 +1,9 @@
 .tickets-details__dates {
-   display: flex;
-   flex-direction: column;
-   gap: 25px;
-   padding: 40px 30px 30px;
-   border-bottom: 1px solid #E5E5E5;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  padding: 40px 30px 30px;
+  border-bottom: 1px solid #e5e5e5;
 }
 
 .tickets-details__date {
@@ -11,14 +11,20 @@
 }
 
 .tickets-details__date-title {
-   font-size: 1.875rem;
-   font-weight: 400;
+  font-size: 1.875rem;
+  font-weight: 400;
+  margin-bottom: 10px;
 }
 
 .tickets-details__input {
-   padding: 11px 56px 11px 8px;
-   width: 295px;
-   color: #292929;
-   font-size: 18px;
- }
- 
+  padding: 11px 56px 11px 8px;
+  width: 295px;
+  color: #292929;
+  font-size: 18px;
+}
+
+.tickets-details__popper {
+  top: 120px !important;
+  left: -20px !important;
+
+}

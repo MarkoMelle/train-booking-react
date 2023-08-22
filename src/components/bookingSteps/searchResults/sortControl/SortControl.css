@@ -1,0 +1,37 @@
+.sort-control {
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.sort-control__quantity {
+  color: #928f94;
+  font-size: 1.125rem;
+}
+
+.sort-control__sort-by {
+  margin-left: auto;
+  color: #928f94;
+  font-size: 1.125rem;
+}
+
+.sort-control__show {
+  margin-left: 50px;
+  color: #928f94;
+  font-size: 1.125rem;
+}
+
+.show-count-btn {
+  background: transparent;
+  color: #928f94;
+  font-size: 1.125rem;
+  padding: 0 0.5ch;
+  margin: 0;
+  border: none;
+}
+
+.show-count-btn--active {
+  color: #292929;
+  font-family: Roboto;
+  font-size: 1.125rem;
+}

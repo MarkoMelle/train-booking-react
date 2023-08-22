@@ -22,7 +22,10 @@ export default function Header() {
   }
 
   return (
-    <header className={`header wrapper ${"header--bg--" + modifier}`}>
+    <header
+      id="header"
+      className={`header wrapper ${"header--bg--" + modifier}`}
+    >
       <Navbar />
       <div
         className={`header__content header__content--${

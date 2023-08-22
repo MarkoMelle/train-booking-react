@@ -1,0 +1,254 @@
+.ticket {
+  width: 100%;
+  max-width: 960px;
+  margin: 0;
+  display: flex;
+  color: #000;
+
+  border: 1px solid #C4C4C4;
+background: #FFF;
+box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.30);
+}
+
+.ticket:last-of-type {
+  margin-bottom: 140px;
+}
+
+.ticket__train-info {
+  flex: 1 1 200px;
+  max-width: 200px;
+  padding: 60px 25px;
+  display: flex;
+  flex-direction: column;
+  background: #e4e0e9;
+}
+
+.ticket__train-info-icon {
+  width: 100%;
+  max-width: 86px;
+  height: 86px;
+  margin: 0 auto;
+  margin-bottom: 17px;
+  padding: 0;
+}
+
+.ticket__train-info__train-number {
+  margin-bottom: 15px;
+  color: #3e3c41;
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.ticket__train-info__direction svg {
+ display: inline-block;
+}
+
+.ticket__body {
+  flex: 1 1 480px;
+  display: flex;
+  flex-direction: column;
+  gap: 60px;
+  max-width: 480px;
+  padding: 55px 40px;
+  border-right: 1px dashed #e5e5e5;
+}
+
+.ticket-info {
+  /* display: flex; */
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
+  justify-items: center;
+}
+
+.ticket-info-container {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.ticket-info-container:last-of-type {
+  margin-left: auto;
+}
+
+.ticket-info__time {
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.ticket-info__city {
+  color: #292929;
+  font-size: 1.125rem;
+}
+
+.ticket-info__station {
+  color: #928f94;
+  font-size: 1rem;
+}
+
+.ticket-info__duration {
+  position: relative;
+  padding-bottom: 40px;
+  color: #c4c4c4;
+  font-size: 1.125rem;
+}
+
+.ticket-info__duration::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url(../../../../../assets/icons/ticket-arrow.svg);
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.ticket-info--departure {
+}
+
+.ticket-info__time--departure {
+}
+
+.ticket-info__city--departure {
+}
+
+.ticket-info__station--departure {
+}
+
+.ticket-info__duration--departure {
+}
+
+.ticket-info__duration--departure::before {
+  transform: rotate(180deg);
+}
+
+.ticket-info--arrival {
+}
+
+.ticket-info__time--arrival {
+}
+
+.ticket-info__city--arrival {
+}
+
+.ticket-info__station--arrival {
+}
+
+.ticket-info__duration--arrival {
+}
+
+.ticket__price-info {
+  flex: 1 1;
+  padding: 40px 25px;
+}
+
+.ticket__sit-classes {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  margin-bottom: 25px;
+}
+
+.ticket__sit-class {
+  position: relative;
+  display: grid;
+  grid-template-columns: 86px auto 1fr;
+  align-items: baseline;
+  cursor: pointer;
+}
+
+.ticket__sit-class__name {
+  color: #3e3c41;
+  font-size: 1rem;
+}
+
+.ticket__sit-class__available {
+  color: #ffa800;
+  font-size: 1rem;
+  font-weight: 500;
+}
+
+.available-sits {
+  position: absolute;
+  width: 275px;
+  top: calc(100% + 10px);
+  left: -22.5px;
+  padding: 20px 22px 20px 30px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  z-index: 999;
+
+  border-radius: 5px;
+  background: #f5f4f6;
+}
+
+.available-sits::before {
+  content: "";
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(calc(-50% - 21px));
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid #f5f4f6;
+}
+
+.available-sits__item {
+  display: grid;
+  grid-template-columns: 79px auto 1fr;
+  align-items: baseline;
+}
+
+.available-sits__item-price {
+  margin-left: auto;
+  padding-right: calc(0.5ch + 16px);
+  color: #2d2b2f;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background-image: url(../../../../../assets/icons/ticket-ruble.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.ticket__sit-class__price {
+  margin-left: auto;
+  padding-right: calc(0.5ch + 16px);
+  color: #2d2b2f;
+  font-size: 1.5rem;
+  font-weight: 700;
+  background-image: url(../../../../../assets/icons/ticket-ruble.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.ticket__sit-class__price::before {
+  content: "от ";
+  color: #928f94;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.ticket__sit-class__price::after {
+  content: "";
+
+  width: 16px;
+  height: 16px;
+}
+
+.ticket__sit-class__options {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  margin-bottom: 25px;
+}
+
+.ticket__select-button {
+}

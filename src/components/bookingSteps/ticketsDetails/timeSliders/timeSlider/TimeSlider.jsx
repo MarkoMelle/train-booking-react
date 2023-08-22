@@ -4,7 +4,9 @@ import PropTypes from "prop-types";
 export default function TimeSlider({ value, handleChange, slotsClass }) {
   return (
     <SliderComponent
-      className={`${value[0] !== 0 ? 'mark-not-start' : ''} ${value[1] !== 24 ? 'mark-not-end' : ''}`}
+      className={`${value[0] !== 0 ? "mark-not-start" : ""} ${
+        value[1] !== 24 ? "mark-not-end" : ""
+      }`}
       type={"time"}
       value={value}
       handleChange={handleChange}

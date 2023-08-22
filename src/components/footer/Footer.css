@@ -86,6 +86,7 @@
 .footer__input {
   width: 28rem;
   margin-right: 30px;
+  padding: 1.25rem;
 }
 
 .footer__input::placeholder {

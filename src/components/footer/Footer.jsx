@@ -16,7 +16,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="footer wrapper" id="contact">
+    <footer className="footer wrapper" id="footer">
       <div className="footer__container">
         <div className="footer__contact">
           <h3 className="footer__title">Свяжитесь с нами</h3>

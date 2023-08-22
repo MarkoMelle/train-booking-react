@@ -5,8 +5,6 @@ import TimeSlider from "./timeSlider/TimeSlider";
 import { plusIcon, minusIcon } from "./iconsSvg/iconsSvg";
 import { Transition } from "react-transition-group";
 
-
-
 export default function TimeSliders({ direction }) {
   const [departureTime, setDepartureTime] = React.useState([0, 24]);
   const [arrivalTime, setArrivalTime] = React.useState([0, 24]);
@@ -22,7 +20,7 @@ export default function TimeSliders({ direction }) {
 
   const transitionStyles = {
     entering: { maxHeight: "0px" },
-    entered: { maxHeight: "500px" }, 
+    entered: { maxHeight: "500px" },
     exiting: { maxHeight: "500px" },
     exited: { maxHeight: "0px" },
   };

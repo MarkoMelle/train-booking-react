@@ -1,0 +1,90 @@
+.last-tickets {
+  color: #292929;
+  font-family: Roboto;
+  font-size: 20px;
+  font-style: normal;
+  font-weight: 400;
+  line-height: normal;
+}
+
+.last-tickets__title {
+  color: #000;
+  font-size: 1.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+.last-tickets__list {
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.last-ticket {
+  width: 100%;
+  padding: 18px;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  border: 1px solid #c4c4c4;
+  background: #fff;
+  box-shadow: 0px 2px 2px 0px rgba(62, 60, 65, 0.25);
+}
+
+.last-ticket__cities {
+  display: flex;
+  flex-basis: 100%;
+  margin-bottom: 30px;
+  justify-content: space-between;
+}
+
+.last-ticket__city {
+}
+
+.last-ticket__city--departure {
+  text-align: left;
+}
+
+.last-ticket__city--arrival {
+  text-align: right;
+}
+
+.last-ticket__city-name {
+  display: block;
+  color: #292929;
+  font-size: 1.25rem;
+}
+
+.last-ticket__station {
+  display: flex;
+  flex-direction: column;
+  color: #928f94;
+  font-size: 1rem;
+}
+
+.last-ticket__options {
+}
+
+.last-ticket__price {
+  display: flex;
+  align-items: center;
+}
+
+.last-ticket__price-value {
+  color: #ffa800;
+  margin-right: 0.5ch;
+  font-size: 2.25rem;
+  font-weight: 700;
+}
+
+.last-ticket__price-value::before {
+  content: "от";
+  margin-right: 0.5ch;
+  font-size: 1rem;
+  color: #928f94;
+  font-weight: 400;
+}
+
+.last-ticket__price-currency {
+}

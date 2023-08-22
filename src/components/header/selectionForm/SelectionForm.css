@@ -65,6 +65,11 @@
   background-position: right 20px center;
 }
 
+.selection-form__popper {
+  top: 120px !important;
+  left: 0 !important;
+}
+
 .selection-form__suggestions {
   display: flex;
   flex-direction: column;

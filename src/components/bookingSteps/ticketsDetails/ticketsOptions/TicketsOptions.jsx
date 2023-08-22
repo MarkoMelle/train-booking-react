@@ -5,8 +5,7 @@ export default function TicketsOptions() {
   return (
     <ul className="options">
       <li className="option">
-        <span className="option__text option__text--kupe">
-          Купе</span>
+        <span className="option__text option__text--kupe">Купе</span>
         <Switch
           className="option__switch"
           slotProps={{
@@ -17,8 +16,7 @@ export default function TicketsOptions() {
         />
       </li>
       <li className="option">
-        <span className="option__text option__text--plackart">
-          Плацкарт</span>
+        <span className="option__text option__text--plackart">Плацкарт</span>
         <Switch
           className="option__switch"
           slotProps={{
@@ -29,8 +27,7 @@ export default function TicketsOptions() {
         />
       </li>
       <li className="option">
-        <span className="option__text option__text--sitting">
-          Сидячий</span>
+        <span className="option__text option__text--sitting">Сидячий</span>
         <Switch
           className="option__switch"
           slotProps={{
@@ -41,8 +38,7 @@ export default function TicketsOptions() {
         />
       </li>
       <li className="option">
-        <span className="option__text option__text--lux">
-          Люкс</span>
+        <span className="option__text option__text--lux">Люкс</span>
         <Switch
           className="option__switch"
           slotProps={{
@@ -53,8 +49,7 @@ export default function TicketsOptions() {
         />
       </li>
       <li className="option">
-        <span className="option__text option__text--wifi">
-          Wi-Fi</span>
+        <span className="option__text option__text--wifi">Wi-Fi</span>
         <Switch
           className="option__switch"
           slotProps={{
@@ -65,8 +60,7 @@ export default function TicketsOptions() {
         />
       </li>
       <li className="option">
-        <span className="option__text option__text--express">
-          Экспресс</span>
+        <span className="option__text option__text--express">Экспресс</span>
         <Switch
           className="option__switch"
           slotProps={{
