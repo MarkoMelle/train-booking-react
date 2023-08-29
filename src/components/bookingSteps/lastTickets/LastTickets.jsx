@@ -1,5 +1,5 @@
 import LastTicket from "./lastTicket/LastTicket";
-import "./lastTickets.css";
+import "./LastTickets.css";
 
 export default function LastTickets() {
   return (
