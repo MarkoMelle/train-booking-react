@@ -33,6 +33,8 @@ export default function SelectionForm({ modifier }) {
     }, 300);
   };
 
+
+  
   return (
     <form className={`${block} ${block}--${modifier}`} onSubmit={handleSubmit}>
       <div className={`${block}__group ${block + `__group--${modifier}`}`}>
@@ -71,6 +73,7 @@ export default function SelectionForm({ modifier }) {
           date={returnDate}
           setDate={setReturnDate}
           block={block}
+          minDate={departureDate}
         />
       </div>
       <button

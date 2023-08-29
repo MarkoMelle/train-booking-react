@@ -152,7 +152,7 @@ const StyledSlider = styled(Slider)(
    }
    & .${sliderClasses.markLabel} {
        position: absolute;
-       bottom: calc(-100% - 16px);
+       bottom: calc(-100% - 8px);
        transform: translateX(calc(-100% + ${type === "price" ? "6px" : "0px"}));
        white-space: nowrap;
        color: #E5E5E5;

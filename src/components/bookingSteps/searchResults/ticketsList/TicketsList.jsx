@@ -2,6 +2,7 @@ import { useState } from "react";
 import Ticket from "./ticket/Ticket";
 import "./TicketsList.css";
 import Pagination from "./pagination/Pagination";
+import PropTypes from "prop-types";
 
 const tickets = [
   {
@@ -36,7 +37,7 @@ const tickets = [
   },
 ];
 
-export default function TicketsList() {
+export default function TicketsList({ setIsSelectSeats }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const totalItems = 100;
@@ -48,7 +49,7 @@ export default function TicketsList() {
   return (
     <div className="tickets-list">
       {tickets.map((ticket, index) => (
-        <Ticket key={index} ticket={ticket} />
+        <Ticket key={index} ticket={ticket} {...{ setIsSelectSeats }} />
       ))}
       <Pagination
         itemsPerPage={itemsPerPage}
@@ -59,3 +60,8 @@ export default function TicketsList() {
     </div>
   );
 }
+
+
+TicketsList.propTypes = {
+  setIsSelectSeats: PropTypes.func.isRequired,
+};

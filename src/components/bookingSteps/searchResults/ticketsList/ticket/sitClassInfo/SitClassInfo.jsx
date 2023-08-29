@@ -2,7 +2,8 @@ import { useState } from "react";
 import { optionsSvg } from "../../../../lastTickets/lastTicket/iconsSvg";
 import PropTypes from "prop-types";
 
-export default function SitClassInfo({ sitClasses }) {
+
+export default function SitClassInfo({ sitClasses , setIsSelectSeats}) {
   const [activeIndex, setActiveIndex] = useState(null);
 
   const handleSitClassClick = (index) => {
@@ -55,8 +56,8 @@ export default function SitClassInfo({ sitClasses }) {
         ))}
       </ul>
       <div className="ticket__sit-class__options">{optionsSvg}</div>
-      <button className="ticket__select-button primary-btn primary-btn--white">
-        Выбор места
+      <button className="primary-btn primary-btn--white ticket__select-button" onClick={() => setIsSelectSeats(true)}>
+        Выбрать места
       </button>
     </>
   );
@@ -64,4 +65,5 @@ export default function SitClassInfo({ sitClasses }) {
 
 SitClassInfo.propTypes = {
   sitClasses: PropTypes.array.isRequired,
+  setIsSelectSeats: PropTypes.func.isRequired,
 };

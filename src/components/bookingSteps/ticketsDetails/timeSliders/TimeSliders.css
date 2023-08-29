@@ -1,7 +1,12 @@
 .time-sliders {
-  padding: 30px;
+  padding: 28px 31px 31px;
   transition: height 0.3s ease-in-out;
 }
+
+.time-sliders--arrival {
+  padding-top: 26px;
+}
+      
 
 .time-sliders--opened {
   /* padding-bottom: 60px; */
@@ -24,7 +29,7 @@
 .time-sliders__title {
   font-size: 1.875rem;
   font-weight: 700;
-  padding-left: 40px;
+  padding-left: 45px;
   background-position: left center;
   background-repeat: no-repeat;
 }

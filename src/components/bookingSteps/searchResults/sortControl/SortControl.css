@@ -1,7 +1,8 @@
 .sort-control {
   width: 100%;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
+  margin-bottom: 44px;
 }
 
 .sort-control__quantity {
@@ -13,10 +14,12 @@
   margin-left: auto;
   color: #928f94;
   font-size: 1.125rem;
+  display: flex;
+  align-items: baseline;
 }
 
 .sort-control__show {
-  margin-left: 50px;
+  margin-left: 61px;
   color: #928f94;
   font-size: 1.125rem;
 }
@@ -25,7 +28,8 @@
   background: transparent;
   color: #928f94;
   font-size: 1.125rem;
-  padding: 0 0.5ch;
+  padding: 0;
+  padding-left: 7px;
   margin: 0;
   border: none;
 }
@@ -34,4 +38,8 @@
   color: #292929;
   font-family: Roboto;
   font-size: 1.125rem;
+}
+
+.MuiSelect-root {
+  padding: 0;
 }

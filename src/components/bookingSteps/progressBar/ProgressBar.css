@@ -2,6 +2,9 @@
   display: flex;
   align-items: center;
   width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
 }
 
 .progress-bar__item {
@@ -35,7 +38,7 @@
   stroke-width: 1px;
   stroke: #e5e5e5;
   z-index: 999;
-  fill: none;
+  fill: #3e3c41;
   transform: translateX(97%);
 }
 .progress-bar__item--active {

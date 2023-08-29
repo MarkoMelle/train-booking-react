@@ -15,13 +15,13 @@
 }
 
 .price-slider {
-  padding: 30px;
-  padding-bottom: 60px;
+  padding: 35px 30px;
+  padding-bottom: 57px;
   border-bottom: 1px solid #e5e5e5;
 }
 
 .price-slider__title {
   font-size: 1.875rem;
   font-weight: 400;
-  margin-bottom: 40px;
+  margin-bottom: 35px;
 }

@@ -1,4 +1,5 @@
 import DataPicker, { registerLocale } from "react-datepicker";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import "react-datepicker/dist/react-datepicker.css";
 import ru from "date-fns/locale/ru";
@@ -54,7 +55,35 @@ const CustomHeader = ({
   );
 };
 
-export default function DataPickerComponent({ date, setDate, block }) {
+
+
+export default function DataPickerComponent({ date, setDate, block,
+  minDate,
+  maxDate,
+
+}) {
+  const [hoveredDate, setHoveredDate] = useState(null);
+
+  const onDayMouseEnter = (date) => {
+    setHoveredDate(date);
+  };
+  
+  const onDayMouseLeave = () => {
+    setHoveredDate(null);
+  };
+  
+  const dayClassNames = (date, departureDate) => {
+    if (
+      hoveredDate && 
+      departureDate && 
+      date >= departureDate && 
+      date <= hoveredDate
+    ) {
+      return "highlighted-range";
+    }
+    return "";
+  };
+
   return (
     <DataPicker
     popperClassName={`${block}__popper`}
@@ -63,6 +92,8 @@ export default function DataPickerComponent({ date, setDate, block }) {
       name="departureDate"
       autoComplete="off"
       selected={date}
+      minDate={minDate}
+      maxDate={maxDate}
       onChange={(date) => handleDateChange(date, setDate)}
       dateFormat="dd.MM.yyyy"
       locale="ru"
@@ -76,6 +107,9 @@ export default function DataPickerComponent({ date, setDate, block }) {
           },
         },
       ]}
+      dayClassName={(date) => dayClassNames(date, minDate)}
+  onDayMouseEnter={onDayMouseEnter}
+  onDayMouseLeave={onDayMouseLeave}
     />
   );
 }
@@ -93,4 +127,6 @@ DataPickerComponent.propTypes = {
     .isRequired,
   setDate: PropTypes.func.isRequired,
   block: PropTypes.string.isRequired,
+  minDate: PropTypes.instanceOf(Date),
+  maxDate: PropTypes.instanceOf(Date),
 };

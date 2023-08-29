@@ -22,7 +22,9 @@ export default function SelectComponent({
   options,
 }) {
   return (
-    <CustomSelect defaultValue={defaultValue} onChange={handleChange}>
+    <CustomSelect 
+    
+    defaultValue={defaultValue} onChange={handleChange}>
       {options.map((option) => (
         <StyledOption key={option} value={option}>
           {option}
@@ -69,7 +71,7 @@ const StyledButton = styled("button")(
   font-family: Roboto, sans-serif;
   font-size: 1.125rem;
   box-sizing: border-box;
-  padding: 8px;
+  padding-left: 12px;
   border-radius: 8px;
   text-align: left;
   line-height: 1.5;
