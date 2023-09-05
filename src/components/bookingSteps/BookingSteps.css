@@ -3,7 +3,7 @@
   background: #f7f5f9;
   display: flex;
   flex-wrap: wrap;
-  padding: 190px 260px 195px;
+  padding: 190px 255px 195px 260px;
 }
 
 .booking-steps__main {
@@ -12,7 +12,6 @@
   margin-left: 85px;
   flex: 1;
 }
-
 
 .booking-steps__aside {
   max-width: 360px;

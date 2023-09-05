@@ -3,7 +3,6 @@ import Select, { selectClasses } from "@mui/base/Select";
 import Option, { optionClasses } from "@mui/base/Option";
 import Popper from "@mui/base/Popper";
 import { styled } from "@mui/system";
-import PropTypes from "prop-types";
 
 const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
   const slots = {
@@ -16,31 +15,17 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
   return <Select {...props} ref={ref} slots={slots} />;
 });
 
-export default function SelectComponent({
-  defaultValue,
-  handleChange,
-  options,
-}) {
+export default function SelectSeatComponent({ option, className }) {
   return (
-    <CustomSelect defaultValue={defaultValue} onChange={handleChange}>
-      {options.map((option) => (
-        <StyledOption key={option} value={option}>
-          {option}
+    <CustomSelect className={className} defaultValue={option[0].value}>
+      {option.map((item) => (
+        <StyledOption key={item.value} value={item.value}>
+          {item.label}
         </StyledOption>
       ))}
     </CustomSelect>
   );
 }
-
-SelectComponent.propTypes = {
-  defaultValue: PropTypes.string.isRequired,
-  handleChange: PropTypes.func.isRequired,
-  options: PropTypes.array.isRequired,
-};
-
-CustomSelect.propTypes = {
-  slots: PropTypes.object,
-};
 
 const blue = {
   100: "#DAECFF",
@@ -68,14 +53,16 @@ const StyledButton = styled("button")(
   ({ theme }) => `
   font-family: Roboto, sans-serif;
   font-size: 1.125rem;
+  width: 240px;
   box-sizing: border-box;
-  padding-left: 12px;
-  border-radius: 8px;
+  padding: 15px 14px 15px;
+  border-radius: 5px;
   text-align: left;
   line-height: 1.5;
-  background: transparent;
-  border: none;
-  color:  #292929;
+  background: #fff;
+  border: 1px solid #928F94;
+  color: #292929;
+font-weight: 400;
 
   transition-property: all;
   transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
@@ -91,30 +78,24 @@ const StyledButton = styled("button")(
     outline: 3px solid ${theme.palette.mode === "dark" ? blue[500] : blue[200]};
   }
 
-  &.${selectClasses.expanded} {
-    &::after {
-      content: '';
-    }
-  }
 
-  &::after {
-    content: '';
-    float: right;
-  }
   `
 );
 
 const StyledListbox = styled("ul")(
   ({ theme }) => `
   font-family: Roboto, sans-serif;
-  font-size: 1.125rem;
+  font-size: 1rem;
   box-sizing: border-box;
+  padding: 6px;
   margin: 12px 0;
+  width: 240px;
+  border-radius: 5px;
   overflow: auto;
   outline: 0px;
-  background: #F7F5F9;
-box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
-  color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
+  background: #fff;
+  border: 1px solid #928F94;
+  color: #292929;
   `
 );
 
@@ -122,22 +103,26 @@ const StyledOption = styled(Option)(
   ({ theme }) => `
   list-style: none;
   padding: 8px;
+  border-radius: 5px;
   cursor: default;
 
-  &:not(last-of-type) {
-    border-bottom: 1px solid #E5E5E5;
+  &:last-of-type {
+    border-bottom: none;
   }
 
   &.${optionClasses.selected} {
-    background-color: transparent;
+    background-color: ${theme.palette.mode === "dark" ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === "dark" ? blue[100] : blue[900]};
   }
 
   &.${optionClasses.highlighted} {
-    background-color: transparent;
+    background-color: ${theme.palette.mode === "dark" ? grey[800] : grey[100]};
+    color: ${theme.palette.mode === "dark" ? grey[300] : grey[900]};
   }
 
   &.${optionClasses.highlighted}.${optionClasses.selected} {
-    background-color: transparent;
+    background-color: ${theme.palette.mode === "dark" ? blue[900] : blue[100]};
+    color: ${theme.palette.mode === "dark" ? blue[100] : blue[900]};
   }
 
   &.${optionClasses.disabled} {
@@ -152,6 +137,5 @@ const StyledOption = styled(Option)(
 );
 
 const StyledPopper = styled(Popper)`
-  top: -3rem !important;
   z-index: 1;
 `;

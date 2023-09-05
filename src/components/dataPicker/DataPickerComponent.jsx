@@ -55,28 +55,28 @@ const CustomHeader = ({
   );
 };
 
-
-
-export default function DataPickerComponent({ date, setDate, block,
+export default function DataPickerComponent({
+  date,
+  setDate,
+  block,
   minDate,
   maxDate,
-
 }) {
   const [hoveredDate, setHoveredDate] = useState(null);
 
   const onDayMouseEnter = (date) => {
     setHoveredDate(date);
   };
-  
+
   const onDayMouseLeave = () => {
     setHoveredDate(null);
   };
-  
+
   const dayClassNames = (date, departureDate) => {
     if (
-      hoveredDate && 
-      departureDate && 
-      date >= departureDate && 
+      hoveredDate &&
+      departureDate &&
+      date >= departureDate &&
       date <= hoveredDate
     ) {
       return "highlighted-range";
@@ -86,7 +86,7 @@ export default function DataPickerComponent({ date, setDate, block,
 
   return (
     <DataPicker
-    popperClassName={`${block}__popper`}
+      popperClassName={`${block}__popper`}
       className={`${block}__input input--date form-input`}
       placeholderText="ДД/ММ/ГГГГ"
       name="departureDate"
@@ -108,8 +108,8 @@ export default function DataPickerComponent({ date, setDate, block,
         },
       ]}
       dayClassName={(date) => dayClassNames(date, minDate)}
-  onDayMouseEnter={onDayMouseEnter}
-  onDayMouseLeave={onDayMouseLeave}
+      onDayMouseEnter={onDayMouseEnter}
+      onDayMouseLeave={onDayMouseLeave}
     />
   );
 }
@@ -127,6 +127,6 @@ DataPickerComponent.propTypes = {
     .isRequired,
   setDate: PropTypes.func.isRequired,
   block: PropTypes.string.isRequired,
-  minDate: PropTypes.instanceOf(Date),
-  maxDate: PropTypes.instanceOf(Date),
+  minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+  maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
 };

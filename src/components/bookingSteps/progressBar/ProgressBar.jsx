@@ -2,20 +2,16 @@ import "./ProgressBar.css";
 import PropTypes from "prop-types";
 
 export default function ProgressBar({ activeStep }) {
-
-  const steps = [
-    "Билеты",
-    "Пассажиры",
-    "Оплата",
-    "Проверка"
-  ];
+  const steps = ["Билеты", "Пассажиры", "Оплата", "Проверка"];
 
   return (
     <div className="progress-bar wrapper">
       {steps.map((step, index) => (
         <div
           key={index}
-          className={`progress-bar__item ${index + 1 === activeStep ? "progress-bar__item--active" : ""}`}
+          className={`progress-bar__item ${
+            index + 1 === activeStep ? "progress-bar__item--active" : ""
+          }`}
         >
           <span className="progress-bar__item-number">{index + 1}</span>
           <span className="progress-bar__item-text">{step}</span>

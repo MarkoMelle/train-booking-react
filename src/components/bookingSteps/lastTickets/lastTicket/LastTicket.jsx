@@ -40,6 +40,6 @@ export default function LastTicket({
 LastTicket.propTypes = {
   departureCity: PropTypes.object.isRequired,
   arrivalCity: PropTypes.object.isRequired,
-  price: PropTypes.number.isRequired,
+  price: PropTypes.string.isRequired,
   options: PropTypes.array.isRequired,
 };

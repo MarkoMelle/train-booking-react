@@ -1,0 +1,11 @@
+.select-seats {
+  color: #000;
+}
+
+.select-seats__title {
+  margin-bottom: 40px;
+  color: #292929;
+  font-size: 1.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+}

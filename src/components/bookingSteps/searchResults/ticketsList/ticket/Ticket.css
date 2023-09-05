@@ -5,9 +5,9 @@
   display: flex;
   color: #000;
 
-  border: 1px solid #C4C4C4;
-background: #FFF;
-box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.30);
+  border: 1px solid #c4c4c4;
+  background: #fff;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
 }
 
 .ticket:last-of-type {
@@ -41,7 +41,7 @@ box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.30);
 }
 
 .ticket__train-info__direction svg {
- display: inline-block;
+  display: inline-block;
 }
 
 .ticket__body {

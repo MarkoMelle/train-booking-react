@@ -1,0 +1,377 @@
+.seat-selector {
+  border: 1px solid #c4c4c4;
+  background: #fff;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.seat-selector__header {
+  display: flex;
+  padding: 36px 20px 32px;
+}
+.seat-selector__header--departure {
+}
+
+.seat-selector__header--arrival {
+}
+
+.seat-selector__arrow {
+  margin-right: 10px;
+}
+
+.seat-selector__arrow--departure {
+}
+
+.seat-selector__arrow--arrival {
+}
+
+.seat-selector__btn {
+  padding: 15px 30px;
+  border-radius: 5px;
+  border: 1px solid #292929;
+  background: transparent;
+  color: #292929;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.seat-selector__info {
+  display: flex;
+  align-items: center;
+  padding: 25px 35px;
+  background: #f7f6f6;
+}
+
+.seat-selector__info-train {
+  padding-left: 60px;
+  background-image: url("../../../../assets/icons/train-icon.svg");
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+
+.info-train__number {
+  color: #3e3c41;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.info-train__direction {
+  display: block;
+  color: #292929;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.info-train__direction svg {
+  display: inline-block;
+}
+
+.seat-selector__info--departure {
+  display: flex;
+}
+
+.seat-selector__info-container {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.seat-selector__info-container:nth-child(n + 2) {
+  margin-left: 36px;
+  padding-left: 80px;
+}
+
+.seat-selector__info-container:nth-child(n + 2)::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../../../../assets/icons/ticket-arrow.svg");
+  background-repeat: no-repeat;
+  background-position: left center;
+}
+
+.seat-selector__info-container--departure:nth-child(n + 2)::after {
+  transform: rotate(180deg);
+  background-position: right center;
+}
+
+.seat-selector__info__time {
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.seat-selector__info__time--departure {
+}
+
+.seat-selector__info__city {
+  color: #292929;
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
+.seat-selector__info__city--departure {
+}
+
+.seat-selector__info__station {
+  color: #928f94;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.seat-selector__info__station--departure {
+}
+
+.seat-selector__info__duration {
+  margin-left: 80px;
+  order: 1;
+  color: #000;
+  white-space: pre-line;
+  font-size: 1.125rem;
+  font-weight: 400;
+  padding-left: 40px;
+  background-image: url("../../../../assets/icons/duration.svg");
+  background-repeat: no-repeat;
+  background-position: center left;
+}
+
+.seat-selector__info__duration--departure {
+}
+
+.seat-selector__quantity {
+  padding-bottom: 50px;
+  border-bottom: 1px dashed #c4c4c4;
+}
+
+.seat-selector__quantity-title {
+  padding: 40px 20px 15px;
+  color: #292929;
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.seat-selector__quantity-container {
+  display: flex;
+}
+
+.seat-selector__quantity-select-group {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 20px 35px;
+}
+
+.seat-selector__quantity-select-group:hover {
+  background: #f7f6f6;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+}
+
+.seat-selector__quantity-select {
+  margin-bottom: 23px;
+}
+
+.seat-selector__quantity-text {
+  color: #000;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.seat-selector__wagons {
+}
+
+.seat-selector__wagons-title {
+  padding: 25px 20px;
+  color: #292929;
+  font-size: 1.875rem;
+  font-weight: 700;
+}
+
+.seat-selector__wagons-list {
+  display: flex;
+  gap: 140px;
+  padding: 0 25px;
+  margin-bottom: 25px;
+}
+
+.seat-selector__wagons-item {
+  display: flex;
+  gap: 18px;
+  flex-direction: column;
+  align-items: center;
+  color: #928f94;
+  cursor: pointer;
+}
+
+.seat-selector__wagons-item--active {
+  color: #ffa800;
+}
+
+.seat-selector__wagons-item-title {
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.seat-selector__wagons-numbers {
+  background: rgba(255, 168, 0, 0.44);
+}
+
+.seat-selector__wagons-text {
+}
+
+.seat-selector__wagons-number {
+}
+
+.wagon {
+  display: grid;
+  grid-template-columns: 190px 1fr;
+}
+
+.wagon__number-container {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  background: #ffd98f;
+}
+
+.wagon__number {
+  color: #292929;
+  font-size: 4.5rem;
+  font-weight: 700;
+}
+
+.wagon__number-text {
+  color: #292929;
+  text-align: center;
+  font-size: 1.5rem;
+}
+.seat-selector__details {
+  display: flex;
+  padding-left: 85px;
+}
+
+.seat-selector__details-group {
+  display: flex;
+  flex-direction: column;
+  padding: 25px 35px;
+}
+
+.seat-selector__details-group-title {
+  margin-bottom: 21px;
+  color: #928f94;
+  font-size: 1.125rem;
+  font-weight: 400;
+}
+
+.seat-selector__seats-title {
+}
+
+.seat-selector__seats-title-number {
+  margin-left: 1ch;
+  color: #000;
+}
+
+.seat-selector__seat-group {
+  display: flex;
+  align-items: baseline;
+  margin-bottom: 20px;
+}
+
+.seat-selector__seat-text {
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 400;
+}
+
+.seat-selector__seat-number {
+  margin-left: 1ch;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.seat-selector__price {
+  display: flex;
+  align-items: center;
+  position: relative;
+  margin-bottom: 20px;
+}
+
+.seat-selector__price-currency {
+  position: absolute;
+  right: 14px;
+}
+
+.seat-selector__price-number {
+  color: #000;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.seat-selector__details-group-title-services {
+  margin-left: 1ch;
+  color: #c4c4c4;
+}
+
+.seat-selector__options-list {
+  display: flex;
+  gap: 12px;
+}
+
+.seat-selector__option-item {
+}
+
+.service-icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 5px;
+  width: 36px;
+  height: 36px;
+  color: #292929;
+}
+
+.service-icon--selected {
+  background: #ffa800;
+}
+
+.service-icon--not-selected {
+  background: #c4c4c4;
+  border: 1px solid #292929;
+}
+
+.service-icon--disabled {
+  background: #fcdc9d;
+  color: #928f94;
+}
+
+.service-icon:hover {
+  cursor: pointer;
+  color: #292929;
+  border: 1px solid #292929;
+  background: #ffa800;
+}
+
+.service-icon--disabled:hover {
+  cursor: not-allowed;
+  background: #fcdc9d;
+  color: #928f94;
+  border: 1px solid #928f94;
+}
+
+.service-icon {
+}
+
+.service-icon-enabled {
+}
+
+.service-icon-disabled {
+}
+
+.seat-selector__img {
+  grid-column: 1 / 3;
+}
+
+.seat-selector__sum {
+}

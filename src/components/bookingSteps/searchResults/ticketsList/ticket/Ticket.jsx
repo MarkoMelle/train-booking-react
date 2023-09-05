@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 import { trainIconSvg } from "./trainIconSvg";
 import "./Ticket.css";
 
-export default function Ticket({ ticket, setIsSelectSeats }) {
+export default function Ticket({ ticket, setIsSelectSeats, setCurrentTrip }) {
   return (
     <div className="ticket">
       <div className="ticket__train-info">
@@ -46,7 +46,10 @@ export default function Ticket({ ticket, setIsSelectSeats }) {
         />
       </div>
       <div className="ticket__price-info">
-        <SitClassInfo sitClasses={ticket.sitClasses} {...{ setIsSelectSeats }} />
+        <SitClassInfo
+          sitClasses={ticket.sitClasses}
+          {...{ setIsSelectSeats, setCurrentTrip, ticket }}
+        />
       </div>
     </div>
   );
@@ -55,4 +58,5 @@ export default function Ticket({ ticket, setIsSelectSeats }) {
 Ticket.propTypes = {
   ticket: PropTypes.object.isRequired,
   setIsSelectSeats: PropTypes.func.isRequired,
+  setCurrentTrip: PropTypes.func.isRequired,
 };

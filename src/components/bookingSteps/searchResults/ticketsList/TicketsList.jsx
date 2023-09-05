@@ -37,7 +37,7 @@ const tickets = [
   },
 ];
 
-export default function TicketsList({ setIsSelectSeats }) {
+export default function TicketsList({ setIsSelectSeats, setCurrentTrip }) {
   const [currentPage, setCurrentPage] = useState(1);
   const itemsPerPage = 10;
   const totalItems = 100;
@@ -49,7 +49,11 @@ export default function TicketsList({ setIsSelectSeats }) {
   return (
     <div className="tickets-list">
       {tickets.map((ticket, index) => (
-        <Ticket key={index} ticket={ticket} {...{ setIsSelectSeats }} />
+        <Ticket
+          key={index}
+          ticket={ticket}
+          {...{ setIsSelectSeats, setCurrentTrip }}
+        />
       ))}
       <Pagination
         itemsPerPage={itemsPerPage}
@@ -61,7 +65,7 @@ export default function TicketsList({ setIsSelectSeats }) {
   );
 }
 
-
 TicketsList.propTypes = {
   setIsSelectSeats: PropTypes.func.isRequired,
+  setCurrentTrip: PropTypes.func.isRequired,
 };

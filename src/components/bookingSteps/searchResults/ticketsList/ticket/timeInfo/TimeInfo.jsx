@@ -1,41 +1,39 @@
 import { timeDifference } from "../../../../../../utils";
 import PropTypes from "prop-types";
 
-export default function TimeInfo({ time, station, city, modifier }) {
+export default function TimeInfo({
+  time,
+  station,
+  city,
+  modifier,
+  block = "ticket-info",
+}) {
   return (
-    <div className={`ticket-info ticket-info--${modifier}`}>
-      <div
-        className={`ticket-info-container ticket-info-container--${modifier}`}
-      >
-        <span className={`ticket-info__time ticket-info__time--${modifier}`}>
+    <div className={`${block} ${block}--${modifier}`}>
+      <div className={`${block}-container ${block}-container--${modifier}`}>
+        <span className={`${block}__time ${block}__time--${modifier}`}>
           {time[0]}
         </span>
-        <span className={`ticket-info__city ticket-info__city--${modifier}`}>
+        <span className={`${block}__city ${block}__city--${modifier}`}>
           {city[0]}
         </span>
-        <span
-          className={`ticket-info__station ticket-info__station--${modifier}`}
-        >
+        <span className={`${block}__station ${block}__station--${modifier}`}>
           {station[0]}
         </span>
       </div>
-      <span
-        className={`ticket-info__duration ticket-info__duration--${modifier}`}
-      >
-        {timeDifference(time[0], time[1])}
+      <span className={`${block}__duration ${block}__duration--${modifier}`}>
+        {block === "ticket-info"
+          ? timeDifference(time[0], time[1])
+          : timeDifference(time[0], time[1], true)}
       </span>
-      <div
-        className={`ticket-info-container ticket-info-container--${modifier}`}
-      >
-        <span className={`ticket-info__time ticket-info__time--${modifier}`}>
+      <div className={`${block}-container ${block}-container--${modifier}`}>
+        <span className={`${block}__time ${block}__time--${modifier}`}>
           {time[1]}
         </span>
-        <span className={`ticket-info__city ticket-info__city--${modifier}`}>
+        <span className={`${block}__city ${block}__city--${modifier}`}>
           {city[1]}
         </span>
-        <span
-          className={`ticket-info__station ticket-info__station--${modifier}`}
-        >
+        <span className={`${block}__station ${block}__station--${modifier}`}>
           {station[1]}
         </span>
       </div>
