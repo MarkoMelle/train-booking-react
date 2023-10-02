@@ -37,3 +37,7 @@ function ServiceIcon({ type }) {
 ServiceIcons.propTypes = {
   services: PropTypes.object.isRequired,
 };
+
+ServiceIcon.propTypes = {
+  type: PropTypes.string.isRequired,
+};

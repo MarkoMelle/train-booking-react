@@ -1,4 +1,5 @@
 import * as React from "react";
+import PropTypes from "prop-types";
 import Select, { selectClasses } from "@mui/base/Select";
 import Option, { optionClasses } from "@mui/base/Option";
 import Popper from "@mui/base/Popper";
@@ -26,6 +27,24 @@ export default function SelectSeatComponent({ option, className }) {
     </CustomSelect>
   );
 }
+
+CustomSelect.propTypes = {
+  slots: PropTypes.shape({
+    root: PropTypes.object,
+    listbox: PropTypes.object,
+    popper: PropTypes.object,
+  }),
+};
+
+SelectSeatComponent.propTypes = {
+  option: PropTypes.arrayOf(
+    PropTypes.shape({
+      value: PropTypes.string.isRequired,
+      label: PropTypes.string.isRequired,
+    })
+  ).isRequired,
+  className: PropTypes.string,
+};
 
 const blue = {
   100: "#DAECFF",
@@ -83,7 +102,7 @@ font-weight: 400;
 );
 
 const StyledListbox = styled("ul")(
-  ({ theme }) => `
+  () => `
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   box-sizing: border-box;
