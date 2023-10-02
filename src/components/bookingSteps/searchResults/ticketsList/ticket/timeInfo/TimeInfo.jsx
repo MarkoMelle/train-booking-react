@@ -46,4 +46,5 @@ TimeInfo.propTypes = {
   station: PropTypes.array.isRequired,
   city: PropTypes.array.isRequired,
   modifier: PropTypes.string.isRequired,
+  block: PropTypes.string,
 };

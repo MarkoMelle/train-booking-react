@@ -1,9 +1,9 @@
-import React from "react";
 import PropTypes from "prop-types";
 import arrowBig from "../../../../assets/icons/arrow-seat-big.svg";
 import TimeInfo from "../../searchResults/ticketsList/ticket/timeInfo/TimeInfo";
 import WagonTypes from "./wagonType/WagonTypes";
 import SelectSeatComponent from "./selectSeatComponent/SelectSeatComponent";
+import { currency } from "./wagonType/iconsSvg";
 import "./SeatSelector.css";
 
 export default function SeatSelector({
@@ -12,7 +12,6 @@ export default function SeatSelector({
   wagons,
   services,
 }) {
-  console.log(currentTrip);
   return (
     <div className="seat-selector">
       <div
@@ -105,7 +104,10 @@ export default function SeatSelector({
         wagons={wagons}
         services={services}
       />
-      <span className="seat-selector__sum">8800</span>
+      <div className="seat-selector__sum">
+        <span className="seat-selector__sum-text">8800</span>
+        <span className="seat-selector__sum-currency">{currency}</span>
+      </div>
     </div>
   );
 }
@@ -121,9 +123,9 @@ SeatSelector.defaultProps = {
 };
 
 SeatSelector.propTypes = {
+  direction: PropTypes.string,
   currentTrip: PropTypes.object.isRequired,
   wagons: PropTypes.array,
   services: PropTypes.object,
   schemeImg: PropTypes.string,
 };
-
