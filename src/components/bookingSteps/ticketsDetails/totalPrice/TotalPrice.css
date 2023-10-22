@@ -1,0 +1,28 @@
+.total-price {
+  padding: 30px 25px;
+}
+
+.total-price__wrapper {
+  display: flex;
+   justify-content: space-between;
+   align-items: baseline;
+}
+
+.total-price__title {
+  color: #fff;
+  font-size: 1.875rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.total-price__price {
+  color: #ffa800;
+  font-size: 3rem;
+  font-weight: 700;
+
+  margin-left: auto;
+  padding-right: calc(0.5ch + 26px);
+  background-image: url(/src/assets/icons/total-price-ruble.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+}

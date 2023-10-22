@@ -1,10 +1,12 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import DataPickerComponent from "../../dataPicker/DataPickerComponent";
 import "./SelectionForm.css";
 import swapIcon from "../../../assets/icons/swap-icon.svg";
 import { useNavigate } from "react-router-dom";
 import PropTypes from "prop-types";
 import InputWithSuggestions from "./inputWithSuggestions/InputWithSuggestions";
+
+import StateContext from "../../../StateContext";
 
 const locations = ["Aнгарск", "Астрахань", "Барнаул", "Москва"];
 
@@ -16,9 +18,17 @@ export default function SelectionForm({ modifier }) {
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [isRotated, setIsRotated] = useState(false);
+  const { state, setState } = useContext(StateContext);
 
   const handleSubmit = (event) => {
     event.preventDefault();
+
+    setState((prevState) => ({
+      ...prevState,
+      departureDate: departureDate,
+      returnDate: returnDate,
+    }));
+
     navigate("/tickets");
   };
 

@@ -1,0 +1,183 @@
+.ticket-details {
+  padding: 20px 28px 20px;
+  transition: height 0.3s ease-in-out;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.ticket-details__header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: baseline;
+}
+
+.ticket-details__title {
+  font-size: 1.875rem;
+  font-weight: 700;
+  padding-left: 45px;
+  background-position: left center;
+  background-repeat: no-repeat;
+}
+
+.ticket-details__title--departure {
+  background-image: url("../../../../assets/icons/departure-arrow.svg");
+}
+
+.ticket-details__title--arrival {
+  background-image: url("../../../../assets/icons/arrival-arrow.svg");
+}
+
+.ticket-details__date {
+  margin-left: 15px;
+  color: #fff;
+  font-size: 1.125rem;
+}
+
+.ticket-details__button {
+  margin-left: auto;
+}
+
+.ticket-details__train-number {
+  padding: 50px 0 20px;
+  display: flex;
+  justify-content: space-between;
+}
+
+.ticket-details__train-number-text {
+  color: #e5e5e5;
+  font-size: 1.125rem;
+}
+
+.ticket-details__train-number-number {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.ticket-details__direction {
+  display: flex;
+  justify-content: space-between;
+  padding-bottom: 84px;
+}
+
+.ticket-details__direction-text {
+  color: #e5e5e5;
+  font-size: 1.125rem;
+}
+
+.ticket-details__direction-city {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-details__direction-city-text {
+  color: #fff;
+  text-align: right;
+  font-size: 1rem;
+  font-weight: 700;
+}
+
+/* time-info */
+
+.ticket-details-time-info--departure {
+}
+
+.ticket-details-time-info__time--left {
+}
+
+.ticket-details-time-info__time--right {
+}
+
+.ticket-details-time-info__city--departure {
+}
+
+.ticket-details-time-info__station--departure {
+}
+
+.ticket-details-time-info__duration--departure {
+}
+
+.ticket-details-time-info__duration--departure::before {
+  transform: rotate(180deg);
+}
+
+.ticket-details-time-info--arrival {
+}
+
+.ticket-details-time-info__time--arrival {
+}
+
+.ticket-details-time-info__city--arrival {
+}
+
+.ticket-details-time-info__station--arrival {
+}
+
+.ticket-details-time-info__duration--arrival {
+}
+
+.ticket-details-time-info {
+  display: flex;
+  position: relative;
+}
+
+.ticket-details-time-info-container {
+  display: flex;
+  flex-direction: column;
+}
+
+.ticket-details-time-info-container--left {
+  align-items: flex-start;
+}
+
+.ticket-details-time-info-container--right {
+  align-items: flex-end;
+}
+
+.ticket-details-time-info-container:last-of-type {
+  margin-left: auto;
+}
+
+.ticket-details-time-info__time {
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.ticket-details-time-info__city {
+  color: #fff;
+  font-size: 1.125rem;
+}
+
+.ticket-details-time-info__station {
+  color: #928f94;
+  font-size: 1rem;
+}
+
+.ticket-details-time-info__duration {
+  margin-top: -23px;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  padding-bottom: 40px;
+  color: #c4c4c4;
+  font-size: 18px;
+}
+
+.ticket-details-time-info__duration::before {
+  content: "";
+  min-width: 30px;
+  position: absolute;
+  top: 5px;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: url("../../../../assets/icons/ticket-arrow.svg");
+  background-repeat: no-repeat;
+  background-position: center center;
+}
+
+.ticket-details-time-info__date {
+  margin-bottom: 20px;
+  color: #928f94;
+  font-size: 1.125rem;
+}

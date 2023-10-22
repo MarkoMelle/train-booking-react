@@ -35,3 +35,11 @@ export const timeDifference = (startTime, endTime, inWords = false) => {
 
   return `${hours}:${minutes.toString().padStart(2, "0")}`;
 };
+
+export const formatDate = (date) => {
+  return date.toLocaleDateString("ru-RU", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+};

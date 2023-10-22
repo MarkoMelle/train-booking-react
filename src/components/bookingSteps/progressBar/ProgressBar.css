@@ -32,7 +32,7 @@
 
 .progress-bar__item-line {
   position: absolute;
-  right: 0;
+  right: 1px;
   flex-shrink: 0;
   height: 101%;
   stroke-width: 1px;

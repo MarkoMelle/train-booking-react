@@ -1,5 +1,6 @@
-import { timeDifference } from "../../../../../../utils";
+import { timeDifference } from "../../../utils";
 import PropTypes from "prop-types";
+
 
 export default function TimeInfo({
   time,
@@ -7,13 +8,19 @@ export default function TimeInfo({
   city,
   modifier,
   block = "ticket-info",
+  date,
 }) {
   return (
     <div className={`${block} ${block}--${modifier}`}>
-      <div className={`${block}-container ${block}-container--${modifier}`}>
+      <div className={`${block}-container ${block}-container--left`}>
         <span className={`${block}__time ${block}__time--${modifier}`}>
           {time[0]}
         </span>
+        {date ? (
+          <span className={`${block}__date ${block}__date--${modifier}`}>
+           {date.left}
+          </span>
+        ) : null}
         <span className={`${block}__city ${block}__city--${modifier}`}>
           {city[0]}
         </span>
@@ -22,14 +29,19 @@ export default function TimeInfo({
         </span>
       </div>
       <span className={`${block}__duration ${block}__duration--${modifier}`}>
-        {block === "ticket-info"
-          ? timeDifference(time[0], time[1])
-          : timeDifference(time[0], time[1], true)}
+        {block === "seat-selector__info"
+          ? timeDifference(time[0], time[1], true)
+          : timeDifference(time[0], time[1])}
       </span>
-      <div className={`${block}-container ${block}-container--${modifier}`}>
+      <div className={`${block}-container ${block}-container--right`}>
         <span className={`${block}__time ${block}__time--${modifier}`}>
           {time[1]}
         </span>
+        {date ? (
+          <span className={`${block}__date ${block}__date--${modifier}`}>
+            {date.right}
+          </span>
+        ) : null}
         <span className={`${block}__city ${block}__city--${modifier}`}>
           {city[1]}
         </span>

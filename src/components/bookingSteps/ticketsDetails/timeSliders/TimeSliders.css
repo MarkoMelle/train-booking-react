@@ -7,14 +7,6 @@
   padding-top: 26px;
 }
 
-.time-sliders--opened {
-  /* padding-bottom: 60px; */
-}
-
-.time-sliders--opened > .time-sliders__header {
-  /* margin-bottom: 40px; */
-}
-
 .time-sliders--departure {
   border-bottom: 1px solid #e5e5e5;
 }
@@ -60,21 +52,7 @@
   text-align: right;
 }
 
-.time-sliders__button {
-  border: none;
-  background: none;
-  padding: 0;
-  color: #ffffff;
-  cursor: pointer;
-}
 
-.time-sliders__button:hover {
-  color: #fcdc9d;
-}
-
-.time-sliders__button:active {
-  color: #c4c4c4;
-}
 
 .time-sliders__mark-label {
   font-size: 1rem;

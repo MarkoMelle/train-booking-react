@@ -1,4 +1,4 @@
-import SliderComponent from "../../sliderComponent";
+import SliderComponent from "../sliderComponent";
 import PropTypes from "prop-types";
 
 export default function TimeSlider({ value, handleChange, slotsClass }) {

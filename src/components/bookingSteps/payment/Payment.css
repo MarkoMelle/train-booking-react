@@ -1,0 +1,146 @@
+.payment {
+   display: flex;
+   flex-direction: column;
+  color: #292929;
+}
+
+.payment__form {
+  margin-bottom: 100px;
+}
+
+.payment__personal-data {
+   padding-bottom: 50px;
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px dashed #c4c4c4;
+}
+
+.payment__header {
+  padding: 35px 35px;
+  background: #f9f9f9;
+border-bottom: 1px dashed #c4c4c4;
+}
+
+.payment__title {
+  font-size: 1.875rem;
+}
+
+.payment__name-group {
+  padding: 30px 35px 0;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 50px;
+}
+
+.payment__contact-group {
+   display: flex;
+   flex-direction: column;
+   padding: 0 35px;
+}
+
+.payment__label {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  font-size: 1rem;
+  font-weight: 400;
+}
+
+.payment__label--name {
+  max-width: 280px;
+}
+
+.payment__label--contact {
+  max-width: 360px;
+  margin-bottom: 35px;
+}
+
+.payment__input {
+  margin-top: 10px;
+}
+
+.payment__type {
+   display: flex;
+   flex-direction: column;
+}
+
+
+
+.payment__type-group--online {
+   padding: 50px 35px 100px;
+   border-bottom: 1px dashed #c4c4c4;
+}
+
+.payment__type-group--cash {
+   padding: 60px 35px 50px;
+}
+
+.payment__online-methods {
+   display: flex;
+   align-items: flex-start;
+}
+
+.payment__online-method {
+   color: #292929;
+font-size: 1.5rem;
+font-weight: 700;
+margin-right: 50px;
+}
+
+.payment__radio {
+   position: relative;
+   display: flex;
+   align-items: flex-start;
+   padding-left: 30px; 
+   cursor: pointer;
+   margin-bottom: 30px;
+}
+
+.payment__radio-text {
+   margin-left: 20px;
+   color: #928F94;
+font-size: 1.5rem;
+}
+
+.payment__radio input[type="radio"] {
+   display: none; 
+}
+
+.payment__radio .payment__radio-check{
+   position: absolute;
+   top: 0;
+   left: 0;
+   height: 28px;
+   width: 28px;
+   border-radius: 5px;
+border: 1px solid #928F94;
+background: #FFF;
+}
+
+.payment__radio input[type="radio"]:checked ~ .payment__radio-check  {
+   border: 1px solid #FFA800;
+}
+
+.payment__radio input[type="radio"]:checked ~ .payment__radio-text {
+   color: #FFA800;
+}
+
+.payment__radio input[type="radio"]:checked ~ .payment__radio-check::before {
+   content: '\2713'; 
+   position: absolute;
+   top: 50%;
+   left: 50%;
+   transform: translate(-50%, -50%);
+   color: #FFA800; 
+   font-size: 18px; 
+   font-weight: bold; 
+}
+
+
+.payment__btn {
+   margin-left: auto;
+   padding: 15px 50px;
+   text-transform: uppercase;
+}
+

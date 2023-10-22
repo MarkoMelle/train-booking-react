@@ -1,4 +1,4 @@
-import TimeInfo from "./timeInfo/TimeInfo";
+import TimeInfo from "../../../timeInfo/TimeInfo";
 import SitClassInfo from "./sitClassInfo/SitClassInfo";
 import PropTypes from "prop-types";
 import { trainIconSvg } from "./trainIconSvg";

@@ -1,8 +1,8 @@
 import * as React from "react";
 import "./TimeSliders.css";
 import PropTypes from "prop-types";
-import TimeSlider from "./timeSlider/TimeSlider";
-import { plusIcon, minusIcon } from "./iconsSvg/iconsSvg";
+import TimeSlider from "../timeSlider/TimeSlider";
+import { plusIcon, minusIcon } from "../iconsSvg/iconsSvg";
 import { Transition } from "react-transition-group";
 
 export default function TimeSliders({ direction }) {
@@ -57,7 +57,7 @@ export default function TimeSliders({ direction }) {
           {direction === "departure" ? "Туда" : "Обратно"}
         </h3>
         <button
-          className="time-sliders__button"
+          className="transition__button"
           type="button"
           onClick={handleToggleOpen}
         >

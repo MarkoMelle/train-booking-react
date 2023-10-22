@@ -1,0 +1,315 @@
+.passenger-card {
+  color: #292929;
+  margin-bottom: 10px;
+}
+
+.passenger-card__header {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 40px 40px 30px 25px;
+  background: #f9f9f9;
+  transition: padding 0.25s ease-in-out;
+}
+
+.passenger-card__header--closed {
+  padding: 30px 40px 30px 25px;
+}
+
+.passenger-card__toggle {
+  color: #928f94;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  transition: color 0.25s ease-in-out;
+}
+
+.passenger-card__toggle line,
+.passenger-card__toggle circle {
+  transition: color 0.25s ease-in-out;
+}
+
+.passenger-card__toggle:hover line {
+  color: #ffa800;
+}
+
+.passenger-card__toggle:hover circle {
+  color: transparent;
+}
+
+.passenger-card__toggle--closed {
+  color: #ffa800;
+}
+
+.passenger-card__toggle--closed:hover circle {
+  color: transparent;
+}
+
+.passenger-card__title {
+  margin: 0;
+  margin-left: 15px;
+  color: #292929;
+  font-size: 1.875rem;
+  font-weight: 400;
+}
+
+.passenger-card__delete {
+  margin-left: auto;
+  color: #928f94;
+  background-color: transparent;
+  border: none;
+  cursor: pointer;
+  outline: none;
+}
+
+.passenger-card__delete:hover {
+  color: #ffa800;
+}
+
+.passenger-card__content {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  border-top: 1px dashed #928f94;
+  padding: 40px 35px 30px;
+}
+
+.passenger-card__label {
+  width: 100%;
+  max-width: 280px;
+  flex: 1;
+  display: block;
+  color: #928f94;
+  font-size: 1rem;
+}
+
+.passenger-card__input {
+  width: 100%;
+  margin-top: 10px;
+  padding: 10px 15px;
+  font-size: 1.5rem;
+}
+
+.passenger-card__select {
+  margin-bottom: 45px;
+}
+
+
+.passenger-card__name {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 25px;
+  margin-bottom: 50px;
+}
+.passenger-card__group {
+  display: flex;
+  gap: 35px;
+  margin-bottom: 45px;
+}
+/* gender start */
+
+.passenger-card__gender {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.passenger-card__label--gender{
+  flex: 0;
+}
+
+.passenger-card__gender-radio {
+  display: flex;
+  flex-direction: row;
+  width: 204px;
+}
+
+.passenger-card__gender input[type="radio"] {
+  display: none;
+}
+
+.gender-label {
+  flex: 1;
+  margin-top: 10px;
+  position: relative;
+  border: 1px solid #928F94;
+  color: #000;
+  padding: 5px 30px;
+  text-align: center;
+font-size: 30px;
+font-weight: 900;
+text-transform: uppercase;
+background: #fff;
+
+cursor: pointer;
+}
+
+.male-label {
+  
+  border-radius: 5px 0px 0px 5px;
+}
+
+.female-label{
+  border-radius: 0 5px 5px 0;
+}
+
+
+.passenger-card__gender input[type="radio"]:checked + label {
+  background: #FFA800;
+}
+
+.passenger-card__document {
+  display: flex;
+}
+
+/* Отключение стрелок для input[type="number"] */
+.passenger-card input::-webkit-outer-spin-button,
+.passenger-card input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.passenger-card input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.passenger-card__input-document::placeholder {
+  font-size: 1.5rem;
+  letter-spacing: 15px;
+}
+
+/* gender end */
+
+.passenger-card__checkbox {
+  width: 28px;
+height: 28px;
+border-radius: 5px;
+border: 1px solid #928F94;
+background: #FFF;
+}
+
+.passenger-card__accessibility{
+  
+  display: flex;
+  align-items: center;
+  margin-bottom: 30px;
+}
+
+.passenger-card__accessibility-text {
+  margin-left: 10px;
+  color: #292929;
+font-size: 1.125rem;
+}
+
+.passenger-card__document {
+  position: relative;
+  display: flex;
+  padding: 35px 0;
+  margin-bottom: 35px;
+}
+
+.passenger-card__document::after, .passenger-card__document::before {
+  content: "";
+  position: absolute;
+  left: -35px;
+  width: calc(100% + 70px);
+  height: 0;  
+  border-top: 1px dashed #928f94;  
+}
+
+.passenger-card__document::after {
+  top: 0;
+  
+}
+
+.passenger-card__document::before {
+  bottom: 0;
+  
+}
+
+.passenger-card__label-document {
+  max-width: none;
+  display: flex;
+  flex-direction: column;
+  flex: 0;
+  margin-right: 35px;  
+}
+
+.passenger-card__document-select {
+}
+
+.passenger-card__input-document {
+  letter-spacing: 12px;
+  padding: 10px 0 10px 15px;
+}
+
+.passenger-card__input-document:focus {
+  padding-right: 0px;
+}
+
+
+.passenger-card__input-document--series {
+  width: 124px;
+}
+
+.passenger-card__input-document--number {
+  width: 174px;
+}
+
+.passenger-card__input-document--number-foreign {
+  width: 274px;
+}
+
+.passenger-card__input-document--number-birthCertificate {
+  width: 334px;
+}
+
+.passenger-card__document-validation {
+  padding: 35px 25px;
+  display: flex;
+  align-items: center;
+  position: absolute;
+  width: calc(100% + 70px);
+  height: 120px;
+  margin-left: -35px;
+  background: #B2F6A1;
+  
+  bottom: 0;
+  transform: translateY(100%);
+  z-index: 1;
+}
+
+.passenger-card__document-validation--error {
+  background: rgba(255, 61, 0, 0.38);
+}
+
+.passenger-card__next-btn {
+  padding: 10px 20px;
+  border-radius: 5px;
+  border: 1px solid #292929;
+  margin-left: auto;
+
+  color: #292929;
+  font-size: 1.5rem;
+  font-weight: 700;
+
+  background: transparent;
+
+  cursor: pointer;
+  z-index: 2;
+}
+
+.passenger-card__document-validation-text {
+  margin-left: 15px;
+}
+
+.passenger-card__document-validation-text--example {
+  font-weight: 700;
+}
+
+.passenger-card__next-btn--disabled {
+  visibility: hidden;
+}

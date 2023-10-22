@@ -1,0 +1,47 @@
+.passenger-details {
+  padding: 20px 28px 20px;
+  transition: height 0.3s ease-in-out;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.passenger-details__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.passenger-details__title {
+  /* margin-bottom: 30px; */
+  font-size: 1.875rem;
+  font-weight: 700;
+  padding-left: 45px;
+  background-position: left center;
+  background-repeat: no-repeat;
+  background-image: url("../../../../assets/icons/passenger.svg");
+}
+
+.passenger-details__container {
+  display: flex;
+  flex-direction: column;
+  padding: 30px 0 20px;
+}
+
+.passenger-details__content {
+  display: flex;
+}
+
+.passenger-details__count {
+  color: #e5e5e5;
+  font-size: 1.125rem;
+}
+
+.passenger-details__price {
+  margin-left: auto;
+  padding-right: calc(0.5ch + 14px);
+  background-image: url(/src/assets/icons/details-ruble.svg);
+  background-repeat: no-repeat;
+  background-position: right center;
+  color: #fff;
+  font-size: 1.5rem;
+  font-weight: 700;
+}

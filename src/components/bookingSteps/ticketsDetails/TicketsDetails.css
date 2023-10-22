@@ -3,3 +3,28 @@
   background-color: #3e3c41;
   margin-bottom: 6rem;
 }
+
+.tickets-details__title {
+  padding: 35px 40px;
+  color: #e5e5e5;
+  font-size: 1.875rem;
+  font-weight: 500;
+  text-transform: uppercase;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.transition__button {
+  border: none;
+  background: none;
+  padding: 0;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.transition__button:hover {
+  color: #fcdc9d;
+}
+
+.transition__button:active {
+  color: #c4c4c4;
+}

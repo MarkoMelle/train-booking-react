@@ -30,9 +30,6 @@
   transform: none !important;
 }
 
-.react-datepicker__aria-live {
-}
-
 .react-datepicker__navigation {
   position: initial;
   margin: auto;
@@ -75,20 +72,9 @@
   border-bottom: 1px solid #d3d3d3;
 }
 
-.react-datepicker__current-month {
-}
-
-.react-datepicker__header__dropdown {
-}
-
-.react-datepicker__header__dropdown--scroll {
-}
 
 .react-datepicker__day-names {
   display: none;
-}
-
-.react-datepicker__day-name {
 }
 
 .react-datepicker__month {
@@ -126,14 +112,14 @@
 }
 
 .react-datepicker__day--selected {
-  border: 2px solid #ffa800;
+  outline: 2px solid #ffa800;
   background-color: rgba(255, 168, 0, 0.31);
   color: #333333;
   font-weight: 600;
 }
 
 .highlighted-range {
-  border: 2px solid #ffa800;
+  outline: 2px solid #ffa800;
   background-color: rgba(255, 168, 0, 0.31);
   color: #333333;
   font-weight: 600;

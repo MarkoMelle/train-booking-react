@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 import arrowBig from "../../../../assets/icons/arrow-seat-big.svg";
-import TimeInfo from "../../searchResults/ticketsList/ticket/timeInfo/TimeInfo";
+import TimeInfo from "../../timeInfo/TimeInfo";
 import WagonTypes from "./wagonType/WagonTypes";
 import SelectSeatComponent from "./selectSeatComponent/SelectSeatComponent";
 import { currency } from "./wagonType/iconsSvg";
@@ -13,7 +13,7 @@ export default function SeatSelector({
   services,
 }) {
   return (
-    <div className="seat-selector">
+    <div className="booking-steps__container seat-selector">
       <div
         className={`seat-selector__header seat-selector__header--${direction}`}
       >
