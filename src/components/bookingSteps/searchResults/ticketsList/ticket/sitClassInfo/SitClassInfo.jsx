@@ -61,15 +61,21 @@ export default function SitClassInfo({
         ))}
       </ul>
       <div className="ticket__sit-class__options">{optionsSvg}</div>
-     {!isVerification ? <button
-        className="primary-btn primary-btn--white ticket__select-button"
-        onClick={() => {
-          setIsSelectSeats(true);
-          setCurrentTrip(ticket);
-        }}
-      >
-        Выбрать места
-      </button> : <button className="secondary-btn ticket__select-button">Изменить</button>}
+      {!isVerification ? (
+        <button
+          className="primary-btn primary-btn--white ticket__select-button"
+          onClick={() => {
+            setIsSelectSeats(true);
+            setCurrentTrip(ticket);
+          }}
+        >
+          Выбрать места
+        </button>
+      ) : (
+        <button className="secondary-btn ticket__select-button">
+          Изменить
+        </button>
+      )}
     </>
   );
 }
@@ -79,4 +85,5 @@ SitClassInfo.propTypes = {
   setIsSelectSeats: PropTypes.func.isRequired,
   setCurrentTrip: PropTypes.func.isRequired,
   ticket: PropTypes.object.isRequired,
+  isVerification: PropTypes.bool,
 };

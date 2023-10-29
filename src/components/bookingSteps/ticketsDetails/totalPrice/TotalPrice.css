@@ -4,8 +4,8 @@
 
 .total-price__wrapper {
   display: flex;
-   justify-content: space-between;
-   align-items: baseline;
+  justify-content: space-between;
+  align-items: baseline;
 }
 
 .total-price__title {

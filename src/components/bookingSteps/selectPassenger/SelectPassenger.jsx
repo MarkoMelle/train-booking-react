@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import PassengerCard from "./passengerCard/PassengerCard";
 import "./SelectPassenger.css";
 
@@ -18,7 +19,7 @@ const addIcon = (
 );
 
 export default function SelectPassenger({ setActiveStep }) {
-  const [disabled, setDisabled] = useState(false);
+  const [disabled] = useState(false);
 
   return (
     <div className="select-passenger">
@@ -32,7 +33,9 @@ export default function SelectPassenger({ setActiveStep }) {
         {addIcon}
       </div>
       <button
-        className={`primary-btn select-passenger__next-btn  ${disabled ? "primary-btn--disabled" : ""}`}
+        className={`primary-btn select-passenger__next-btn  ${
+          disabled ? "primary-btn--disabled" : ""
+        }`}
         type="button"
         onClick={() => setActiveStep(3)}
         disabled={disabled}
@@ -42,3 +45,7 @@ export default function SelectPassenger({ setActiveStep }) {
     </div>
   );
 }
+
+SelectPassenger.propTypes = {
+  setActiveStep: PropTypes.func.isRequired,
+};

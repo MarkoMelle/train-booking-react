@@ -57,6 +57,7 @@ SelectComponent.propTypes = {
   className: PropTypes.string,
   onChange: PropTypes.func.isRequired,
   value: PropTypes.string.isRequired,
+  width: PropTypes.string,
 };
 
 const blue = {
@@ -122,7 +123,7 @@ font-weight: 400;
 );
 
 const StyledListbox = styled("ul")(
-  ({ theme, width }) => `
+  ({ width }) => `
   font-family: Roboto, sans-serif;
   font-size: 1rem;
   box-sizing: border-box;

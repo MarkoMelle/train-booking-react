@@ -12,13 +12,13 @@ const today = new Date();
 const weekFromToday = new Date();
 weekFromToday.setDate(today.getDate() + 7);
 
-const defaultDepartureDate = today
-const defaultReturnDate = weekFromToday
+const defaultDepartureDate = today;
+const defaultReturnDate = weekFromToday;
 
 export default function TicketDetails({ direction, currentTrip }) {
+  // eslint-disable-next-line no-unused-vars
   const { state, setState } = React.useContext(StateContext);
   const [isOpened, setIsOpened] = React.useState(false);
-
 
   const departureDate = state.departureDate || defaultDepartureDate;
   const returnDate = state.returnDate || defaultReturnDate;
@@ -107,7 +107,10 @@ export default function TicketDetails({ direction, currentTrip }) {
               station={currentTrip.departureStation}
               city={currentTrip.direction}
               modifier={direction === "departure" ? "departure" : "arrival"}
-              date={{left: formatDate(departureDate), right: formatDate(returnDate)}}
+              date={{
+                left: formatDate(departureDate),
+                right: formatDate(returnDate),
+              }}
               block="ticket-details-time-info"
             />
           </div>

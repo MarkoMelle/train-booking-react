@@ -1,6 +1,6 @@
 .payment {
-   display: flex;
-   flex-direction: column;
+  display: flex;
+  flex-direction: column;
   color: #292929;
 }
 
@@ -9,7 +9,7 @@
 }
 
 .payment__personal-data {
-   padding-bottom: 50px;
+  padding-bottom: 50px;
   display: flex;
   flex-direction: column;
   border-bottom: 1px dashed #c4c4c4;
@@ -18,7 +18,7 @@
 .payment__header {
   padding: 35px 35px;
   background: #f9f9f9;
-border-bottom: 1px dashed #c4c4c4;
+  border-bottom: 1px dashed #c4c4c4;
 }
 
 .payment__title {
@@ -34,9 +34,9 @@ border-bottom: 1px dashed #c4c4c4;
 }
 
 .payment__contact-group {
-   display: flex;
-   flex-direction: column;
-   padding: 0 35px;
+  display: flex;
+  flex-direction: column;
+  padding: 0 35px;
 }
 
 .payment__label {
@@ -61,86 +61,82 @@ border-bottom: 1px dashed #c4c4c4;
 }
 
 .payment__type {
-   display: flex;
-   flex-direction: column;
+  display: flex;
+  flex-direction: column;
 }
 
-
-
 .payment__type-group--online {
-   padding: 50px 35px 100px;
-   border-bottom: 1px dashed #c4c4c4;
+  padding: 50px 35px 100px;
+  border-bottom: 1px dashed #c4c4c4;
 }
 
 .payment__type-group--cash {
-   padding: 60px 35px 50px;
+  padding: 60px 35px 50px;
 }
 
 .payment__online-methods {
-   display: flex;
-   align-items: flex-start;
+  display: flex;
+  align-items: flex-start;
 }
 
 .payment__online-method {
-   color: #292929;
-font-size: 1.5rem;
-font-weight: 700;
-margin-right: 50px;
+  color: #292929;
+  font-size: 1.5rem;
+  font-weight: 700;
+  margin-right: 50px;
 }
 
 .payment__radio {
-   position: relative;
-   display: flex;
-   align-items: flex-start;
-   padding-left: 30px; 
-   cursor: pointer;
-   margin-bottom: 30px;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  padding-left: 30px;
+  cursor: pointer;
+  margin-bottom: 30px;
 }
 
 .payment__radio-text {
-   margin-left: 20px;
-   color: #928F94;
-font-size: 1.5rem;
+  margin-left: 20px;
+  color: #928f94;
+  font-size: 1.5rem;
 }
 
 .payment__radio input[type="radio"] {
-   display: none; 
+  display: none;
 }
 
-.payment__radio .payment__radio-check{
-   position: absolute;
-   top: 0;
-   left: 0;
-   height: 28px;
-   width: 28px;
-   border-radius: 5px;
-border: 1px solid #928F94;
-background: #FFF;
+.payment__radio .payment__radio-check {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 28px;
+  width: 28px;
+  border-radius: 5px;
+  border: 1px solid #928f94;
+  background: #fff;
 }
 
-.payment__radio input[type="radio"]:checked ~ .payment__radio-check  {
-   border: 1px solid #FFA800;
+.payment__radio input[type="radio"]:checked ~ .payment__radio-check {
+  border: 1px solid #ffa800;
 }
 
 .payment__radio input[type="radio"]:checked ~ .payment__radio-text {
-   color: #FFA800;
+  color: #ffa800;
 }
 
 .payment__radio input[type="radio"]:checked ~ .payment__radio-check::before {
-   content: '\2713'; 
-   position: absolute;
-   top: 50%;
-   left: 50%;
-   transform: translate(-50%, -50%);
-   color: #FFA800; 
-   font-size: 18px; 
-   font-weight: bold; 
+  content: "\2713";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  color: #ffa800;
+  font-size: 18px;
+  font-weight: bold;
 }
-
 
 .payment__btn {
-   margin-left: auto;
-   padding: 15px 50px;
-   text-transform: uppercase;
+  margin-left: auto;
+  padding: 15px 50px;
+  text-transform: uppercase;
 }
-

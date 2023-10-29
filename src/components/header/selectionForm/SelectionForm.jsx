@@ -18,6 +18,7 @@ export default function SelectionForm({ modifier }) {
   const [departureDate, setDepartureDate] = useState("");
   const [returnDate, setReturnDate] = useState("");
   const [isRotated, setIsRotated] = useState(false);
+  // eslint-disable-next-line no-unused-vars
   const { state, setState } = useContext(StateContext);
 
   const handleSubmit = (event) => {

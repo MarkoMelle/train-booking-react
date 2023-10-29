@@ -6,6 +6,7 @@ import PassengerList from "./passengerList/PassengerList";
 import { useContext } from "react";
 
 export default function Verification() {
+  // eslint-disable-next-line no-unused-vars
   const { state, setState } = useContext(StateContext);
   const navigate = useNavigate();
   const handleSubmit = (event) => {

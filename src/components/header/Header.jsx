@@ -38,7 +38,7 @@ export default function Header() {
             <span className="header__title--bold">путешествие!</span>
           </h2>
         ) : null}
-        {modifier !== 'success' ? <SelectionForm modifier={modifier} /> : null}
+        {modifier !== "success" ? <SelectionForm modifier={modifier} /> : null}
       </div>
     </header>
   );

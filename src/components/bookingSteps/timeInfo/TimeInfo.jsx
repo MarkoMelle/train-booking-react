@@ -1,7 +1,6 @@
 import { timeDifference } from "../../../utils";
 import PropTypes from "prop-types";
 
-
 export default function TimeInfo({
   time,
   station,
@@ -18,7 +17,7 @@ export default function TimeInfo({
         </span>
         {date ? (
           <span className={`${block}__date ${block}__date--${modifier}`}>
-           {date.left}
+            {date.left}
           </span>
         ) : null}
         <span className={`${block}__city ${block}__city--${modifier}`}>
@@ -59,4 +58,5 @@ TimeInfo.propTypes = {
   city: PropTypes.array.isRequired,
   modifier: PropTypes.string.isRequired,
   block: PropTypes.string,
+  date: PropTypes.object,
 };

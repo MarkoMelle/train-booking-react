@@ -1,6 +1,7 @@
-import React, { useState, useRef } from "react";
+import { useState, useRef } from "react";
 import SelectComponent from "../../selectComponent/SelectComponent";
 import { errorIcon } from "../iconSvg";
+import PropTypes from "prop-types";
 
 export default function DocumentForm({
   passportSeries,
@@ -21,6 +22,7 @@ export default function DocumentForm({
   const numberInputForeignRef = useRef(null);
   const numberInputBirthCertificateRef = useRef(null);
 
+  // eslint-disable-next-line no-unused-vars
   const validateSeries = (value) => {
     // if (documentType === "passport") {
     //   return value.length === 4 && /^[0-9]{4}$/.test(value)
@@ -36,6 +38,7 @@ export default function DocumentForm({
     // }
   };
 
+  // eslint-disable-next-line no-unused-vars
   const validateNumber = (value) => {
     // switch (documentType) {
     //   case "passport":
@@ -118,7 +121,6 @@ export default function DocumentForm({
         return "205px";
     }
   };
-  console.log(errors);
   return (
     <div className="passenger-card__document">
       <label className="passenger-card__label passenger-card__label-document">
@@ -224,3 +226,17 @@ export default function DocumentForm({
     </div>
   );
 }
+
+DocumentForm.propTypes = {
+  passportSeries: PropTypes.string.isRequired,
+  passportNumber: PropTypes.string.isRequired,
+  passportForeignNumber: PropTypes.string.isRequired,
+  birthCertificateNumber: PropTypes.string.isRequired,
+  setPassportSeries: PropTypes.func.isRequired,
+  setPassportNumber: PropTypes.func.isRequired,
+  setPassportForeignNumber: PropTypes.func.isRequired,
+  setBirthCertificateNumber: PropTypes.func.isRequired,
+  age: PropTypes.string.isRequired,
+  errors: PropTypes.object.isRequired,
+  setErrors: PropTypes.func.isRequired,
+};

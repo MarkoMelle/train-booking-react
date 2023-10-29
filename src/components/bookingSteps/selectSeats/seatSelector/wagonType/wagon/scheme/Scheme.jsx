@@ -71,7 +71,6 @@ export default function Scheme({ number = "07", type, places = arr }) {
         );
       });
   };
-  
 
   return (
     <div className={`scheme scheme--${type}`}>

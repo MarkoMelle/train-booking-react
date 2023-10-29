@@ -1,5 +1,5 @@
-import React from "react";
 import "./Payment.css";
+import PropTypes from "prop-types";
 
 export default function Payment({ setActiveStep }) {
   const handleSubmit = (e) => {
@@ -71,8 +71,7 @@ export default function Payment({ setActiveStep }) {
           <div className="payment__header">
             <h2 className="payment__title">Способ оплаты</h2>
           </div>
-          <div
-            className="payment__type-group payment__type-group--online">
+          <div className="payment__type-group payment__type-group--online">
             <label className="payment__label payment__radio">
               <input type="radio" name="payment" id="card" value="card" />
               <span className="payment__radio-text">Онлайн</span>
@@ -104,3 +103,7 @@ export default function Payment({ setActiveStep }) {
     </div>
   );
 }
+
+Payment.propTypes = {
+  setActiveStep: PropTypes.func.isRequired,
+};

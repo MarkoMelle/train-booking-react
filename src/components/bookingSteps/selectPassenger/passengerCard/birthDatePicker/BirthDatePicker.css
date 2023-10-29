@@ -1,19 +1,18 @@
 .birth-date__input {
-
 }
 
-.passenger-card  .react-datepicker-wrapper {
+.passenger-card .react-datepicker-wrapper {
   width: 20.25rem;
   position: relative;
   font-weight: 300;
 }
 
-.passenger-card  .react-datepicker__tab-loop {
+.passenger-card .react-datepicker__tab-loop {
   position: absolute;
 }
 
-.passenger-card  .react-datepicker {
-  background: #F9F9F9;
+.passenger-card .react-datepicker {
+  background: #f9f9f9;
   font-family: "Roboto", sans-serif;
   font-size: 1.125rem;
   width: 20.25rem;
@@ -22,45 +21,44 @@
   top: -6.875rem;
 }
 
-
-.passenger-card  .react-datepicker__triangle {
+.passenger-card .react-datepicker__triangle {
   display: none;
 }
 
-.passenger-card  .react-datepicker__navigation {
+.passenger-card .react-datepicker__navigation {
   position: initial;
   margin: auto;
 }
 
-.passenger-card  .react-datepicker__navigation--previous {
+.passenger-card .react-datepicker__navigation--previous {
 }
 
-.passenger-card  .react-datepicker__navigation-icon {
+.passenger-card .react-datepicker__navigation-icon {
   width: 0.5rem;
   fill: #3d3b3b;
 }
 
-.passenger-card  .react-datepicker__navigation--previous {
+.passenger-card .react-datepicker__navigation--previous {
   transform: rotate(30deg);
 }
 
-.passenger-card  .react-datepicker__navigation--next {
+.passenger-card .react-datepicker__navigation--next {
   transform: rotate(90deg);
 }
 
-.passenger-card  .react-datepicker__navigation-icon--next {
+.passenger-card .react-datepicker__navigation-icon--next {
 }
 
-.passenger-card  .react-datepicker__month-container {
+.passenger-card .react-datepicker__month-container {
   width: 100%;
 }
 
-.passenger-card  .react-datepicker__header {
+.passenger-card .react-datepicker__header {
   color: #333333;
   width: 100%;
   display: flex;
   justify-content: center;
-  background: #F9F9F9;
+  background: #f9f9f9;
   border: none;
   text-transform: capitalize;
   font-size: 1.5rem;
@@ -69,47 +67,46 @@
   border-bottom: 1px solid #d3d3d3;
 }
 
-
-.passenger-card  .react-datepicker__day-names {
+.passenger-card .react-datepicker__day-names {
   display: none;
 }
 
-.passenger-card  .react-datepicker__month {
+.passenger-card .react-datepicker__month {
   display: flex;
   flex-direction: column;
   gap: 0.5rem;
 }
 
-.passenger-card  .react-datepicker__week {
+.passenger-card .react-datepicker__week {
   display: flex;
   justify-content: space-between;
   padding: 0 1rem;
 }
 
-.passenger-card  .react-datepicker__day {
+.passenger-card .react-datepicker__day {
   color: #515151;
   font-weight: 400;
 }
 
-.passenger-card  .react-datepicker__day--weekend {
+.passenger-card .react-datepicker__day--weekend {
   color: #333333;
   font-weight: 600;
 }
 
-.passenger-card  .react-datepicker__day--outside-month {
+.passenger-card .react-datepicker__day--outside-month {
   color: #e2e2e2;
 }
 
-.passenger-card  .react-datepicker__day--selected:hover {
+.passenger-card .react-datepicker__day--selected:hover {
   background-color: rgba(255, 168, 0, 0.31);
 }
 
-.passenger-card  .react-datepicker__day--keyboard-selected {
+.passenger-card .react-datepicker__day--keyboard-selected {
   background-color: transparent;
   font-weight: 400;
 }
 
-.passenger-card  .react-datepicker__day--selected {
+.passenger-card .react-datepicker__day--selected {
   outline: 1px solid #ffa800;
   background-color: rgba(255, 168, 0, 0.31);
   color: #333333;

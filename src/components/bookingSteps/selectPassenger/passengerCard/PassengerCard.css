@@ -95,7 +95,6 @@
   margin-bottom: 45px;
 }
 
-
 .passenger-card__name {
   width: 100%;
   display: flex;
@@ -117,7 +116,7 @@
   align-items: flex-start;
 }
 
-.passenger-card__label--gender{
+.passenger-card__label--gender {
   flex: 0;
 }
 
@@ -135,30 +134,28 @@
   flex: 1;
   margin-top: 10px;
   position: relative;
-  border: 1px solid #928F94;
+  border: 1px solid #928f94;
   color: #000;
   padding: 5px 30px;
   text-align: center;
-font-size: 30px;
-font-weight: 900;
-text-transform: uppercase;
-background: #fff;
+  font-size: 30px;
+  font-weight: 900;
+  text-transform: uppercase;
+  background: #fff;
 
-cursor: pointer;
+  cursor: pointer;
 }
 
 .male-label {
-  
   border-radius: 5px 0px 0px 5px;
 }
 
-.female-label{
+.female-label {
   border-radius: 0 5px 5px 0;
 }
 
-
 .passenger-card__gender input[type="radio"]:checked + label {
-  background: #FFA800;
+  background: #ffa800;
 }
 
 .passenger-card__document {
@@ -185,14 +182,13 @@ cursor: pointer;
 
 .passenger-card__checkbox {
   width: 28px;
-height: 28px;
-border-radius: 5px;
-border: 1px solid #928F94;
-background: #FFF;
+  height: 28px;
+  border-radius: 5px;
+  border: 1px solid #928f94;
+  background: #fff;
 }
 
-.passenger-card__accessibility{
-  
+.passenger-card__accessibility {
   display: flex;
   align-items: center;
   margin-bottom: 30px;
@@ -201,7 +197,7 @@ background: #FFF;
 .passenger-card__accessibility-text {
   margin-left: 10px;
   color: #292929;
-font-size: 1.125rem;
+  font-size: 1.125rem;
 }
 
 .passenger-card__document {
@@ -211,23 +207,22 @@ font-size: 1.125rem;
   margin-bottom: 35px;
 }
 
-.passenger-card__document::after, .passenger-card__document::before {
+.passenger-card__document::after,
+.passenger-card__document::before {
   content: "";
   position: absolute;
   left: -35px;
   width: calc(100% + 70px);
-  height: 0;  
-  border-top: 1px dashed #928f94;  
+  height: 0;
+  border-top: 1px dashed #928f94;
 }
 
 .passenger-card__document::after {
   top: 0;
-  
 }
 
 .passenger-card__document::before {
   bottom: 0;
-  
 }
 
 .passenger-card__label-document {
@@ -235,7 +230,7 @@ font-size: 1.125rem;
   display: flex;
   flex-direction: column;
   flex: 0;
-  margin-right: 35px;  
+  margin-right: 35px;
 }
 
 .passenger-card__document-select {
@@ -249,7 +244,6 @@ font-size: 1.125rem;
 .passenger-card__input-document:focus {
   padding-right: 0px;
 }
-
 
 .passenger-card__input-document--series {
   width: 124px;
@@ -275,8 +269,8 @@ font-size: 1.125rem;
   width: calc(100% + 70px);
   height: 120px;
   margin-left: -35px;
-  background: #B2F6A1;
-  
+  background: #b2f6a1;
+
   bottom: 0;
   transform: translateY(100%);
   z-index: 1;

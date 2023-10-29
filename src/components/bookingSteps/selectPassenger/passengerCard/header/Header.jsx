@@ -1,11 +1,17 @@
 import { plusCircleIcon, minusCircleIcon, deleteIcon } from "../iconSvg";
-import React from 'react';
+import PropTypes from "prop-types";
 
 export default function Header({ isOpened, handleToggleOpen }) {
   return (
-    <div className={`passenger-card__header ${!isOpened ? "passenger-card__header--closed" : ""}`}>
+    <div
+      className={`passenger-card__header ${
+        !isOpened ? "passenger-card__header--closed" : ""
+      }`}
+    >
       <button
-        className={`passenger-card__toggle ${!isOpened ? "passenger-card__toggle--closed" : ""}`}
+        className={`passenger-card__toggle ${
+          !isOpened ? "passenger-card__toggle--closed" : ""
+        }`}
         type="button"
         onClick={handleToggleOpen}
       >
@@ -18,3 +24,8 @@ export default function Header({ isOpened, handleToggleOpen }) {
     </div>
   );
 }
+
+Header.propTypes = {
+  isOpened: PropTypes.bool.isRequired,
+  handleToggleOpen: PropTypes.func.isRequired,
+};

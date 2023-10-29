@@ -38,7 +38,7 @@ const testTrip = {
       price: { from: 11820, upper: 11820, lower: 12130 },
     },
   ],
-}
+};
 
 export default function BookingSteps() {
   const [activeStep, setActiveStep] = useState(1);

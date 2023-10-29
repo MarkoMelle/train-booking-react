@@ -13,7 +13,6 @@
 //   </svg>
 // </button>
 import DatePicker, { registerLocale } from "react-datepicker";
-import React from "react";
 import PropTypes from "prop-types";
 import "react-datepicker/dist/react-datepicker.css";
 import ru from "date-fns/locale/ru";
@@ -113,6 +112,16 @@ export default function BirthDatePicker({ date, setDate }) {
     />
   );
 }
+
+CustomHeader.propTypes = {
+  date: PropTypes.instanceOf(Date).isRequired,
+  changeYear: PropTypes.func.isRequired,
+  changeMonth: PropTypes.func.isRequired,
+  decreaseMonth: PropTypes.func.isRequired,
+  increaseMonth: PropTypes.func.isRequired,
+  prevMonthButtonDisabled: PropTypes.bool.isRequired,
+  nextMonthButtonDisabled: PropTypes.bool.isRequired,
+};
 
 BirthDatePicker.propTypes = {
   date: PropTypes.instanceOf(Date).isRequired,
