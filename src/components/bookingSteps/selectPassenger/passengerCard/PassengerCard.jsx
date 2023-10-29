@@ -125,7 +125,7 @@ export default function PassengerCard() {
                 setErrors={setErrors}
               />
               <button
-                className={`passenger-card__next-btn passenger-card__next-btn--${
+                className={`secondary-btn passenger-card__next-btn passenger-card__next-btn--${
                   errors.series || errors.number ? "disabled" : "active"
                 }`}
                 type="submit"

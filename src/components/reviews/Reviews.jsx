@@ -2,8 +2,8 @@ import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
 import "./Reviews.css";
-import user1 from "../../../assets/images/user1.png";
-import user2 from "../../../assets/images/user2.png";
+import user1 from "../../assets/images/user1.png";
+import user2 from "../../assets/images/user2.png";
 
 function repeatArray(array, times) {
   let result = [];

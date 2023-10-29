@@ -1,7 +1,7 @@
 import "./HowItWorks.css";
-import desktopImg from "../../../assets/images/desktop.png";
-import officeImg from "../../../assets/images/office.png";
-import earth from "../../../assets/images/earth.png";
+import desktopImg from "../../assets/images/desktop.png";
+import officeImg from "../../assets/images/office.png";
+import earth from "../../assets/images/earth.png";
 
 export default function HowItWorks() {
   const block = "how-it-works";

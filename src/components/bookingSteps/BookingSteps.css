@@ -27,6 +27,11 @@
   font-weight: 400;
 }
 
+.booking-steps__input:focus {
+  outline: none;
+  border: 1px solid #ffa800;
+}
+
 .booking-steps__container {
   border: 1px solid #c4c4c4;
   background: #fff;

@@ -1,0 +1,139 @@
+.verification {
+  color: #292929;
+  display: flex;
+  flex-direction: column;
+  gap: 45px;
+}
+
+.verification__ticket {
+}
+
+.verification__payment {
+   margin-bottom: 75px;
+}
+.verification__header {
+  padding: 30px;
+  border-bottom: 1px solid #928f94;
+}
+
+.verification__title {
+  font-size: 1.875rem;
+}
+
+.verification__aside {
+  padding: 25px;
+  display: flex;
+  flex-direction: column;
+}
+
+.verification__payment-container {
+  display: flex;
+  align-items: flex-end;
+}
+
+.verification__payment-method {
+  flex: 1;
+  padding: 45px 30px 75px;
+  border-right: 1px dashed #e5e5e5;
+  font-size: 1.5rem;
+}
+
+.verification__payment-btn {
+}
+
+.verification__btn {
+  margin-left: auto;
+  padding: 15px 60px;
+  text-transform: uppercase;
+}
+
+.passenger-list {
+}
+
+.passenger-list__header {
+}
+
+.passenger-list__title {
+}
+
+.passenger-list__wrapper {
+  display: flex;
+  align-items: flex-end;
+}
+
+.passenger-list__container {
+  padding: 30px 0 60px;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px dashed #e5e5e5;
+  flex: 1;
+}
+
+.passenger-list__total-price {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: calc(0.5ch + 20px);
+  color: #2d2b2f;
+  font-size: 30px;
+  font-weight: 400;
+  background-image: url(../../../assets/icons/ticket-ruble.svg);
+  background-size: 20px;
+  background-repeat: no-repeat;
+  background-position: right center;
+  margin-bottom: 25px;
+}
+
+.passenger-list__total-price--bold {
+  font-weight: 700;
+}
+
+.passenger-list__btn {
+}
+
+.passenger {
+  display: flex;
+  padding: 30px 45px;
+  border-bottom: 1px dashed #e5e5e5;
+  font-size: 1.125rem;
+}
+
+.passenger:last-child {
+  border-bottom: none;
+}
+
+.passenger__avatar {
+  display: flex;
+  flex-direction: column;
+  margin-right: 45px;
+}
+
+.passenger__avatar-img {
+  margin-bottom: 20px;
+}
+
+.passenger__ageCategory {
+  color: #292929;
+}
+
+.passenger__info {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.passenger__name {
+  color: #292929;
+}
+
+.passenger__gender {
+  color: #928f94;
+}
+
+.passenger__birth-date {
+  color: #928f94;
+}
+
+.passenger__document {
+  color: #928f94;
+}

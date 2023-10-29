@@ -7,6 +7,7 @@ export default function SitClassInfo({
   setIsSelectSeats,
   setCurrentTrip,
   ticket,
+  isVerification = false,
 }) {
   const [activeIndex, setActiveIndex] = useState(null);
 
@@ -60,7 +61,7 @@ export default function SitClassInfo({
         ))}
       </ul>
       <div className="ticket__sit-class__options">{optionsSvg}</div>
-      <button
+     {!isVerification ? <button
         className="primary-btn primary-btn--white ticket__select-button"
         onClick={() => {
           setIsSelectSeats(true);
@@ -68,7 +69,7 @@ export default function SitClassInfo({
         }}
       >
         Выбрать места
-      </button>
+      </button> : <button className="secondary-btn ticket__select-button">Изменить</button>}
     </>
   );
 }

@@ -7,6 +7,7 @@ import SearchResults from "./searchResults/SearchResults";
 import SelectSeats from "./selectSeats/SelectSeats";
 import SelectPassenger from "./selectPassenger/SelectPassenger";
 import Payment from "./payment/Payment";
+import Verification from "./verification/Verification";
 
 const testTrip = {
   trainNumber: "116С",
@@ -40,7 +41,7 @@ const testTrip = {
 }
 
 export default function BookingSteps() {
-  const [activeStep, setActiveStep] = useState(3);
+  const [activeStep, setActiveStep] = useState(1);
   const [isSelectSeats, setIsSelectSeats] = useState(false);
   const [currentTrip, setCurrentTrip] = useState(testTrip);
   return (
@@ -58,7 +59,8 @@ export default function BookingSteps() {
           <SelectSeats {...{ setActiveStep, currentTrip }} />
         )}
         {activeStep === 2 && <SelectPassenger {...{ setActiveStep }} />}
-        {activeStep === 3 && <Payment />}
+        {activeStep === 3 && <Payment {...{ setActiveStep }} />}
+        {activeStep === 4 && <Verification />}
       </main>
     </div>
   );

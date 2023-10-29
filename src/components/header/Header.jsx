@@ -14,11 +14,11 @@ export default function Header() {
     case "/tickets":
       modifier = "tickets";
       break;
-    case "/.....":
-      // Widget = "Filter-full";
+    case "/success":
+      modifier = "success";
       break;
     default:
-    // Widget = null;
+      modifier = "";
   }
 
   return (
@@ -38,7 +38,7 @@ export default function Header() {
             <span className="header__title--bold">путешествие!</span>
           </h2>
         ) : null}
-        <SelectionForm modifier={modifier} />
+        {modifier !== 'success' ? <SelectionForm modifier={modifier} /> : null}
       </div>
     </header>
   );

@@ -17,6 +17,14 @@
   border-bottom: none;
 }
 
+.header--bg--success {
+  background-color: #292929;
+  background-image: url("../../assets/images/header-bg-success.png");
+  background-size: cover;
+  border-bottom: none;
+  height: 835px;
+}
+
 .header__content {
   width: 100%;
   display: flex;

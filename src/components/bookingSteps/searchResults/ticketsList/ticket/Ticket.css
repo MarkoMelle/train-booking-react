@@ -4,13 +4,9 @@
   margin: 0;
   display: flex;
   color: #000;
-
-  border: 1px solid #c4c4c4;
-  background: #fff;
-  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
 }
 
-.ticket:last-of-type {
+.tickets-list .ticket:last-of-type {
   margin-bottom: 140px;
 }
 
@@ -238,7 +234,6 @@
 
 .ticket__sit-class__price::after {
   content: "";
-
   width: 16px;
   height: 16px;
 }

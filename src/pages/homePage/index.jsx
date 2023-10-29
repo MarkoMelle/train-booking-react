@@ -1,7 +1,7 @@
 import Header from "../../components/header/Header";
-import About from "./about/About";
-import HowItWorks from "./howItWorks/HowItWorks";
-import Reviews from "./reviews/Reviews";
+import About from "../../components/about/About";
+import HowItWorks from "../../components/howItWorks/HowItWorks";
+import Reviews from "../../components/reviews/Reviews";
 import { useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { handleScroll } from "../../utils";

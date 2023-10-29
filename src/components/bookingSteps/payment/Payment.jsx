@@ -1,10 +1,11 @@
 import React from "react";
 import "./Payment.css";
 
-export default function Payment() {
+export default function Payment({ setActiveStep }) {
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log("Отправлено");
+    setActiveStep(4);
   };
   return (
     <div className="payment">

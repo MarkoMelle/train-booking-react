@@ -1,0 +1,165 @@
+.order-success {
+  background: #f7f5f9;
+}
+
+.order-success__content {
+  position: relative;
+  margin: auto;
+
+  max-width: 1400px;
+  margin-top: -325px;
+  z-index: 999;
+}
+
+.order-success__card {
+  border: 1px solid #c4c4c4;
+  background: #fff;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.25);
+  color: #292929;
+}
+
+.order-success__after--decor {
+  height: 175px;
+}
+
+.order-success__title {
+  color: #fff;
+  font-size: 72px;
+  font-weight: 700;
+  margin-bottom: 35px;
+}
+
+.order-success__order-info {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 60px 80px 40px;
+  font-size: 36px;
+}
+
+.order-success__order-info--bold {
+  color: #3e3c41;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.order-success__order-info--text {
+  display: flex;
+  color: #928f94;
+  font-family: Roboto;
+  font-weight: 400;
+}
+
+.order-success__order-info--sum {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-right: calc(0.5ch + 21px);
+  margin-left: 1ch;
+  color: #3e3c41;
+  font-weight: 700;
+  background-image: url(../../assets/icons/ticket-ruble.svg);
+  background-size: 21px;
+  background-repeat: no-repeat;
+  background-position: right center;
+}
+
+.order-success__instruction {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 95px;
+  background: #f4f3f6;
+}
+
+.order-success__instruction-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.order-success__instruction-item--img {
+  padding: 0 25px 10px;
+}
+
+.order-success__instruction-item--text {
+  color: #292929;
+  text-align: center;
+  font-size: 1.125rem;
+  font-weight: 400;
+  max-width: 175px;
+}
+
+.order-success__confirmation {
+  padding: 95px 205px 130px;
+  background: #fff;
+  color: #292929;
+}
+
+.order-success__customer-name {
+  margin-bottom: 50px;
+  font-size: 36px;
+  font-weight: 700;
+}
+
+.order-success__message {
+  margin-bottom: 85px;
+  display: flex;
+  flex-direction: column;
+  font-size: 24px;
+}
+
+.order-success__message--bold {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+/* footer */
+
+.order-success__footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #ffa500;
+  padding: 50px 80px;
+  color: #292929;
+  font-size: 1.5rem;
+}
+
+.order-success__rating {
+  display: flex;
+  align-items: center;
+}
+
+.order-success__rating span {
+  margin-right: 15px;
+}
+
+.stars {
+  display: flex;
+  cursor: pointer;
+}
+
+.star  {
+   color: #fff;
+}
+
+.star svg {
+  fill: none;
+}
+
+.star.active {
+  color: #000;
+}
+
+.star.active svg {
+  fill: #ffd700;
+}
+
+.order-success__btn {
+  padding: 15px;
+  font-size: 1.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+}
