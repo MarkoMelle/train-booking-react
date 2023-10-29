@@ -1,5 +1,5 @@
 import { order as orderInfo } from "../../tempoDate";
-import "./orderSuccess.css";
+import "./OrderSuccess.css";
 import ticketsOnEmail from "../../assets/images/tickets-on-email.svg";
 import tickets from "../../assets/images/tickets.svg";
 import controlPerson from "../../assets/images/control-person.svg";
