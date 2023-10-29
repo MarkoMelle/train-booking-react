@@ -46,6 +46,7 @@
 }
 
 .secondary-btn {
+  padding: 6px 60px;
   border: none;
   outline: 1px solid #292929;
   display: inline-block;

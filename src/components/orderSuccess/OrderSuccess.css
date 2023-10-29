@@ -157,7 +157,7 @@
   fill: #ffd700;
 }
 
-.order-success__btn {
+button.order-success__btn {
   padding: 15px;
   font-size: 1.5rem;
   font-weight: 700;
