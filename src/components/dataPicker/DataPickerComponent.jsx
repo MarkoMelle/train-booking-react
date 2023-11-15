@@ -130,3 +130,37 @@ DataPickerComponent.propTypes = {
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
 };
+
+// import React, { useState, useEffect } from 'react';
+// import DatePicker from 'react-datepicker';
+// import 'react-datepicker/dist/react-datepicker.css';
+
+// const YourComponent = () => {
+//   const [startDate, setStartDate] = useState(new Date());
+//   const [highlightedDates, setHighlightedDates] = useState([]);
+
+//   useEffect(() => {
+//     const newHighlightedDates = [/* массив дат */];
+//     setHighlightedDates(newHighlightedDates);
+//   }, [/* зависимости */]);
+
+//   const isHighlighted = (date) => {
+//     return highlightedDates.some(highlightedDate =>
+//       date.getDate() === highlightedDate.getDate() &&
+//       date.getMonth() === highlightedDate.getMonth() &&
+//       date.getFullYear() === highlightedDate.getFullYear()
+//     );
+//   };
+
+//   return (
+//     <DatePicker
+//       selected={startDate}
+//       onChange={(date) => setStartDate(date)}
+//       dayClassName={(date) =>
+//         isHighlighted(date) ? 'highlighted-range' : undefined
+//       }
+//     />
+//   );
+// };
+
+// export default YourComponent;

@@ -1,23 +1,38 @@
-import * as React from "react";
 import "./PriceSlider.css";
+import { useState, useEffect } from "react";
 import SliderComponent from "../sliderComponent";
-
-const marks = [
-  {
-    value: 1920,
-    label: "1920",
-  },
-  {
-    value: 7000,
-    label: "7000",
-  },
-];
+import { useSelector, useDispatch } from "react-redux";
+import { setFilter } from "../../../../redux/features/filtersSlice";
 
 export default function PriceSlider() {
-  const [value, setValue] = React.useState([1920, 7000]);
+  const { minPrice, maxPrice, priceFrom, priceTo } = useSelector(
+    (state) => state.filters
+  );
+  const [value, setValue] = useState([
+    priceFrom || minPrice,
+    priceTo || maxPrice,
+  ]);
+  const dispatch = useDispatch();
+
+  useEffect(() => {
+    setValue([minPrice, maxPrice]);
+  }, [minPrice, maxPrice]);
+
   const handleChange = (event, newValue) => {
     setValue(newValue);
+    dispatch(setFilter({ priceFrom: newValue[0], priceTo: newValue[1] }));
   };
+
+  const marks = [
+    {
+      value: minPrice,
+      label: `${minPrice}`,
+    },
+    {
+      value: maxPrice,
+      label: `${maxPrice}`,
+    },
+  ];
   return (
     <div
       className={`price-slider ${
@@ -29,13 +44,18 @@ export default function PriceSlider() {
         type={"price"}
         value={value}
         handleChange={handleChange}
-        min={1920}
-        max={7000}
+        min={minPrice}
+        max={maxPrice}
         step={10}
         marks={[
           {
             value: marks[0].value / value[0] === 1 ? 0 : marks[0].value,
-            label: marks[0].value / value[0] > 0.7 ? `` : marks[0].label,
+            label:
+              marks[0].value / value[0] > 0.7
+                ? ""
+                : value[0] === 0 || marks[1].value / 10 > value[0]
+                ? ""
+                : marks[0].label,
           },
           {
             value: value[0],
@@ -47,7 +67,7 @@ export default function PriceSlider() {
           },
           {
             value: marks[1].value / value[1] === 1 ? 0 : marks[1].value,
-            label: marks[1].value / value[1] < 1.15 ? `` : marks[1].label,
+            label: marks[1].value / value[1] < 1.2 ? `` : marks[1].label,
           },
         ]}
       />

@@ -1,7 +1,28 @@
 import "./TicketsOptions.css";
 import Switch from "@mui/base/Switch";
+import { useSelector, useDispatch } from "react-redux";
+import { setFilter } from "../../../../redux/features/filtersSlice";
 
 export default function TicketsOptions() {
+  const {
+    haveFirstClass,
+    haveSecondClass,
+    haveThirdClass,
+    haveFourthClass,
+    haveWifi,
+    haveExpress,
+  } = useSelector((state) => state.filters);
+
+  const dispatch = useDispatch();
+
+  const handleSwitchChange = (optionName, currentValue) => {
+    dispatch(
+      setFilter({
+        [optionName]: !currentValue,
+      })
+    );
+  };
+
   return (
     <ul className="options">
       <li className="option">
@@ -13,6 +34,10 @@ export default function TicketsOptions() {
             track: { className: "option__switch-track" },
             input: { className: "option__switch-input" },
           }}
+          checked={haveSecondClass}
+          onChange={() =>
+            handleSwitchChange("haveSecondClass", haveSecondClass)
+          }
         />
       </li>
       <li className="option">
@@ -24,6 +49,8 @@ export default function TicketsOptions() {
             track: { className: "option__switch-track" },
             input: { className: "option__switch-input" },
           }}
+          checked={haveThirdClass}
+          onChange={() => handleSwitchChange("haveThirdClass", haveThirdClass)}
         />
       </li>
       <li className="option">
@@ -35,6 +62,10 @@ export default function TicketsOptions() {
             track: { className: "option__switch-track" },
             input: { className: "option__switch-input" },
           }}
+          checked={haveFourthClass}
+          onChange={() =>
+            handleSwitchChange("haveFourthClass", haveFourthClass)
+          }
         />
       </li>
       <li className="option">
@@ -46,6 +77,8 @@ export default function TicketsOptions() {
             track: { className: "option__switch-track" },
             input: { className: "option__switch-input" },
           }}
+          checked={haveFirstClass}
+          onChange={() => handleSwitchChange("haveFirstClass", haveFirstClass)}
         />
       </li>
       <li className="option">
@@ -57,6 +90,8 @@ export default function TicketsOptions() {
             track: { className: "option__switch-track" },
             input: { className: "option__switch-input" },
           }}
+          checked={haveWifi}
+          onChange={() => handleSwitchChange("haveWifi", haveWifi)}
         />
       </li>
       <li className="option">
@@ -68,6 +103,8 @@ export default function TicketsOptions() {
             track: { className: "option__switch-track" },
             input: { className: "option__switch-input" },
           }}
+          checked={haveExpress}
+          onChange={() => handleSwitchChange("haveExpress", haveExpress)}
         />
       </li>
     </ul>

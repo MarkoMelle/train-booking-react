@@ -63,6 +63,7 @@
   background-image: url("../../../assets/icons/location-icon.svg");
   background-repeat: no-repeat;
   background-position: right 20px center;
+  text-transform: capitalize;
 }
 
 .selection-form__popper {

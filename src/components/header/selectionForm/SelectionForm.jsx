@@ -1,43 +1,75 @@
-import { useState, useContext } from "react";
-import DataPickerComponent from "../../dataPicker/DataPickerComponent";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import "./SelectionForm.css";
+import DataPickerComponent from "../../dataPicker/DataPickerComponent";
 import swapIcon from "../../../assets/icons/swap-icon.svg";
 import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
 import InputWithSuggestions from "./inputWithSuggestions/InputWithSuggestions";
-
-import StateContext from "../../../StateContext";
-
-const locations = ["Aнгарск", "Астрахань", "Барнаул", "Москва"];
+import { setFilter } from "../../../redux/features/filtersSlice";
+import { fetchRoutes } from "../../../redux/features/filtersSlice";
+import { useSelector, useDispatch } from "react-redux";
+import { stringifyDate } from "../../../utils";
 
 export default function SelectionForm({ modifier }) {
   const block = "selection-form";
   const navigate = useNavigate();
-  const [fromInput, setFromInput] = useState("");
-  const [toInput, setToInput] = useState("");
-  const [departureDate, setDepartureDate] = useState("");
-  const [returnDate, setReturnDate] = useState("");
+  const { fromCity, toCity, dateStart, dateEnd } = useSelector(
+    (state) => state.filters
+  );
+  const filters = useSelector((state) => state.filters);
+  const dateStartObj = dateStart ? new Date(dateStart) : "";
+  const dateEndObj = dateEnd ? new Date(dateEnd) : "";
+  const dispatch = useDispatch();
   const [isRotated, setIsRotated] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const { state, setState } = useContext(StateContext);
+
+  const setFromCity = (cityId, cityName) => {
+    dispatch(
+      setFilter({
+        fromCity: {
+          id: cityId,
+          name: cityName,
+        },
+      })
+    );
+  };
+
+  const setToCity = (cityId, cityName) => {
+    dispatch(
+      setFilter({
+        toCity: {
+          id: cityId,
+          name: cityName,
+        },
+      })
+    );
+  };
+
+  const setDepartureDate = (date) => {
+    dispatch(
+      setFilter({
+        dateStart: stringifyDate(date),
+      })
+    );
+  };
+
+  const setReturnDate = (date) => {
+    dispatch(
+      setFilter({
+        dateEnd: stringifyDate(date),
+      })
+    );
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    setState((prevState) => ({
-      ...prevState,
-      departureDate: departureDate,
-      returnDate: returnDate,
-    }));
-
     navigate("/tickets");
+    dispatch(fetchRoutes(filters));
   };
 
   const handleSwapButtonClick = () => {
-    const temp = fromInput;
-    setFromInput(toInput);
-    setToInput(temp);
-
+    const temp = { ...fromCity };
+    setFromCity(toCity.id, toCity.name);
+    setToCity(temp.id, temp.name);
     setIsRotated(true);
     setTimeout(() => {
       setIsRotated(false);
@@ -50,10 +82,9 @@ export default function SelectionForm({ modifier }) {
         <h3 className={`${block}__group-title`}>Направление</h3>
         <InputWithSuggestions
           block={block}
-          inputValue={fromInput}
-          setInputValue={setFromInput}
+          city={fromCity}
+          setCity={setFromCity}
           placeholder="Откуда"
-          locations={locations}
         />
         <button
           className={`${block}__swap-btn ${isRotated ? "rotating" : ""}`}
@@ -64,29 +95,29 @@ export default function SelectionForm({ modifier }) {
         </button>
         <InputWithSuggestions
           block={block}
-          inputValue={toInput}
-          setInputValue={setToInput}
+          city={toCity}
+          setCity={setToCity}
           placeholder="Куда"
-          locations={locations}
         />
       </div>
       <div className={`${block}__group ${block + `__group--${modifier}`}`}>
         <h3 className={`${block}__group-title`}>Дата</h3>
         <DataPickerComponent
-          date={departureDate}
+          date={dateStartObj}
           setDate={setDepartureDate}
           block={block}
         />
         <DataPickerComponent
-          date={returnDate}
+          date={dateEndObj}
           setDate={setReturnDate}
           block={block}
-          minDate={departureDate}
+          minDate={dateStartObj || new Date()}
         />
       </div>
       <button
         className={`${block}__submit-btn primary-btn primary-btn--big--black`}
         type="submit"
+        onClick={handleSubmit}
       >
         Найти билеты
       </button>
