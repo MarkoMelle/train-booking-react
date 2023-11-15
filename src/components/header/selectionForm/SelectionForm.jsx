@@ -1,43 +1,58 @@
-import { useState, useContext } from "react";
-import DataPickerComponent from "../../dataPicker/DataPickerComponent";
+import { useState } from "react";
+import PropTypes from "prop-types";
 import "./SelectionForm.css";
+import DataPickerComponent from "../../dataPicker/DataPickerComponent";
 import swapIcon from "../../../assets/icons/swap-icon.svg";
 import { useNavigate } from "react-router-dom";
-import PropTypes from "prop-types";
 import InputWithSuggestions from "./inputWithSuggestions/InputWithSuggestions";
+import { setFilter } from "../../../redux/features/filtersSlice";
+import { useSelector, useDispatch } from "react-redux";
 
-import StateContext from "../../../StateContext";
-
-const locations = ["Aнгарск", "Астрахань", "Барнаул", "Москва"];
 
 export default function SelectionForm({ modifier }) {
   const block = "selection-form";
   const navigate = useNavigate();
-  const [fromInput, setFromInput] = useState("");
-  const [toInput, setToInput] = useState("");
+  const {fromCity, toCity, dateStart, dateEnd} = useSelector(state => state.filters);
+  const dispatch = useDispatch();
   const [departureDate, setDepartureDate] = useState("");
+  // eslint-disable-next-line no-unused-vars
   const [returnDate, setReturnDate] = useState("");
   const [isRotated, setIsRotated] = useState(false);
-  // eslint-disable-next-line no-unused-vars
-  const { state, setState } = useContext(StateContext);
 
+
+  const setFromCity = (cityId, cityName) => {
+    dispatch(setFilter({
+      fromCity: {
+        id: cityId,
+        name: cityName
+      }
+    }));
+  };
+  
+  const setToCity = (cityId, cityName) => {
+    dispatch(setFilter({
+      toCity: {
+        id: cityId,
+        name: cityName
+      }
+    }));
+  };
+ 
   const handleSubmit = (event) => {
     event.preventDefault();
-
-    setState((prevState) => ({
-      ...prevState,
-      departureDate: departureDate,
-      returnDate: returnDate,
-    }));
-
+    // setState((prevState) => ({
+    //   ...prevState,
+    //   departureDate: departureDate,
+    //   returnDate: returnDate,
+    // }));
     navigate("/tickets");
   };
 
   const handleSwapButtonClick = () => {
-    const temp = fromInput;
-    setFromInput(toInput);
-    setToInput(temp);
-
+    console.log(fromCity, toCity);
+    const temp = { ...fromCity };
+    setFromCity(toCity.id, toCity.name);
+    setToCity(temp.id, temp.name);
     setIsRotated(true);
     setTimeout(() => {
       setIsRotated(false);
@@ -50,10 +65,10 @@ export default function SelectionForm({ modifier }) {
         <h3 className={`${block}__group-title`}>Направление</h3>
         <InputWithSuggestions
           block={block}
-          inputValue={fromInput}
-          setInputValue={setFromInput}
+          city={fromCity}
+          setCity={setFromCity}
           placeholder="Откуда"
-          locations={locations}
+  
         />
         <button
           className={`${block}__swap-btn ${isRotated ? "rotating" : ""}`}
@@ -64,21 +79,20 @@ export default function SelectionForm({ modifier }) {
         </button>
         <InputWithSuggestions
           block={block}
-          inputValue={toInput}
-          setInputValue={setToInput}
+          city={toCity}
+          setCity={setToCity}
           placeholder="Куда"
-          locations={locations}
         />
       </div>
       <div className={`${block}__group ${block + `__group--${modifier}`}`}>
         <h3 className={`${block}__group-title`}>Дата</h3>
         <DataPickerComponent
-          date={departureDate}
+          date={dateStart}
           setDate={setDepartureDate}
           block={block}
         />
         <DataPickerComponent
-          date={returnDate}
+          date={dateEnd}
           setDate={setReturnDate}
           block={block}
           minDate={departureDate}

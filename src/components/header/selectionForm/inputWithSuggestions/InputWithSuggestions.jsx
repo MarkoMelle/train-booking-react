@@ -1,33 +1,58 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import PropTypes from "prop-types";
+import { apiClient } from "../../../../api/apiClient";
 
 export default function InputWithSuggestions({
   block,
-  inputValue,
-  setInputValue,
+  city,
+  setCity,
   placeholder,
-  locations,
 }) {
+  const [inputValue, setInputValue] = useState(city.name);
   const [inputFocus, setInputFocus] = useState(false);
+  const [suggestions, setSuggestions] = useState([]);
+
+  useEffect(() => {
+    if (inputValue.length !== 0 && inputFocus) {
+      const loadSuggestions = async () => {
+        try {
+          const cities = await apiClient.searchCities(inputValue);
+          if (Array.isArray(cities)) {
+            setSuggestions(cities.map((citySgs) => ({ id: citySgs._id, name: citySgs.name })));
+          } else {
+            setSuggestions([]);
+          }
+        } catch (error) {
+          console.error("Failed to load suggestions:", error);
+          setSuggestions([]);
+        }
+      };
+      loadSuggestions();
+    } else {
+      setSuggestions([]);
+    }
+  }, [inputValue, inputFocus]);
+
+  useEffect(() => {
+    setInputValue(city.name);
+  }, [city.name]);
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
   };
 
-  const handleSuggestionClick = (location) => {
-    setInputValue(location);
+  const handleSuggestionClick = (suggestion) => {
+    setCity(suggestion.id, suggestion.name);
+    setInputValue(suggestion.name);
+    setInputFocus(false);
   };
 
   const renderSuggestions = () => {
-    if (!inputValue || !inputFocus) return null;
-
-    const suggestions = locations.filter((location) =>
-      location.toLowerCase().includes(inputValue.toLowerCase())
-    );
+    if (!inputFocus || suggestions.length === 0) return null;
 
     if (
       suggestions.length === 1 &&
-      suggestions[0].toLowerCase() === inputValue.toLowerCase()
+      suggestions[0].name.toLowerCase() === inputValue.toLowerCase()
     ) {
       return;
     }
@@ -37,10 +62,10 @@ export default function InputWithSuggestions({
         {suggestions.map((suggestion) => (
           <li
             className={`${block}__suggestion`}
-            key={suggestion}
+            key={suggestion.id}
             onMouseDown={() => handleSuggestionClick(suggestion)}
           >
-            {suggestion}
+            {suggestion.name}
           </li>
         ))}
       </ul>
@@ -53,7 +78,7 @@ export default function InputWithSuggestions({
         className={`${block}__input ${block}__input--text form-input`}
         type="text"
         value={inputValue}
-        onInput={handleInputChange}
+        onChange={handleInputChange}
         onFocus={() => setInputFocus(true)}
         onBlur={() => setInputFocus(false)}
         placeholder={placeholder}
@@ -65,8 +90,10 @@ export default function InputWithSuggestions({
 
 InputWithSuggestions.propTypes = {
   block: PropTypes.string.isRequired,
-  inputValue: PropTypes.string.isRequired,
-  setInputValue: PropTypes.func.isRequired,
+  city: PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+  }).isRequired,
+  setCity: PropTypes.func.isRequired,
   placeholder: PropTypes.string.isRequired,
-  locations: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

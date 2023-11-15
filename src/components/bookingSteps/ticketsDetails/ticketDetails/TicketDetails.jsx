@@ -1,5 +1,6 @@
 import "./TicketDetails.css";
-import StateContext from "../../../../StateContext";
+import { useSelector, useDispatch } from 'react-redux';
+
 import { plusIcon, minusIcon } from "../iconsSvg/iconsSvg";
 import TimeInfo from "../../timeInfo/TimeInfo";
 import { formatDate } from "../../../../utils";
@@ -16,8 +17,9 @@ const defaultDepartureDate = today;
 const defaultReturnDate = weekFromToday;
 
 export default function TicketDetails({ direction, currentTrip }) {
+  const state = useSelector(state => state.test.currentTrip);
   // eslint-disable-next-line no-unused-vars
-  const { state, setState } = React.useContext(StateContext);
+  const dispatch = useDispatch();
   const [isOpened, setIsOpened] = React.useState(false);
 
   const departureDate = state.departureDate || defaultDepartureDate;

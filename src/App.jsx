@@ -1,21 +1,17 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
-import StateContext from "./StateContext";
+import { Provider } from "react-redux";
 import HomePage from "./pages/homePage";
 import TicketsPage from "./pages/ticketsPage/TicketsPage";
 import SuccessPage from "./pages/successPage";
 import "./App.css";
 import Footer from "./components/footer/Footer";
 import SwitchStyles from "./components/bookingSteps/ticketsDetails/switchStyles";
-import { initialState } from "./tempoDate";
+import { store } from "./redux/store";
 
 export default function App() {
-  const [globalState, setGlobalState] = useState({ ...initialState });
   console.log(import.meta.env.VITE_PUBLIC_URL);
   return (
-    <StateContext.Provider
-      value={{ state: globalState, setState: setGlobalState }}
-    >
+    <Provider store={store}>
       <Router basename={import.meta.env.VITE_PUBLIC_URL}>
         <SwitchStyles />
         <Routes>
@@ -25,6 +21,6 @@ export default function App() {
         </Routes>
         <Footer />
       </Router>
-    </StateContext.Provider>
+    </Provider>
   );
 }
