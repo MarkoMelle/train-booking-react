@@ -1,6 +1,9 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import "./SelectionForm.css";
+import { useState } from "react";
+import PropTypes from "prop-types";
+import "./SelectionForm.css";
 import DataPickerComponent from "../../dataPicker/DataPickerComponent";
 import swapIcon from "../../../assets/icons/swap-icon.svg";
 import { useNavigate } from "react-router-dom";
