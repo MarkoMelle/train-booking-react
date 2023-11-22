@@ -1,12 +1,12 @@
 import DataPickerComponent from "../../../dataPicker/DataPickerComponent";
 import "./TicketsDate.css";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilter } from "../../../../redux/features/filtersSlice";
+import { setFilter } from "../../../../redux/features/searchResultsSlice";
 import { stringifyDate } from "../../../../utils";
 
 export default function TicketsDate() {
   const { dateStart: departureString, dateEnd: returnString } = useSelector(
-    (state) => state.filters
+    (state) => state.searchResults
   );
   const departureDate = departureString ? new Date(departureString) : "";
   const returnDate = returnString ? new Date(returnString) : "";

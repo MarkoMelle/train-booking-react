@@ -2,28 +2,34 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import PropTypes from "prop-types";
 import { apiClient } from "../../api/apiClient";
-import { setRoutes } from "./routesSlice";
+
 
 export const fetchRoutes = createAsyncThunk(
-  "filters/fetchRoutes",
+  "searchResults/fetchRoutes",
   async (newFilters, { dispatch, getState }) => {
     try {
-      const { filters } = getState();
-
+      const { searchResults } = getState();
       const isRouteChanged =
-        newFilters.fromCity.id !== filters.lastFilters.fromCityId ||
-        newFilters.toCity.id !== filters.lastFilters.toCityId ||
-        newFilters.dateStart !== filters.lastFilters.dateStart ||
-        newFilters.dateEnd !== filters.lastFilters.dateEnd;
+        newFilters.fromCity.id !== searchResults.lastFilters.fromCityId ||
+        newFilters.toCity.id !== searchResults.lastFilters.toCityId ||
+        newFilters.dateStart !== searchResults.lastFilters.dateStart ||
+        newFilters.dateEnd !== searchResults.lastFilters.dateEnd;
+      
       if (isRouteChanged) {
         dispatch(setFilter({ priceFrom: "", priceTo: "" }));
-        const updatedFilters = {
+        const requestParams = {
           ...newFilters,
           priceFrom: "",
           priceTo: "",
+          minPrice: "",
+          maxPrice: "",
         };
-        console.log(isRouteChanged, newFilters);
-        const data = await apiClient.searchRoutes(updatedFilters);
+        const data = await apiClient.searchRoutes(requestParams);
+        if (data.error) {
+          console.error("Error from server:", data.error);
+          return; 
+        }
+        
         let minPrice = Infinity;
         let maxPrice = -Infinity;
         data.items.forEach((item) => {
@@ -42,7 +48,16 @@ export const fetchRoutes = createAsyncThunk(
           setRoutes({ totalCount: data.total_count, items: data.items })
         );
       } else {
-        const data = await apiClient.searchRoutes(newFilters);
+        const requestParams = {
+          ...newFilters,
+           minPrice: '',
+            maxPrice: '',
+        };
+        const data = await apiClient.searchRoutes(requestParams);
+        if (data.error) {
+          console.error("Error from server:", data.error);
+          return; 
+        }
         dispatch(
           setRoutes({ totalCount: data.total_count, items: data.items })
         );
@@ -59,7 +74,7 @@ export const fetchRoutes = createAsyncThunk(
   }
 );
 
-const filtersInitialState = {
+const searchResultsInitialState = {
   fromCity: {
     id: "",
     name: "",
@@ -89,9 +104,11 @@ const filtersInitialState = {
   endDepartureHourTo: "",
   endArrivalHourFrom: "",
   endArrivalHourTo: "",
-  limit: "",
-  offset: "",
-  sort: "",
+  limit: 5,
+  offset: 0,
+  sort: "date",
+  totalCount: 0,
+  items: [],
   minPrice: 0,
   maxPrice: 10000,
   lastFilters: {
@@ -102,11 +119,17 @@ const filtersInitialState = {
   },
 };
 
-const filtersSlice = createSlice({
-  name: "filters",
-  initialState: filtersInitialState,
+const searchResultsSlice = createSlice({
+  name: "searchResults",
+  initialState: searchResultsInitialState,
   reducers: {
     setFilter: (state, action) => {
+      return {
+        ...state,
+        ...action.payload,
+      };
+    },
+    setRoutes: (state, action) => {
       return {
         ...state,
         ...action.payload,
@@ -118,14 +141,14 @@ const filtersSlice = createSlice({
         lastFilters: action.payload,
       };
     },
-    resetFilters: () => filtersInitialState,
+    resetFilters: () => searchResultsInitialState,
   },
 
   extraReducers: (builder) => {
     builder
       .addCase(fetchRoutes.pending, (state) => {})
       .addCase(fetchRoutes.fulfilled, (state, action) => {
-        console.log("action", action.payload);
+        
         state.lastFilters = {
           fromCityId: action.meta.arg.fromCity.id,
           toCityId: action.meta.arg.toCity.id,
@@ -137,10 +160,10 @@ const filtersSlice = createSlice({
   },
 });
 
-export const { setFilter, resetFilters } = filtersSlice.actions;
-export default filtersSlice.reducer;
+export const { setFilter, setRoutes, resetFilters } = searchResultsSlice.actions;
+export default searchResultsSlice.reducer;
 
-export const filtersPropTypes = {
+export const searchResultsPropTypes = {
   fromCity: PropTypes.object,
   toCity: PropTypes.object,
   dateStart: PropTypes.string,
@@ -166,7 +189,7 @@ export const filtersPropTypes = {
   endArrivalHourTo: PropTypes.string,
   limit: PropTypes.string,
   offset: PropTypes.string,
-  sort: PropTypes.string,
+  sort: PropTypes.string[("date", "price", "duration")],
   minPrice: PropTypes.number,
   maxPrice: PropTypes.number,
 };

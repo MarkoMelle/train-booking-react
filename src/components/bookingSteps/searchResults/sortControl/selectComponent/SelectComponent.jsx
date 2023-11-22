@@ -24,8 +24,8 @@ export default function SelectComponent({
   return (
     <CustomSelect defaultValue={defaultValue} onChange={handleChange}>
       {options.map((option) => (
-        <StyledOption key={option} value={option}>
-          {option}
+        <StyledOption key={option.value} value={option.value}>
+          {option.label}
         </StyledOption>
       ))}
     </CustomSelect>

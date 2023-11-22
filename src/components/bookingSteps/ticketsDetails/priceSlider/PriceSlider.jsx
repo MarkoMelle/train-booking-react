@@ -2,11 +2,11 @@ import "./PriceSlider.css";
 import { useState, useEffect } from "react";
 import SliderComponent from "../sliderComponent";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilter } from "../../../../redux/features/filtersSlice";
+import { setFilter } from "../../../../redux/features/searchResultsSlice";
 
 export default function PriceSlider() {
   const { minPrice, maxPrice, priceFrom, priceTo } = useSelector(
-    (state) => state.filters
+    (state) => state.searchResults
   );
   const [value, setValue] = useState([
     priceFrom || minPrice,

@@ -5,8 +5,8 @@ import DataPickerComponent from "../../dataPicker/DataPickerComponent";
 import swapIcon from "../../../assets/icons/swap-icon.svg";
 import { useNavigate } from "react-router-dom";
 import InputWithSuggestions from "./inputWithSuggestions/InputWithSuggestions";
-import { setFilter } from "../../../redux/features/filtersSlice";
-import { fetchRoutes } from "../../../redux/features/filtersSlice";
+import { setFilter } from "../../../redux/features/searchResultsSlice";
+import { fetchRoutes } from "../../../redux/features/searchResultsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { stringifyDate } from "../../../utils";
 
@@ -14,9 +14,9 @@ export default function SelectionForm({ modifier }) {
   const block = "selection-form";
   const navigate = useNavigate();
   const { fromCity, toCity, dateStart, dateEnd } = useSelector(
-    (state) => state.filters
+    (state) => state.searchResults
   );
-  const filters = useSelector((state) => state.filters);
+  const filters = useSelector((state) => state.searchResults);
   const dateStartObj = dateStart ? new Date(dateStart) : "";
   const dateEndObj = dateEnd ? new Date(dateEnd) : "";
   const dispatch = useDispatch();

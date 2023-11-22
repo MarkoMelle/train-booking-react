@@ -1,7 +1,7 @@
 import "./TicketsOptions.css";
 import Switch from "@mui/base/Switch";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilter } from "../../../../redux/features/filtersSlice";
+import { setFilter } from "../../../../redux/features/searchResultsSlice";
 
 export default function TicketsOptions() {
   const {
@@ -11,7 +11,7 @@ export default function TicketsOptions() {
     haveFourthClass,
     haveWifi,
     haveExpress,
-  } = useSelector((state) => state.filters);
+  } = useSelector((state) => state.searchResults);
 
   const dispatch = useDispatch();
 

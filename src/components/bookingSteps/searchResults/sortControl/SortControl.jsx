@@ -1,28 +1,35 @@
-import { useState } from "react";
 import SelectComponent from "./selectComponent/SelectComponent";
 import ShowCount from "./showCount/ShowCount";
 import "./SortControl.css";
 
-export default function SortControl() {
-  const [sortBy, setSortBy] = useState("времени");
-  const [showCount, setShowCount] = useState(5);
+export default function SortControl({
+  limit,
+  handleLimitChange,
+  sort,
+  handleSortChange,
+  totalCount,
+}) {
 
-  const handleSortChange = (e) => {
-    setSortBy(e.target.value);
-  };
+
+  const sortOptions = [
+    { value: "date", label: "времени" },
+    { value: "price_min", label: "стоимости" },
+    { value: "duration", label: "длительности" },
+  ];
+
 
   return (
     <div className="sort-control">
-      <p className="sort-control__quantity">Найдено 20</p>
+      <p className="sort-control__quantity">Найдено {`${totalCount}`}</p>
       <div className="sort-control__sort-by">
         сортировать по:
         <SelectComponent
-          defaultValue={sortBy}
+          defaultValue={sort}
           handleChange={handleSortChange}
-          options={["времени", "cтоимости", "длительности"]}
+          options={sortOptions}
         />
       </div>
-      <ShowCount showCount={showCount} setShowCount={setShowCount} />
+      <ShowCount showCount={limit} setShowCount={handleLimitChange} />
     </div>
   );
 }
