@@ -1,8 +1,30 @@
-import { timeDifference } from "../../../utils";
 import PropTypes from "prop-types";
+
+function formatTime(time, inWords = false) {
+  const date = new Date(time);
+  const hours = date.getHours();
+  const minutes = date.getMinutes();
+  if (inWords) {
+    const hoursWord =
+      hours === 1 ? "час" : hours > 1 && hours < 5 ? "часа" : "часов";
+
+    const minutesWord =
+      minutes === 1
+        ? "минута"
+        : minutes > 1 && minutes < 5
+        ? "минуты"
+        : "минут";
+
+    return `${hours} ${hoursWord}\n${minutes} ${minutesWord}`;
+  }
+  return `${hours < 10 ? `0${hours}` : hours}:${
+    minutes < 10 ? `0${minutes}` : minutes
+  }`;
+}
 
 export default function TimeInfo({
   time,
+  duration,
   station,
   city,
   modifier,
@@ -13,7 +35,7 @@ export default function TimeInfo({
     <div className={`${block} ${block}--${modifier}`}>
       <div className={`${block}-container ${block}-container--left`}>
         <span className={`${block}__time ${block}__time--${modifier}`}>
-          {time[0]}
+          {formatTime(time[0])}
         </span>
         {date ? (
           <span className={`${block}__date ${block}__date--${modifier}`}>
@@ -24,17 +46,17 @@ export default function TimeInfo({
           {city[0]}
         </span>
         <span className={`${block}__station ${block}__station--${modifier}`}>
-          {station[0]}
+          {station[0]} вокзал
         </span>
       </div>
       <span className={`${block}__duration ${block}__duration--${modifier}`}>
         {block === "seat-selector__info"
-          ? timeDifference(time[0], time[1], true)
-          : timeDifference(time[0], time[1])}
+          ? formatTime(duration, true)
+          : formatTime(duration)}
       </span>
       <div className={`${block}-container ${block}-container--right`}>
         <span className={`${block}__time ${block}__time--${modifier}`}>
-          {time[1]}
+          {formatTime(time[1])}
         </span>
         {date ? (
           <span className={`${block}__date ${block}__date--${modifier}`}>
@@ -45,7 +67,7 @@ export default function TimeInfo({
           {city[1]}
         </span>
         <span className={`${block}__station ${block}__station--${modifier}`}>
-          {station[1]}
+          {station[1]} вокзал
         </span>
       </div>
     </div>
@@ -54,6 +76,7 @@ export default function TimeInfo({
 
 TimeInfo.propTypes = {
   time: PropTypes.array.isRequired,
+  duration: PropTypes.number.isRequired,
   station: PropTypes.array.isRequired,
   city: PropTypes.array.isRequired,
   modifier: PropTypes.string.isRequired,

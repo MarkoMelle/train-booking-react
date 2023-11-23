@@ -3,7 +3,6 @@ import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import PropTypes from "prop-types";
 import { apiClient } from "../../api/apiClient";
 
-
 export const fetchRoutes = createAsyncThunk(
   "searchResults/fetchRoutes",
   async (newFilters, { dispatch, getState }) => {
@@ -14,7 +13,7 @@ export const fetchRoutes = createAsyncThunk(
         newFilters.toCity.id !== searchResults.lastFilters.toCityId ||
         newFilters.dateStart !== searchResults.lastFilters.dateStart ||
         newFilters.dateEnd !== searchResults.lastFilters.dateEnd;
-      
+
       if (isRouteChanged) {
         dispatch(setFilter({ priceFrom: "", priceTo: "" }));
         const requestParams = {
@@ -23,13 +22,14 @@ export const fetchRoutes = createAsyncThunk(
           priceTo: "",
           minPrice: "",
           maxPrice: "",
+          totalCount: "",
         };
         const data = await apiClient.searchRoutes(requestParams);
         if (data.error) {
           console.error("Error from server:", data.error);
-          return; 
+          return;
         }
-        
+
         let minPrice = Infinity;
         let maxPrice = -Infinity;
         data.items.forEach((item) => {
@@ -50,13 +50,14 @@ export const fetchRoutes = createAsyncThunk(
       } else {
         const requestParams = {
           ...newFilters,
-           minPrice: '',
-            maxPrice: '',
+          minPrice: "",
+          maxPrice: "",
+          totalCount: "",
         };
         const data = await apiClient.searchRoutes(requestParams);
         if (data.error) {
           console.error("Error from server:", data.error);
-          return; 
+          return;
         }
         dispatch(
           setRoutes({ totalCount: data.total_count, items: data.items })
@@ -93,7 +94,7 @@ const searchResultsInitialState = {
   haveFourthClass: false,
   haveWifi: false,
   haveAirConditioning: false,
-  haveExpress: false,
+  isExpress: false,
   priceFrom: "",
   priceTo: "",
   startDepartureHourFrom: "",
@@ -104,10 +105,10 @@ const searchResultsInitialState = {
   endDepartureHourTo: "",
   endArrivalHourFrom: "",
   endArrivalHourTo: "",
-  limit: 5,
   offset: 0,
   sort: "date",
   totalCount: 0,
+  limit: 5,
   items: [],
   minPrice: 0,
   maxPrice: 10000,
@@ -148,7 +149,6 @@ const searchResultsSlice = createSlice({
     builder
       .addCase(fetchRoutes.pending, (state) => {})
       .addCase(fetchRoutes.fulfilled, (state, action) => {
-        
         state.lastFilters = {
           fromCityId: action.meta.arg.fromCity.id,
           toCityId: action.meta.arg.toCity.id,
@@ -160,7 +160,8 @@ const searchResultsSlice = createSlice({
   },
 });
 
-export const { setFilter, setRoutes, resetFilters } = searchResultsSlice.actions;
+export const { setFilter, setRoutes, resetFilters } =
+  searchResultsSlice.actions;
 export default searchResultsSlice.reducer;
 
 export const searchResultsPropTypes = {

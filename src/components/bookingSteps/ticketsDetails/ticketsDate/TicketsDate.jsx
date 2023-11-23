@@ -5,9 +5,8 @@ import { setFilter } from "../../../../redux/features/searchResultsSlice";
 import { stringifyDate } from "../../../../utils";
 
 export default function TicketsDate() {
-  const { dateStart: departureString, dateEnd: returnString } = useSelector(
-    (state) => state.searchResults
-  );
+  const { dateStartArrival: departureString, dateEndArrival: returnString } =
+    useSelector((state) => state.searchResults);
   const departureDate = departureString ? new Date(departureString) : "";
   const returnDate = returnString ? new Date(returnString) : "";
 
@@ -16,7 +15,7 @@ export default function TicketsDate() {
   const setDepartureDate = (date) => {
     dispatch(
       setFilter({
-        dateStart: stringifyDate(date),
+        dateStartArrival: stringifyDate(date),
       })
     );
   };
@@ -24,7 +23,7 @@ export default function TicketsDate() {
   const setReturnDate = (date) => {
     dispatch(
       setFilter({
-        dateEnd: stringifyDate(date),
+        dateEndArrival: stringifyDate(date),
       })
     );
   };

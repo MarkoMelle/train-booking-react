@@ -1,5 +1,5 @@
 import PropTypes from "prop-types";
-import { optionsSvg, currencySvg } from "./iconsSvg";
+import { currencySvg } from "./iconsSvg";
 
 export default function LastTicket({
   departureCity: departureInfo,
@@ -28,7 +28,7 @@ export default function LastTicket({
           </p>
         </div>
       </div>
-      <div className="last-ticket__options">{optionsSvg}</div>
+      {/* <div className="last-ticket__options">{optionsSvg}</div> */}
       <div className="last-ticket__price">
         <span className="last-ticket__price-value">{price}</span>
         <span className="last-ticket__price-currency">{currencySvg}</span>

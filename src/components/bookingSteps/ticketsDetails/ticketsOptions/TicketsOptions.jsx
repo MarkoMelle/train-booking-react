@@ -10,7 +10,7 @@ export default function TicketsOptions() {
     haveThirdClass,
     haveFourthClass,
     haveWifi,
-    haveExpress,
+    isExpress,
   } = useSelector((state) => state.searchResults);
 
   const dispatch = useDispatch();
@@ -103,8 +103,8 @@ export default function TicketsOptions() {
             track: { className: "option__switch-track" },
             input: { className: "option__switch-input" },
           }}
-          checked={haveExpress}
-          onChange={() => handleSwitchChange("haveExpress", haveExpress)}
+          checked={isExpress}
+          onChange={() => handleSwitchChange("isExpress", isExpress)}
         />
       </li>
     </ul>

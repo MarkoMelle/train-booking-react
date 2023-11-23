@@ -7,8 +7,22 @@ import { format } from "date-fns";
 import "./DataPickerComponent.css";
 registerLocale("ru", ru);
 
-const handleDateChange = (date, setDate) => {
-  setDate(date);
+const handleDateChange = (newDate, setDate) => {
+  const currentDate = new Date();
+  const currentYear = currentDate.getFullYear();
+  if (newDate) {
+    const newYear = newDate.getFullYear();
+    const newMonth = newDate.getMonth();
+    const newDay = newDate.getDate();
+
+    if (newYear < currentYear) {
+      setDate(new Date(currentYear, newMonth, newDay));
+    } else {
+      setDate(new Date(newYear, newMonth, newDay));
+    }
+  } else {
+    setDate(null);
+  }
 };
 
 const CustomHeader = ({

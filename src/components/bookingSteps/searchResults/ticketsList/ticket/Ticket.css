@@ -13,9 +13,10 @@
 .ticket__train-info {
   flex: 1 1 200px;
   max-width: 197px;
-  padding: 60px 25px 40px;
+  padding: 30px 25px;
   display: flex;
   flex-direction: column;
+  justify-content: center;
   background: #e4e0e9;
 }
 
@@ -36,8 +37,15 @@
   font-weight: 700;
 }
 
+.ticket__train-info__direction {
+  font-size: 1rem;
+  text-transform: capitalize;
+  word-break: break-all;
+}
+
 .ticket__train-info__direction svg {
   display: inline-block;
+  margin-left: 5px;
 }
 
 .ticket__body {
@@ -46,24 +54,29 @@
   flex-direction: column;
   gap: 60px;
   max-width: 480px;
-  padding: 55px 60px 50px 40px;
+  padding: 55px 40px 50px;
   border-right: 1px dashed #e5e5e5;
 }
 
 .ticket-info {
-  display: grid;
+  display: flex;
   grid-template-columns: 1fr auto 1fr;
   justify-items: center;
-  margin-left: -40px;
+  justify-content: center;
+  /* gap: 30px; */
 }
 
 .ticket-info-container {
-  display: flex;
+  display: inline-flex;
   flex-direction: column;
   align-items: flex-start;
 }
 
-.ticket-info-container:last-of-type {
+.ticket-info-container--left {
+  margin-right: auto;
+}
+
+.ticket-info-container--right {
   margin-left: auto;
 }
 
@@ -76,11 +89,14 @@
 .ticket-info__city {
   color: #292929;
   font-size: 1.125rem;
+  text-transform: capitalize;
 }
 
 .ticket-info__station {
   color: #928f94;
   font-size: 1rem;
+  text-transform: capitalize;
+  /* width: max-content; */
 }
 
 .ticket-info__duration {
@@ -182,6 +198,7 @@
 
   border-radius: 5px;
   background: #f5f4f6;
+  box-shadow: 0px 2px 2px 0px rgba(0, 0, 0, 0.3);
 }
 
 .available-sits::before {
@@ -198,9 +215,11 @@
 }
 
 .available-sits__item {
-  display: grid;
+  /* display: grid;
   grid-template-columns: 79px auto 1fr;
-  align-items: baseline;
+  align-items: baseline; */
+  display: flex;
+  justify-content: space-between;
 }
 
 .available-sits__item-price {
@@ -226,7 +245,8 @@
 }
 
 .ticket__sit-class__price::before {
-  content: "от ";
+  content: "от";
+  margin-right: 5px;
   color: #928f94;
   font-size: 1rem;
   font-weight: 400;
@@ -240,9 +260,18 @@
 
 .ticket__sit-class__options {
   display: flex;
-  flex-direction: column;
-  align-items: flex-end;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
   margin-bottom: 25px;
+}
+
+.ticket__sit-class__option {
+  color: #c4c4c4;
+}
+
+.ticket__sit-class__option--active {
+  color: #ffa800;
 }
 
 .ticket__select-button {

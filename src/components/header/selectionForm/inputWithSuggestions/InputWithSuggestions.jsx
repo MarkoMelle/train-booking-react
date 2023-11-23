@@ -41,6 +41,7 @@ export default function InputWithSuggestions({
 
   const handleInputChange = (event) => {
     setInputValue(event.target.value);
+    setCity("", event.target.value);
   };
 
   const handleSuggestionClick = (suggestion) => {

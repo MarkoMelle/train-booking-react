@@ -17,10 +17,10 @@ export default function Ticket({
       <div className="ticket__train-info">
         <div className="ticket__train-info-icon">{trainIconSvg}</div>
         <div className="ticket__train-info__train-number">
-          {ticket.trainNumber}
+          {ticket.departure.train.name}
         </div>
         <span className="ticket__train-info__direction">
-          {ticket.direction[0]}&nbsp;
+          {ticket.departure.from.city.name}
           <svg
             xmlns="http://www.w3.org/2000/svg"
             width="14"
@@ -35,26 +35,38 @@ export default function Ticket({
           </svg>
         </span>
         <span className="ticket__train-info__direction">
-          {ticket.direction[1]}
+          {ticket.departure.to.city.name}
         </span>
       </div>
       <div className="ticket__body">
         <TimeInfo
           modifier="departure"
-          time={ticket.departureTime}
-          city={ticket.direction}
-          station={ticket.departureStation}
+          time={[ticket.departure.from.datetime, ticket.departure.to.datetime]}
+          duration={ticket.departure.duration}
+          city={[
+            ticket.departure.from.city.name,
+            ticket.departure.to.city.name,
+          ]}
+          station={[
+            ticket.departure.from.railway_station_name,
+            ticket.departure.to.railway_station_name,
+          ]}
         />
-        <TimeInfo
-          modifier="arrival"
-          time={ticket.arrivalTime}
-          city={ticket.direction}
-          station={ticket.arrivalStation}
-        />
+        {Object.prototype.hasOwnProperty.call(ticket, "arrival") ? (
+          <TimeInfo
+            modifier="arrival"
+            time={[ticket.arrival.from.datetime, ticket.arrival.to.datetime]}
+            duration={ticket.arrival.duration}
+            city={[ticket.arrival.from.city.name, ticket.arrival.to.city.name]}
+            station={[
+              ticket.arrival.from.railway_station_name,
+              ticket.arrival.to.railway_station_name,
+            ]}
+          />
+        ) : null}
       </div>
       <div className="ticket__price-info">
         <SitClassInfo
-          sitClasses={ticket.sitClasses}
           {...{ setIsSelectSeats, setCurrentTrip, ticket, isVerification }}
         />
       </div>

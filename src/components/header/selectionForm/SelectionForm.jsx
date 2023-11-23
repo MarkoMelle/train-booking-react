@@ -45,6 +45,14 @@ export default function SelectionForm({ modifier }) {
   };
 
   const setDepartureDate = (date) => {
+    if (date === null) {
+      dispatch(
+        setFilter({
+          dateStart: "",
+        })
+      );
+      return;
+    }
     dispatch(
       setFilter({
         dateStart: stringifyDate(date),
@@ -53,6 +61,14 @@ export default function SelectionForm({ modifier }) {
   };
 
   const setReturnDate = (date) => {
+    if (date === null) {
+      dispatch(
+        setFilter({
+          dateEnd: "",
+        })
+      );
+      return;
+    }
     dispatch(
       setFilter({
         dateEnd: stringifyDate(date),
