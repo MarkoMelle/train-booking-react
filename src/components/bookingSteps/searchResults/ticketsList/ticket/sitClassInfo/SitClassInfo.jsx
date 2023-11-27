@@ -4,15 +4,24 @@ import {
   expressSvg,
   airConditionerSvg,
 } from "../../../../lastTickets/lastTicket/iconsSvg";
+import {
+  setCurrentRoute,
+  setCurrentRouteBack,
+  setRouteId,
+  setRouteIdBack,
+} from "../../../../../../redux/features/seatsSlice";
+import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
+
 
 export default function SitClassInfo({
   setIsSelectSeats,
-  setCurrentTrip,
   ticket,
   isVerification = false,
 }) {
   const [activeIndex, setActiveIndex] = useState(null);
+  const dispatch = useDispatch();
+  const { currentRoute , currentRouteBack } = useSelector((state) => state.seats);
 
   const handleSitClassClick = (index) => {
     if (activeIndex === index) {
@@ -43,7 +52,41 @@ export default function SitClassInfo({
       };
     }
   );
+  // const handleSelectButtonClick = () => {
+  //   if (Object.prototype.hasOwnProperty.call(ticket, "arrival")) {
+  //     dispatch(setCurrentRoute(ticket.departure));
+  //     dispatch(setRouteId(ticket.departure._id));
+  //     dispatch(setCurrentRouteBack(ticket.arrival));
+  //     dispatch(setRouteIdBack(ticket.arrival._id));
+  //   } else {
+  //     if (currentRoute) {
+  //       if (ticket.departure.from.city.name === currentRoute.to.city.name && ticket.departure.from.datetime > currentRoute.to.datetime) {
+  //         dispatch(setCurrentRouteBack(ticket.departure));
+  //         dispatch(setRouteIdBack(ticket.departure._id));
+  //       }
+  //     } else if (currentRouteBack) {
+  //       if (ticket.departure.to.city.name === currentRouteBack.from.city.name && ticket.departure.to.datetime < currentRouteBack.from.datetime) {
+  //         dispatch(setCurrentRoute(ticket.departure));
+  //         dispatch(setRouteId(ticket.departure._id));
+  //       }
+  //     } else {
+  //       dispatch(setCurrentRoute(ticket.departure));
+  //       dispatch(setRouteId(ticket.departure._id));
+  //     }
+  //   }
+  //   setIsSelectSeats();
+  // };
 
+  const handleSelectButtonClick = () => {
+          dispatch(setCurrentRoute(ticket.departure));
+          dispatch(setRouteId(ticket.departure._id));
+      if (Object.prototype.hasOwnProperty.call(ticket, "arrival")) {
+          dispatch(setCurrentRouteBack(ticket.arrival));
+          dispatch(setRouteIdBack(ticket.arrival._id));
+      } 
+      setIsSelectSeats();
+  }
+  
   return (
     <>
       <ul className="ticket__sit-classes">
@@ -115,10 +158,7 @@ export default function SitClassInfo({
       {!isVerification ? (
         <button
           className="primary-btn primary-btn--white ticket__select-button"
-          onClick={() => {
-            setIsSelectSeats(true);
-            setCurrentTrip(ticket);
-          }}
+          onClick={handleSelectButtonClick}
         >
           Выбрать места
         </button>

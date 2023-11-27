@@ -1,10 +1,5 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import "./Scheme.css";
-
-const arr = Array(32)
-  .fill(null)
-  .map(() => Math.random() > 0.5);
 
 const Place = ({
   placeIndex,
@@ -33,17 +28,30 @@ const Place = ({
   );
 };
 
-export default function Scheme({ number = "07", type, places = arr }) {
-  const [selectedPlaces, setSelectedPlaces] = useState([]);
+export default function Scheme({
+  wagon,
+  type,
+  handleSelectSeat,
+  handleDeselectSeat,
+  selectedSeats,
+}) {
+  const places = wagon.seats.reduce((acc, seat) => {
+    acc[seat.index - 1] = seat.available;
+    return acc;
+  }, []);
 
   const handleClick = (placeNumber) => {
-    setSelectedPlaces((prev) =>
-      prev.includes(placeNumber)
-        ? prev.filter((p) => p !== placeNumber)
-        : [...prev, placeNumber]
-    );
+    const wagonId = wagon.coach._id;
+    if (
+      selectedSeats.some(
+        (seat) => seat.seatNumber === placeNumber && seat.wagonId === wagonId
+      )
+    ) {
+      handleDeselectSeat(placeNumber, wagonId);
+    } else {
+      handleSelectSeat(placeNumber, wagonId);
+    }
   };
-
   const renderPlaces = (
     count,
     offset,
@@ -56,16 +64,24 @@ export default function Scheme({ number = "07", type, places = arr }) {
       .map((_, placeIndex) => {
         const placeNumber =
           columnIndex * multiplier + placeIndex + startPlaceNumber;
-        const isSelected = selectedPlaces.includes(placeNumber);
+
+        const isSelected = selectedSeats.some(
+          (seat) =>
+            seat.seatNumber === placeNumber + 1 &&
+            seat.wagonId === wagon.coach._id
+        );
+
+        const isOccupied = !places[placeNumber];
+
         return (
           <Place
             key={placeIndex}
             placeIndex={placeIndex}
             placeNumber={placeNumber}
             isSelected={isSelected}
-            isOccupied={!places[placeNumber]}
+            isOccupied={isOccupied}
             type={type}
-            onClick={handleClick}
+            onClick={() => handleClick(placeNumber + 1)}
             offset={offset}
           />
         );
@@ -74,7 +90,7 @@ export default function Scheme({ number = "07", type, places = arr }) {
 
   return (
     <div className={`scheme scheme--${type}`}>
-      <div className="scheme__number">{number}</div>
+      <div className="scheme__number">{wagon.coach.name.match(/\d+/g)}</div>
       {Array(8)
         .fill()
         .map((_, columnIndex) => (
@@ -82,23 +98,28 @@ export default function Scheme({ number = "07", type, places = arr }) {
             key={columnIndex}
             className={`scheme__column scheme__column--${columnIndex + 1}`}
           >
-            {type === "coupe" && renderPlaces(4, 1, columnIndex, 4)}
-            {type === "platzcart" && (
+            {type === "second" && renderPlaces(4, 1, columnIndex, 4)}
+            {type === "third" && (
               <>
                 {renderPlaces(4, 1, columnIndex, 4)}
                 {renderPlaces(2, 5, columnIndex, 2, 32)}
               </>
             )}
-            {type === "lux" && renderPlaces(2, 1, columnIndex, 2)}
-            {type === "sitting" && (
+            {type === "first" && renderPlaces(2, 1, columnIndex, 2)}
+            {type === "fourth" && (
               <>
                 {renderPlaces(4, 1, columnIndex, 4)}
-                {renderPlaces(
-                  4,
-                  5,
-                  columnIndex,
-                  2,
-                  columnIndex === 0 ? 32 : 31
+                {type === "fourth" && (
+                  <>
+                    {renderPlaces(4, 1, columnIndex, 4)}
+                    {renderPlaces(
+                      columnIndex === 0 || columnIndex === 7 ? 3 : 4,
+                      5,
+                      columnIndex,
+                      0,
+                      columnIndex === 0 ? 32 : columnIndex * 4 + 31
+                    )}
+                  </>
                 )}
               </>
             )}

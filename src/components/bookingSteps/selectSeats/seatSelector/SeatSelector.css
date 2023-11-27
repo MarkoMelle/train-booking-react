@@ -14,6 +14,7 @@
 }
 
 .seat-selector__header--arrival {
+  justify-content: flex-end;
 }
 
 .seat-selector__arrow {
@@ -24,6 +25,7 @@
 }
 
 .seat-selector__arrow--arrival {
+  transform: rotate(180deg);
 }
 
 .seat-selector__btn {
@@ -61,9 +63,11 @@
   color: #292929;
   font-size: 1rem;
   font-weight: 400;
+  text-transform: capitalize;
 }
 
 .info-train__direction svg {
+  margin-left: 5px;
   display: inline-block;
 }
 
@@ -112,6 +116,7 @@
   color: #292929;
   font-size: 1.125rem;
   font-weight: 400;
+  text-transform: capitalize;
 }
 
 .seat-selector__info__city--departure {
@@ -178,6 +183,7 @@
   color: #000;
   font-size: 1rem;
   font-weight: 400;
+  max-width: 240px;
 }
 
 .seat-selector__wagons {
@@ -190,10 +196,14 @@
   font-weight: 700;
 }
 
+.seat-selector__wagons-title--center {
+  text-align: center;
+}
+
 .seat-selector__wagons-list {
   display: flex;
   gap: 140px;
-  padding: 0 25px;
+  padding: 0 35px;
   margin-bottom: 25px;
 }
 
@@ -237,6 +247,12 @@
   color: #292929;
   font-size: 1.5rem;
   font-weight: 700;
+  cursor: pointer;
+  margin-left: 5px;
+}
+
+.seat-selector__wagons-number:hover {
+  color: #fff;
 }
 
 .seat-selector__wagons-number--active {
@@ -253,7 +269,8 @@
   width: 100%;
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
+  justify-content: center;
   background: #ffd98f;
 }
 
@@ -271,13 +288,24 @@
 }
 .seat-selector__details {
   display: flex;
+  /* justify-content: space-between; */
   padding-left: 85px;
+  padding-right: 50px;
 }
 
 .seat-selector__details-group {
   display: flex;
   flex-direction: column;
-  padding: 25px 35px;
+  /* padding: 25px 35px; */
+  padding: 25px 0;
+}
+
+.seat-selector__details-group:first-of-type {
+  margin-right: 70px;
+}
+
+.seat-selector__details-group:last-of-type {
+ margin-left: auto;
 }
 
 .seat-selector__details-group-title {
@@ -299,6 +327,7 @@
   display: flex;
   align-items: baseline;
   margin-bottom: 20px;
+  justify-content: space-between;
 }
 
 .seat-selector__seat-text {
@@ -321,11 +350,11 @@
 }
 
 .seat-selector__price-currency {
-  position: absolute;
-  right: 14px;
+  margin-left: 1ch;
 }
 
 .seat-selector__price-number {
+  margin-left: auto;
   color: #000;
   font-size: 1.5rem;
   font-weight: 700;
@@ -356,16 +385,18 @@
 
 .service-icon--selected {
   background: #ffa800;
+  color: #fff;
 }
 
 .service-icon--not-selected {
-  background: #c4c4c4;
+  /* background: #c4c4c4; */
   border: 1px solid #292929;
 }
 
 .service-icon--disabled {
   background: #fcdc9d;
   color: #928f94;
+  
 }
 
 .service-icon:hover {
@@ -382,16 +413,26 @@
   border: 1px solid #928f94;
 }
 
-.service-icon {
+
+.service-icon--selected--disabled {
+  cursor: not-allowed;
+  background: #ffa800;
+  color: #FFF;
+  border: 1px solid #928f94;
 }
 
-.service-icon-enabled {
-}
+.service-icon--selected--disabled:hover {
+  cursor: not-allowed;
+  background: #ffa800;
+  color: #FFF;
+  border: 1px solid #928f94;
+} 
 
-.service-icon-disabled {
-}
+
 
 .seat-selector__scheme {
+  margin: auto;
+  margin-top: 70px;
   grid-column: 1 / 3;
 }
 
@@ -407,8 +448,14 @@
 }
 
 .seat-selector__sum-text {
+  color: #000;
+  margin-right: 10px;
+}
+
+.seat-selector__sum-count {
   margin-right: 5px;
 }
+
 
 .seat-selector__sum-currency {
   /* position: absolute;

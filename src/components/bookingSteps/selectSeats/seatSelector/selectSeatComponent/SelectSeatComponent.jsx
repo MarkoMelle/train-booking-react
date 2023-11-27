@@ -16,9 +16,13 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
   return <Select {...props} ref={ref} slots={slots} />;
 });
 
-export default function SelectSeatComponent({ option, className }) {
+export default function SelectSeatComponent({ option, onChange, className }) {
   return (
-    <CustomSelect className={className} defaultValue={option[0].value}>
+    <CustomSelect
+      className={className}
+      defaultValue={option[0].value}
+      onChange={onChange}
+    >
       {option.map((item) => (
         <StyledOption key={item.value} value={item.value}>
           {item.label}

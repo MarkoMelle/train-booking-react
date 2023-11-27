@@ -115,13 +115,17 @@ export const apiClient = {
 
   getSeatsInfo: function (routeId, filters) {
     let query = new URLSearchParams();
-
+  
     for (let key in filters) {
-      if (Object.prototype.hasOwnProperty.call(filters, key)) {
-        query.append(key, filters[key]);
+      if (Object.prototype.hasOwnProperty.call(filters, key) && filters[key] != null) {
+        const value = filters[key];
+        if (typeof value === "boolean" && value === false) {
+          continue;
+        } 
+        query.append(camelToSnakeCase(key), value);
       }
     }
-
+  
     return fetch(`${this.baseUrl}/routes/${routeId}/seats?${query.toString()}`)
       .then((response) => {
         if (!response.ok) {
@@ -130,16 +134,13 @@ export const apiClient = {
         return response.json();
       })
       .then((data) => {
-        console.log("Seats Info:", data);
         return data;
       })
       .catch((error) => {
-        console.error(
-          "There has been a problem with your fetch operation:",
-          error
-        );
+        console.error("There has been a problem with your fetch operation:", error);
       });
   },
+  
 
   subscribe: function (email) {
     return fetch(`${this.baseUrl}/subscribe?email=${encodeURIComponent(email)}`)
@@ -161,3 +162,5 @@ export const apiClient = {
       });
   },
 };
+
+window.apiClient = apiClient;

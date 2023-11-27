@@ -14,9 +14,7 @@ export default function TimeSliders({
   // handleDepartureTimeChange,
   // handleArrivalTimeChange,
 }) {
-  // const [departureTime, setDepartureTime] = React.useState([0, 24]);
-  // const [arrivalTime, setArrivalTime] = React.useState([0, 24]);
-  // Opened, setIsOpened] = React.useState(false);
+
   const dispatch = useDispatch();
   const {
     startDepartureHourFrom,

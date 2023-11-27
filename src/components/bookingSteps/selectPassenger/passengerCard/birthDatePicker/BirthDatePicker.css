@@ -30,6 +30,9 @@
   margin: auto;
 }
 
+.react-datepicker__navigation[disabled] svg {
+  fill: #d3d3d3;
+}
 .passenger-card .react-datepicker__navigation--previous {
 }
 

@@ -1,43 +1,49 @@
 import PropTypes from "prop-types";
 import { climate, wifi, linen, drinks } from "./icons";
 
-export default function ServiceIcons({ services }) {
-  const serviceItems = Object.entries(services).map(([service, display]) => {
-    return {
-      type: service,
-      display,
-    };
-  });
-
+export default function ServiceIcons({
+  wagon,
+  services,
+  updateService,
+  seatsFilter,
+  // setSeatsFilter,
+}) {
   return (
     <ul className="seat-selector__options-list">
-      {serviceItems.map((item) => (
-        <li
-          key={item.type}
-          className={`seat-selector__options-item service-icon service-icon--${item.display}`}
-        >
-          <ServiceIcon type={item.type} />
-        </li>
-      ))}
+      <li
+        className={`seat-selector__options-item service-icon service-icon--${
+          wagon.have_air_conditioning ? "selected--disabled" : "disabled"
+        }`}
+      >
+        {climate}
+      </li>
+      <li
+        className={`seat-selector__options-item service-icon service-icon--${
+          wagon.have_wifi
+            ? services.wifi
+              ? "selected"
+              : "not-selected"
+            : "disabled"
+        }`}
+        onClick={
+          wagon.have_wifi ? () => updateService("wifi", !services.wifi) : null
+        }
+      >
+        {wifi}
+      </li>
+      <li
+        className={`seat-selector__options-item service-icon service-icon--${
+          wagon.is_linens_included ? "selected--disabled" : services.linens ? "selected" : "not-selected"
+        }`}
+        onClick={
+          !wagon.is_linens_included
+            ? () => updateService("linens", !services.linens)
+            : null
+        }
+      >
+        {linen}
+      </li>
+      {/* {type === "drinks" && drinks} */}
     </ul>
   );
 }
-
-function ServiceIcon({ type }) {
-  return (
-    <>
-      {type === "climate" && climate}
-      {type === "wifi" && wifi}
-      {type === "linen" && linen}
-      {type === "drinks" && drinks}
-    </>
-  );
-}
-
-ServiceIcons.propTypes = {
-  services: PropTypes.object.isRequired,
-};
-
-ServiceIcon.propTypes = {
-  type: PropTypes.string.isRequired,
-};

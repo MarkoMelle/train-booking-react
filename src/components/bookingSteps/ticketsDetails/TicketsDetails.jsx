@@ -20,7 +20,7 @@ export default function TicketsDetails({ activeStep, currentTrip }) {
           <TimeSliders direction="arrival" />
         </>
       )}
-      {(activeStep === 2 || activeStep === 3) && (
+      {/* {(activeStep === 2 || activeStep === 3) && (
         <>
           {console.log(currentTrip)}
           <h2 className="tickets-details__title">Детали поездки</h2>
@@ -29,7 +29,7 @@ export default function TicketsDetails({ activeStep, currentTrip }) {
           <PassengerDetails />
           <TotalPrice />
         </>
-      )}
+      )} */}
     </div>
   );
 }

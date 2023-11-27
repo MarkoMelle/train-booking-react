@@ -3,11 +3,31 @@ import { currency } from "../iconsSvg";
 import ServiceIcons from "../../serviceIcons/ServiceIcons";
 import Scheme from "./scheme/Scheme";
 
-export default function Wagon({ currentTrip, services, type }) {
+export default function Wagon({
+  wagon,
+  type,
+  seatsFilter,
+  handleSelectSeat,
+  handleDeselectSeat,
+  selectedSeats,
+  services,
+  updateService,
+}) {
+
+  const countAvailableSeats = (wagon) => {
+    let count = 0;
+    wagon.seats.forEach((seat) => {
+      if (seat.available) {
+        count++;
+      }
+    });
+    return count;
+  };
+
   return (
     <div className="seat-selector__wagon wagon">
       <div className="wagon__number-container">
-        <span className="wagon__number">07</span>
+        <span className="wagon__number">{wagon.coach.name.match(/\d+/g)}</span>
         <span className="wagon__number-text">Вагон</span>
       </div>
       <div className="seat-selector__details">
@@ -15,37 +35,61 @@ export default function Wagon({ currentTrip, services, type }) {
           <p className="seat-selector__details-group-title">
             <span>Места</span>
             <span className="seat-selector__seats-title-number">
-              {currentTrip.sitClasses[1].available.all}
+              {countAvailableSeats(wagon)}
             </span>
           </p>
 
-          <p className="seat-selector__seat-group">
-            <span className="seat-selector__seat-text">Верхние</span>
-            <span className="seat-selector__seat-number">
-              {currentTrip.sitClasses[1].available.upper}
+          {wagon.coach.top_price !== 0 && (
+            <p className="seat-selector__seat-group">
+              <span className="seat-selector__seat-text">Верхние</span>
+              <span className="seat-selector__seat-number">
+              {wagon.coach.upper_available_seats}
             </span>
-          </p>
-          <p className="seat-selector__seat-group">
-            <span className="seat-selector__seat-text">Нижние</span>
-            <span className="seat-selector__seat-number">
-              {currentTrip.sitClasses[1].available.lower}
+            </p>
+          )}
+          {wagon.coach.bottom_price !== 0 && (
+            <p className="seat-selector__seat-group">
+              <span className="seat-selector__seat-text">Нижние</span>
+              <span className="seat-selector__seat-number">
+              {wagon.coach.lower_available_seats}
             </span>
-          </p>
+            </p>
+          )}
+          {wagon.coach.side_price !== 0 && (
+            <p className="seat-selector__seat-group">
+              <span className="seat-selector__seat-text">Боковые</span>
+              <span className="seat-selector__seat-number">
+              {wagon.coach.side_available_seats}
+            </span>
+            </p>
+          )}
         </div>
         <div className="seat-selector__details-group">
           <span className="seat-selector__details-group-title">Стоимость</span>
-          <div className="seat-selector__price">
-            <span className="seat-selector__price-number">
-              {currentTrip.sitClasses[1].price.upper}
-            </span>
-            <span className="seat-selector__price-currency">{currency}</span>
-          </div>
-          <div className="seat-selector__price">
-            <span className="seat-selector__price-number">
-              {currentTrip.sitClasses[1].price.lower}
-            </span>
-            <span className="seat-selector__price-currency">{currency}</span>
-          </div>
+          {wagon.coach.top_price !== 0 && (
+            <div className="seat-selector__price">
+              <span className="seat-selector__price-number">
+                {wagon.coach.bottom_price}
+              </span>
+              <span className="seat-selector__price-currency">{currency}</span>
+            </div>
+          )}
+          {wagon.coach.bottom_price !== 0 && (
+            <div className="seat-selector__price">
+              <span className="seat-selector__price-number">
+                {wagon.coach.top_price}
+              </span>
+              <span className="seat-selector__price-currency">{currency}</span>
+            </div>
+          )}
+          {wagon.coach.side_price !== 0 && (
+            <div className="seat-selector__price">
+              <span className="seat-selector__price-number">
+                {wagon.coach.side_price}
+              </span>
+              <span className="seat-selector__price-currency">{currency}</span>
+            </div>
+          )}
         </div>
         <div className="seat-selector__details-group">
           <div className="seat-selector__details-group-title">
@@ -54,11 +98,22 @@ export default function Wagon({ currentTrip, services, type }) {
               ФПК
             </span>
           </div>
-          <ServiceIcons services={services} />
+          <ServiceIcons
+            wagon={wagon.coach}
+            services={services}
+            updateService={updateService}
+            seatsFilter={seatsFilter}
+          />
         </div>
       </div>
       <div className="seat-selector__scheme">
-        <Scheme type={type} />
+        <Scheme
+          type={type}
+          wagon={wagon}
+          handleSelectSeat={handleSelectSeat}
+          handleDeselectSeat={handleDeselectSeat}
+          selectedSeats={selectedSeats}
+        />
       </div>
     </div>
   );
@@ -69,3 +124,5 @@ Wagon.propTypes = {
   services: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
 };
+
+

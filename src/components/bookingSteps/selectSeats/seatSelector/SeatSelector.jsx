@@ -5,13 +5,225 @@ import WagonTypes from "./wagonType/WagonTypes";
 import SelectSeatComponent from "./selectSeatComponent/SelectSeatComponent";
 import { currency } from "./wagonType/iconsSvg";
 import "./SeatSelector.css";
+import { apiClient } from "../../../../api/apiClient";
+import { useSelector, useDispatch } from "react-redux";
+import { useEffect, useState, useMemo, useRef } from "react";
+import { toggleSelectSeats } from "../../../../redux/features/seatsSlice";
+import { addSeatsToWagons , classifySeats} from "../../../../utils";
+
+const usePrevious = (value) => {
+  const ref = useRef();
+  useEffect(() => {
+    ref.current = value;
+  });
+  return ref.current;
+};
 
 export default function SeatSelector({
   direction = "departure",
-  currentTrip,
-  wagons,
-  services,
+  currentRoute,
+  routeId,
+  seatsInfo,
+  selectedSeats,
+  setSeatsInfo,
+  setSelectedSeats,
+  resetRoute,
 }) {
+  console.log("seatsInfo", seatsInfo);
+  const [adults, setAdults] = useState(0);
+  const [children, setChildren] = useState(0);
+  const [infants, setInfants] = useState(0);
+  const [selectedSeatsLocal, setSelectedSeatsLocal] = useState([]);
+  const [totalPrice, setTotalPrice] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+  const [filteredSeats, setFilteredSeats] = useState([]);
+
+  const initialServicesState = {
+    wifi: false,
+    linens: false,
+  };
+  const [services, setServices] = useState(initialServicesState);
+
+  const updateService = (serviceName, value) => {
+    console.log(serviceName, value);
+    setServices((prevServices) => ({
+      ...prevServices,
+      [serviceName]: value,
+    }));
+  };
+
+  const dispatch = useDispatch();
+
+  const searchResults = useSelector((state) => state.searchResults);
+
+  const seatsFilter = useMemo(
+    () => ({
+      haveFirstClass: searchResults.haveFirstClass,
+      haveSecondClass: searchResults.haveSecondClass,
+      haveThirdClass: searchResults.haveThirdClass,
+      haveFourthClass: searchResults.haveFourthClass,
+      haveWifi: searchResults.haveWifi,
+      haveAirConditioning: searchResults.haveAirConditioning,
+      // isExpress: searchResults.isExpress,
+    }),
+    [
+      searchResults.haveFirstClass,
+      searchResults.haveSecondClass,
+      searchResults.haveThirdClass,
+      searchResults.haveFourthClass,
+      searchResults.haveWifi,
+      searchResults.haveAirConditioning,
+      searchResults.isExpress,
+    ]
+  );
+
+  useEffect(() => {
+    const fetchSeats = async () => {
+      setIsLoading(true);
+      try {
+        const data = await apiClient.getSeatsInfo(routeId);
+        dispatch(setSeatsInfo(data));
+      } catch (error) {
+        console.error(error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+    fetchSeats();
+  }, [routeId]);
+
+  useEffect(() => {
+    const filterWagons = () => {
+      if (!Array.isArray(seatsInfo)) {
+        return [];
+      }
+  
+      return seatsInfo.filter(wagon => {
+        const classType = wagon.coach.class_type;
+  
+        const isClassSelected = seatsFilter.haveFirstClass || seatsFilter.haveSecondClass || seatsFilter.haveThirdClass || seatsFilter.haveFourthClass;
+        const classMatch = !isClassSelected || 
+          (seatsFilter.haveFirstClass && classType === "first") ||
+          (seatsFilter.haveSecondClass && classType === "second") ||
+          (seatsFilter.haveThirdClass && classType === "third") ||
+          (seatsFilter.haveFourthClass && classType === "fourth");
+  
+        const wifiMatch = !seatsFilter.haveWifi || wagon.coach.have_wifi === seatsFilter.haveWifi;
+        const airConditioningMatch = !seatsFilter.haveAirConditioning || wagon.coach.have_air_conditioning === seatsFilter.haveAirConditioning;
+  
+        return classMatch && wifiMatch && airConditioningMatch;
+      });
+    };
+  
+    const newFilteredSeats = filterWagons();
+    const addSeats = addSeatsToWagons(newFilteredSeats);
+    const classifiedSeats = addSeats.map((wagon) => classifySeats(wagon));
+    console.log("classifySeats", classifiedSeats);
+    setFilteredSeats(classifiedSeats);
+  }, [seatsInfo, seatsFilter]);
+  
+  
+
+  const prevAdults = usePrevious(adults);
+  const prevChildren = usePrevious(children);
+
+  useEffect(() => {
+    const difference = (prev, current) => prev - current;
+    handleSeatsChange("adult", difference(prevAdults, adults));
+  }, [adults, selectedSeatsLocal, prevAdults]);
+
+  useEffect(() => {
+    const difference = (prev, current) => prev - current;
+    handleSeatsChange("child", difference(prevChildren, children));
+  }, [children, selectedSeatsLocal, prevChildren]);
+
+  const handleAdultsChange = (e, value) => {
+    setAdults(value);
+  };
+
+  const handleChildrenChange = (e, value) => {
+    setChildren(value);
+  };
+
+  const handleInfantsChange = (e, value) => {
+    setInfants(value);
+  };
+
+  const determineSeatType = () => {
+    let adultSeats = selectedSeatsLocal.filter(
+      (seat) => seat.type === "adult"
+    ).length;
+    let childSeats = selectedSeatsLocal.filter(
+      (seat) => seat.type === "child"
+    ).length;
+
+    if (adultSeats < adults) {
+      return "adult";
+    } else if (childSeats < children) {
+      return "child";
+    }
+  };
+
+  const handleSeatsChange = (type, count) => {
+    if (count > 0) {
+      let newSelectedSeats = [...selectedSeatsLocal];
+      while (count > 0 && newSelectedSeats.some((seat) => seat.type === type)) {
+        const indexToRemove = newSelectedSeats
+          .map((seat) => seat.type)
+          .lastIndexOf(type);
+        if (indexToRemove !== -1) {
+          newSelectedSeats.splice(indexToRemove, 1);
+          count--;
+        }
+      }
+      setSelectedSeatsLocal(newSelectedSeats);
+    }
+  };
+
+  const handleSelectSeat = (seatNumber, wagonId) => {
+    let type = determineSeatType();
+    if (
+      type &&
+      !selectedSeatsLocal.some(
+        (seat) => seat.seatNumber === seatNumber && seat.wagonId === wagonId
+      )
+    ) {
+      setSelectedSeatsLocal([
+        ...selectedSeatsLocal,
+        { seatNumber, type, wagonId },
+      ]);
+    }
+  };
+
+  const handleDeselectSeat = (seatNumber, wagonId) => {
+    setSelectedSeatsLocal(
+      selectedSeatsLocal.filter(
+        (seat) => !(seat.seatNumber === seatNumber && seat.wagonId === wagonId)
+      )
+    );
+  };
+
+  const handleSubmit = () => {
+    if (selectedSeatsLocal.length === adults + children) {
+      dispatch(setSelectedSeats(selectedSeatsLocal));
+    } else {
+      console.log("Не все места выбраны");
+    }
+  };
+
+  const handleBack = () => {
+    dispatch(resetRoute());
+    dispatch(toggleSelectSeats());
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <div className="booking-steps__container seat-selector">
       <div
@@ -22,13 +234,24 @@ export default function SeatSelector({
           src={arrowBig}
           alt="arrow"
         />
-        <button className="seat-selector__btn">Выбрать другой поезд</button>
+        <button
+          className="seat-selector__btn
+        secondary-btn
+        "
+          onClick={handleBack}
+        >
+          Выбрать другой поезд
+        </button>
       </div>
       <div className="seat-selector__info">
         <div className="seat-selector__info-train">
-          <div className="info-train__number">{currentTrip.trainNumber}</div>
+          <div className="info-train__number">
+            {currentRoute.train.name.includes("undefined")
+              ? currentRoute.train.name.replace("undefined", "Поезд")
+              : currentRoute.train.name}
+          </div>
           <span className="info-train__direction">
-            {currentTrip.direction[0]}&nbsp;
+            {currentRoute.from.city.name}
             <svg
               xmlns="http://www.w3.org/2000/svg"
               width="14"
@@ -43,14 +266,33 @@ export default function SeatSelector({
             </svg>
           </span>
           <span className="info-train__direction">
-            {currentTrip.direction[1]}
+            {currentRoute.to.city.name}
           </span>
         </div>
         <TimeInfo
-          modifier="departure"
-          time={currentTrip.departureTime}
-          city={currentTrip.direction}
-          station={currentTrip.departureStation}
+          modifier={direction}
+          duration={currentRoute.duration}
+          time={
+            direction === "departure"
+              ? [currentRoute.from.datetime, currentRoute.to.datetime]
+              : [currentRoute.to.datetime, currentRoute.from.datetime]
+          }
+          city={
+            direction === "departure"
+              ? [currentRoute.from.city.name, currentRoute.to.city.name]
+              : [currentRoute.to.city.name, currentRoute.from.city.name]
+          }
+          station={
+            direction === "departure"
+              ? [
+                  currentRoute.from.railway_station_name,
+                  currentRoute.to.railway_station_name,
+                ]
+              : [
+                  currentRoute.to.railway_station_name,
+                  currentRoute.from.railway_station_name,
+                ]
+          }
           block="seat-selector__info"
         />
       </div>
@@ -60,6 +302,7 @@ export default function SeatSelector({
           <div className="seat-selector__quantity-select-group">
             <SelectSeatComponent
               className="seat-selector__quantity-select"
+              onChange={handleAdultsChange}
               option={[
                 { label: "Взрослых — 0", value: 0 },
                 { label: "Взрослых — 1", value: 1 },
@@ -73,6 +316,7 @@ export default function SeatSelector({
           <div className="seat-selector__quantity-select-group">
             <SelectSeatComponent
               className="seat-selector__quantity-select"
+              onChange={handleChildrenChange}
               option={[
                 { label: "Детских — 0", value: 0 },
                 { label: "Детских — 1", value: 1 },
@@ -87,6 +331,7 @@ export default function SeatSelector({
           <div className="seat-selector__quantity-select-group">
             <SelectSeatComponent
               className="seat-selector__quantity-select"
+              onChange={handleInfantsChange}
               option={[
                 { label: "Детских «без места» — 0", value: 0 },
                 { label: "Детских «без места» — 1", value: 1 },
@@ -100,32 +345,135 @@ export default function SeatSelector({
         </div>
       </div>
       <WagonTypes
-        currentTrip={currentTrip}
-        wagons={wagons}
+        currentTrip={currentRoute}
+        seatsInfo={filteredSeats}
+        seatsFilter={seatsFilter}
+        handleSelectSeat={handleSelectSeat}
+        handleDeselectSeat={handleDeselectSeat}
+        selectedSeats={selectedSeatsLocal}
         services={services}
+        updateService={updateService}
       />
       <div className="seat-selector__sum">
-        <span className="seat-selector__sum-text">8800</span>
+        <span className="seat-selector__sum-text">Итого:</span>
+        <span className="seat-selector__sum-count">{totalPrice}</span>
         <span className="seat-selector__sum-currency">{currency}</span>
       </div>
     </div>
   );
 }
 
-SeatSelector.defaultProps = {
-  wagons: ["07", "09"],
-  services: {
-    climate: "selected",
-    wifi: "not-selected",
-    linen: "disabled",
-    drinks: "not-selected",
+[
+  {
+    coach: {
+      _id: "641037ec5c49ea004632f116",
+      name: "КЛССЖ-47",
+      class_type: "third",
+      have_wifi: true,
+      have_air_conditioning: true,
+      price: 0,
+      top_price: 4510,
+      bottom_price: 4155,
+      side_price: 4420,
+      linens_price: 77,
+      wifi_price: 299,
+      is_linens_included: false,
+      available_seats: 40,
+      train: "641037f05c49ea004632f801",
+    },
+    seats: [
+      {
+        index: 1,
+        available: true,
+      },
+      {
+        index: 2,
+        available: true,
+      },
+    ],
   },
-};
-
-SeatSelector.propTypes = {
-  direction: PropTypes.string,
-  currentTrip: PropTypes.object.isRequired,
-  wagons: PropTypes.array,
-  services: PropTypes.object,
-  schemeImg: PropTypes.string,
-};
+  {
+    coach: {
+      _id: "641037ec5c49ea004632f117",
+      name: "ЙОЕ-74",
+      class_type: "first",
+      have_wifi: true,
+      have_air_conditioning: true,
+      price: 3065,
+      top_price: 3870,
+      bottom_price: 4915,
+      side_price: 0,
+      linens_price: 107,
+      wifi_price: 230,
+      is_linens_included: true,
+      available_seats: 10,
+      train: "641037f05c49ea004632f801",
+    },
+    seats: [
+      {
+        index: 1,
+        available: true,
+      },
+      {
+        index: 2,
+        available: true,
+      },
+    ],
+  },
+  {
+    coach: {
+      _id: "641037ec5c49ea004632f118",
+      name: "ЖНЕЙ-13",
+      class_type: "fourth",
+      have_wifi: false,
+      have_air_conditioning: false,
+      price: 0,
+      top_price: 854,
+      bottom_price: 591,
+      side_price: 0,
+      linens_price: 0,
+      wifi_price: 195,
+      is_linens_included: false,
+      available_seats: 54,
+      train: "641037f05c49ea004632f801",
+    },
+    seats: [
+      {
+        index: 1,
+        available: true,
+      },
+      {
+        index: 2,
+        available: true,
+      },
+    ],
+  },
+  {
+    coach: {
+      _id: "641037ec5c49ea004632f119",
+      name: "БРАВ-95",
+      class_type: "second",
+      have_wifi: false,
+      have_air_conditioning: false,
+      price: 0,
+      top_price: 2502,
+      bottom_price: 2493,
+      side_price: 0,
+      linens_price: 198,
+      wifi_price: 210,
+      is_linens_included: true,
+      available_seats: 24,
+      train: "641037f05c49ea004632f801",
+    },
+    seats: [
+      {
+        index: 1,
+        available: true,
+      },
+      {
+        index: 2,
+        available: true,
+      },
+    ],
+  },
+];
