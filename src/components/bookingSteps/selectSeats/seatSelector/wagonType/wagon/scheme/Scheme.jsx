@@ -88,9 +88,7 @@ export default function Scheme({
             isSelected={isSelected}
             isOccupied={isOccupied}
             type={type}
-            onClick={() =>
-              handleClick(placeNumber + 1, places[placeNumber].price)
-            }
+            onClick={handleClick}
             offset={offset}
           />
         );

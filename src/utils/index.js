@@ -47,7 +47,6 @@ export function addSeatsToWagons(wagons) {
         available: Math.random() > 0.5,
       });
     }
-
     return {
       ...wagon,
       seats: newSeats,

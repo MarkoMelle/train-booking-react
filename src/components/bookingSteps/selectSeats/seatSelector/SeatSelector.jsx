@@ -123,6 +123,7 @@ export default function SeatSelector({
   
 
   useEffect(() => {
+    // Фильтрация вагонов по фильтрам
     const filterWagons = () => {
       if (!Array.isArray(seatsInfo)) {
         return [];
