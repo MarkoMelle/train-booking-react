@@ -58,8 +58,15 @@ const CustomHeader = ({
         type="button"
         onClick={decreaseMonth}
         disabled={prevMonthButtonDisabled}
+        className="react-datepicker__navigation react-datepicker__navigation--previous"
       >
-        {"<"}
+        <svg
+          className="react-datepicker__navigation-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path d="M24 22h-24l12-20z" />
+        </svg>
       </button>
       <select
         value={getYear(date)}
@@ -87,8 +94,15 @@ const CustomHeader = ({
         type="button"
         onClick={increaseMonth}
         disabled={nextMonthButtonDisabled}
+        className="react-datepicker__navigation react-datepicker__navigation--next"
       >
-        {">"}
+        <svg
+          className="react-datepicker__navigation-icon"
+          xmlns="http://www.w3.org/2000/svg"
+          viewBox="0 0 24 24"
+        >
+          <path d="M24 22h-24l12-20z" />
+        </svg>
       </button>
     </>
   );

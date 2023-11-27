@@ -1,10 +1,6 @@
-import { useState } from "react";
 import PropTypes from "prop-types";
 import "./Scheme.css";
-
-const arr = Array(32)
-  .fill(null)
-  .map(() => Math.random() > 0.5);
+import { useState } from "react";
 
 const Place = ({
   placeIndex,
@@ -33,17 +29,36 @@ const Place = ({
   );
 };
 
-export default function Scheme({ number = "07", type, places = arr }) {
-  const [selectedPlaces, setSelectedPlaces] = useState([]);
-
-  const handleClick = (placeNumber) => {
-    setSelectedPlaces((prev) =>
-      prev.includes(placeNumber)
-        ? prev.filter((p) => p !== placeNumber)
-        : [...prev, placeNumber]
-    );
+export default function Scheme({
+  wagon,
+  type,
+  handleSelectSeat,
+  handleDeselectSeat,
+  selectedSeats,
+  changePrice,
+}) {
+  const places = wagon.seats.reduce((acc, seat) => {
+    acc[seat.index - 1] = {
+      available: seat.available,
+      price: seat.price,
+    };
+    return acc;
+  }, []);
+  const handleClick = (placeNumber, placePrice) => {
+    const wagonId = wagon.coach._id;
+    if (
+      selectedSeats.some(
+        (seat) => seat.seatNumber === placeNumber && seat.wagonId === wagonId
+      )
+    ) {
+      handleDeselectSeat(placeNumber, wagonId);
+      changePrice(placePrice, "remove");
+    } else {
+      console.log(placeNumber, placePrice);
+      handleSelectSeat(placeNumber, wagonId);
+      changePrice(placePrice, "add");
+    }
   };
-
   const renderPlaces = (
     count,
     offset,
@@ -56,16 +71,26 @@ export default function Scheme({ number = "07", type, places = arr }) {
       .map((_, placeIndex) => {
         const placeNumber =
           columnIndex * multiplier + placeIndex + startPlaceNumber;
-        const isSelected = selectedPlaces.includes(placeNumber);
+        const isSelected = selectedSeats.some(
+          (seat) =>
+            seat.seatNumber === placeNumber + 1 &&
+            seat.wagonId === wagon.coach._id
+        );
+        const placeInfo = places[placeNumber]; 
+
+        const isOccupied = !placeInfo.available;
+
         return (
           <Place
             key={placeIndex}
             placeIndex={placeIndex}
             placeNumber={placeNumber}
             isSelected={isSelected}
-            isOccupied={!places[placeNumber]}
+            isOccupied={isOccupied}
             type={type}
-            onClick={handleClick}
+            onClick={() =>
+              handleClick(placeNumber + 1, places[placeNumber].price)
+            }
             offset={offset}
           />
         );
@@ -74,7 +99,7 @@ export default function Scheme({ number = "07", type, places = arr }) {
 
   return (
     <div className={`scheme scheme--${type}`}>
-      <div className="scheme__number">{number}</div>
+      <div className="scheme__number">{wagon.coach.name.match(/\d+/g)}</div>
       {Array(8)
         .fill()
         .map((_, columnIndex) => (
@@ -82,23 +107,28 @@ export default function Scheme({ number = "07", type, places = arr }) {
             key={columnIndex}
             className={`scheme__column scheme__column--${columnIndex + 1}`}
           >
-            {type === "coupe" && renderPlaces(4, 1, columnIndex, 4)}
-            {type === "platzcart" && (
+            {type === "second" && renderPlaces(4, 1, columnIndex, 4)}
+            {type === "third" && (
               <>
                 {renderPlaces(4, 1, columnIndex, 4)}
                 {renderPlaces(2, 5, columnIndex, 2, 32)}
               </>
             )}
-            {type === "lux" && renderPlaces(2, 1, columnIndex, 2)}
-            {type === "sitting" && (
+            {type === "first" && renderPlaces(2, 1, columnIndex, 2)}
+            {type === "fourth" && (
               <>
                 {renderPlaces(4, 1, columnIndex, 4)}
-                {renderPlaces(
-                  4,
-                  5,
-                  columnIndex,
-                  2,
-                  columnIndex === 0 ? 32 : 31
+                {type === "fourth" && (
+                  <>
+                    {renderPlaces(4, 1, columnIndex, 4)}
+                    {renderPlaces(
+                      columnIndex === 0 || columnIndex === 7 ? 3 : 4,
+                      5,
+                      columnIndex,
+                      0,
+                      columnIndex === 0 ? 32 : columnIndex * 4 + 31
+                    )}
+                  </>
                 )}
               </>
             )}
