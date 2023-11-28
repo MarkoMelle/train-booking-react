@@ -18,7 +18,6 @@ export default function WagonTypes({
   filteredWagonTypes,
   wagonTypes,
 }) {
-  console.log(filteredWagonTypes);
   const handleTypeClick = (type) => {
     const selectedType = filteredWagonTypes.find(wagonType => wagonType.type === type);
     const firstWagonOfSelectedType = seatsInfo.find(

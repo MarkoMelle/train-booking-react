@@ -10,6 +10,7 @@ const Place = ({
   type,
   onClick,
   offset,
+  placePrice,
 }) => {
   return (
     <div
@@ -20,7 +21,7 @@ const Place = ({
           ${isSelected ? "scheme__place--selected" : ""}`}
       onClick={() => {
         if (!isOccupied) {
-          onClick(placeIndex);
+          onClick(placeNumber + 1, placePrice);
         }
       }}
     >
@@ -45,18 +46,18 @@ export default function Scheme({
     return acc;
   }, []);
   const handleClick = (placeNumber, placePrice) => {
+    console.log(placeNumber, placePrice);
     const wagonId = wagon.coach._id;
     if (
       selectedSeats.some(
         (seat) => seat.seatNumber === placeNumber && seat.wagonId === wagonId
       )
     ) {
-      handleDeselectSeat(placeNumber, wagonId);
-      changePrice(placePrice, "remove");
+      handleDeselectSeat(placeNumber, wagonId, placePrice);
+      // if (deselection.success) changePrice(deselection.type === 'child' ? placePrice / 2 : placePrice, "remove");
     } else {
-      console.log(placeNumber, placePrice);
-      handleSelectSeat(placeNumber, wagonId);
-      changePrice(placePrice, "add");
+      handleSelectSeat(placeNumber, wagonId, placePrice);
+      // if (selection.success) changePrice(selection.type === 'child' ? placePrice / 2 : placePrice, "add");
     }
   };
   const renderPlaces = (
@@ -76,7 +77,7 @@ export default function Scheme({
             seat.seatNumber === placeNumber + 1 &&
             seat.wagonId === wagon.coach._id
         );
-        const placeInfo = places[placeNumber]; 
+        const placeInfo = places[placeNumber];
 
         const isOccupied = !placeInfo.available;
 
@@ -90,6 +91,7 @@ export default function Scheme({
             type={type}
             onClick={handleClick}
             offset={offset}
+            placePrice={placeInfo.price}
           />
         );
       });

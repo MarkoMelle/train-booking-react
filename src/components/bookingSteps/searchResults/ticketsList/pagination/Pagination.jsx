@@ -26,10 +26,40 @@ function Pagination({ itemsPerPage, totalItems, currentPage, onPageChange }) {
     const startPage = 1;
     const endPage = pageNumbers.length;
 
-    if (currentPage <= 3) {
-      return [1, 2, 3, "...", endPage];
+    if (currentPage < 3) {
+      return [1, 2, 3, 4,5, "...", endPage];
+    } else if (currentPage === 3) {
+      return [
+        startPage,
+        startPage + 1,
+        currentPage,
+        currentPage + 1,
+        currentPage + 2,
+        "...",
+        endPage,
+      ];
+    } else if (currentPage === 4) {
+      return [
+        startPage,
+        startPage + 1,
+        startPage + 2,
+        currentPage,
+        currentPage + 1,
+        "...",
+        endPage,
+      ];
     } else if (currentPage >= pageNumbers.length - 2) {
-      return [startPage, "...", endPage - 2, endPage - 1, endPage];
+      return [startPage, "...",endPage - 4 , endPage - 3, endPage - 2, endPage - 1, endPage];
+    } else if (currentPage === pageNumbers.length - 3) {
+      return [
+        startPage,
+        "...",
+        currentPage - 1,
+        currentPage,
+        currentPage + 1,
+        currentPage + 2,
+        endPage,
+      ];
     } else {
       return [
         startPage,

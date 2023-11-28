@@ -178,6 +178,7 @@ export default function SeatSelector({
 
 
   const changePrice = (price, type) => {
+    console.log(price, type);
     if (typeof price !== "number") {
       console.error("Ошибка: price должно быть числом");
       return;
@@ -255,8 +256,12 @@ export default function SeatSelector({
         const indexToRemove = newSelectedSeats
           .map((seat) => seat.type)
           .lastIndexOf(type);
+  
         if (indexToRemove !== -1) {
+          console.log(newSelectedSeats);
+          const priceOfSeatToRemove = newSelectedSeats[indexToRemove].price;
           newSelectedSeats.splice(indexToRemove, 1);
+          changePrice(priceOfSeatToRemove, "remove");
           count--;
         }
       }
@@ -264,28 +269,38 @@ export default function SeatSelector({
     }
   };
 
-  const handleSelectSeat = (seatNumber, wagonId) => {
+  const handleSelectSeat = (seatNumber, wagonId, price) => {
     let type = determineSeatType();
-    if (
-      type &&
-      !selectedSeatsLocal.some(
-        (seat) => seat.seatNumber === seatNumber && seat.wagonId === wagonId
-      )
-    ) {
+    const isSeatAlreadySelected = selectedSeatsLocal.some(
+      (seat) => seat.seatNumber === seatNumber && seat.wagonId === wagonId
+    );
+  
+    if (type && !isSeatAlreadySelected) {
+      const resultPrice = type === "child" ? price / 2 : price;
       setSelectedSeatsLocal([
         ...selectedSeatsLocal,
-        { seatNumber, type, wagonId },
+        { seatNumber, type, wagonId , resultPrice},
       ]);
+      changePrice(type === "child" ? price / 2 : price, "add");
     }
   };
-
-  const handleDeselectSeat = (seatNumber, wagonId) => {
-    setSelectedSeatsLocal(
-      selectedSeatsLocal.filter(
-        (seat) => !(seat.seatNumber === seatNumber && seat.wagonId === wagonId)
-      )
+  
+  const handleDeselectSeat = (seatNumber, wagonId, price) => {
+    const seatToDeselect = selectedSeatsLocal.find(
+      (seat) => seat.seatNumber === seatNumber && seat.wagonId === wagonId
     );
+  
+    if (seatToDeselect) {
+      setSelectedSeatsLocal(
+        selectedSeatsLocal.filter(
+          (seat) => !(seat.seatNumber === seatNumber && seat.wagonId === wagonId)
+        )
+      );
+      changePrice(seatToDeselect.type === "child" ? price / 2 : price, "remove");
+    }
   };
+  
+  
 
   const handleSubmit = () => {
     if (selectedSeatsLocal.length === passengerCounts.adults + passengerCounts.children) {
