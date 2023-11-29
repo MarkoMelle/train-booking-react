@@ -16,11 +16,11 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
   return <Select {...props} ref={ref} slots={slots} />;
 });
 
-export default function SelectSeatComponent({ option, onChange, className }) {
+export default function SelectSeatComponent({ option, onChange, className, value }) {
   return (
     <CustomSelect
       className={className}
-      defaultValue={option[0].value}
+      value={value}
       onChange={onChange}
     >
       {option.map((item) => (

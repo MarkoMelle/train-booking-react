@@ -5,10 +5,11 @@ import DataPickerComponent from "../../dataPicker/DataPickerComponent";
 import swapIcon from "../../../assets/icons/swap-icon.svg";
 import { useNavigate } from "react-router-dom";
 import InputWithSuggestions from "./inputWithSuggestions/InputWithSuggestions";
-import { setFilter } from "../../../redux/features/searchResultsSlice";
-import { fetchRoutes } from "../../../redux/features/searchResultsSlice";
+import {fetchRoutes, setFilter ,resetPagination } from "../../../redux/features/searchResultsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { stringifyDate } from "../../../utils";
+import { showSnackBar } from "../../../redux/features/notificationsSlice";
+import {setSelectSeats} from "../../../redux/features/seatsSlice";
 
 export default function SelectionForm({ modifier }) {
   const block = "selection-form";
@@ -78,9 +79,28 @@ export default function SelectionForm({ modifier }) {
 
   const handleSubmit = (event) => {
     event.preventDefault();
+    dispatch(setSelectSeats(false));
+    if (fromCity.id === toCity.id && fromCity.id !== "") {
+      dispatch(showSnackBar('Города отправления и прибытия не могут совпадать.'));
+      return;
+    }
+    if (!fromCity.name) {
+      dispatch(showSnackBar('Выберите город отправления.'));
+      return;
+    }
+    if (fromCity.name && !toCity.name) {
+      dispatch(showSnackBar('Выберите город прибытия.'));
+      return;
+    }
+    // if (!dateStart) {
+    //   dispatch(showSnackBar('Выберите дату отправления.'));
+    //   return;
+    // }
     navigate("/tickets");
-    dispatch(fetchRoutes(filters));
+    dispatch(resetPagination());
+    dispatch(fetchRoutes({ ...filters, offset: 0 }));
   };
+  
 
   const handleSwapButtonClick = () => {
     const temp = { ...fromCity };
@@ -122,8 +142,10 @@ export default function SelectionForm({ modifier }) {
           date={dateStartObj}
           setDate={setDepartureDate}
           block={block}
+          minDate={new Date()}
         />
         <DataPickerComponent
+          direction="return"
           date={dateEndObj}
           setDate={setReturnDate}
           block={block}

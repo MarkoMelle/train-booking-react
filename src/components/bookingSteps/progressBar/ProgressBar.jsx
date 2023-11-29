@@ -1,17 +1,24 @@
 import "./ProgressBar.css";
 import PropTypes from "prop-types";
 
-export default function ProgressBar({ activeStep }) {
+export default function ProgressBar({ activeStep, setActiveStep }) {
   const steps = ["Билеты", "Пассажиры", "Оплата", "Проверка"];
 
   return (
-    <div className="progress-bar wrapper">
+    <div className="progress-bar wrapper" id="progress-bar">
       {steps.map((step, index) => (
         <div
           key={index}
           className={`progress-bar__item ${
             index + 1 === activeStep ? "progress-bar__item--active" : ""
-          }`}
+          } ${index + 1 < activeStep ? "progress-bar__item--completed" : ""}`}
+          // onClick={() => setActiveStep(index + 1)}
+          onClick={() => {
+            if (index + 1 < activeStep) {
+              setActiveStep(index + 1);
+            }
+          }
+          }
         >
           <span className="progress-bar__item-number">{index + 1}</span>
           <span className="progress-bar__item-text">{step}</span>

@@ -1,11 +1,16 @@
-import * as React from "react";
+import { useState, useCallback } from "react";
 import "./TimeSliders.css";
 import PropTypes from "prop-types";
 import TimeSlider from "../timeSlider/TimeSlider";
 import { plusIcon, minusIcon } from "../iconsSvg/iconsSvg";
 import { Transition } from "react-transition-group";
-import { setFilter } from "../../../../redux/features/searchResultsSlice";
+import {
+  setFilter,
+  fetchRoutes,
+  resetPagination,
+} from "../../../../redux/features/searchResultsSlice";
 import { useSelector, useDispatch } from "react-redux";
+import { debounce } from "../../../../utils";
 
 export default function TimeSliders({
   direction,
@@ -14,7 +19,7 @@ export default function TimeSliders({
   // handleDepartureTimeChange,
   // handleArrivalTimeChange,
 }) {
-
+  const filters = useSelector((state) => state.searchResults);
   const dispatch = useDispatch();
   const {
     startDepartureHourFrom,
@@ -36,6 +41,14 @@ export default function TimeSliders({
       ? [startArrivalHourFrom || 0, startArrivalHourTo || 24]
       : [endArrivalHourFrom || 0, endArrivalHourTo || 24];
 
+  const debouncedFetchRoutes = useCallback(
+    debounce((updatedFilters) => {
+      dispatch(resetPagination());
+      dispatch(fetchRoutes({ ...updatedFilters, offset: 0 }));
+    }, 500),
+    []
+  );
+
   const handleDepartureTimeChange = (e, newValue) => {
     if (direction === "departure") {
       dispatch(
@@ -44,6 +57,11 @@ export default function TimeSliders({
           startDepartureHourTo: newValue[1],
         })
       );
+      debouncedFetchRoutes({
+        ...filters,
+        startDepartureHourFrom: newValue[0],
+        startDepartureHourTo: newValue[1],
+      });
     } else {
       dispatch(
         setFilter({
@@ -51,6 +69,11 @@ export default function TimeSliders({
           endDepartureHourTo: newValue[1],
         })
       );
+      debouncedFetchRoutes({
+        ...filters,
+        endDepartureHourFrom: newValue[0],
+        endDepartureHourTo: newValue[1],
+      });
     }
   };
 
@@ -62,16 +85,27 @@ export default function TimeSliders({
           startArrivalHourTo: newValue[1],
         })
       );
-    }
-    dispatch(
-      setFilter({
+      debouncedFetchRoutes({
+        ...filters,
+        startArrivalHourFrom: newValue[0],
+        startArrivalHourTo: newValue[1],
+      });
+    } else {
+      dispatch(
+        setFilter({
+          endArrivalHourFrom: newValue[0],
+          endArrivalHourTo: newValue[1],
+        })
+      );
+      debouncedFetchRoutes({
+        ...filters,
         endArrivalHourFrom: newValue[0],
         endArrivalHourTo: newValue[1],
-      })
-    );
+      });
+    }
   };
 
-  const [isOpened, setIsOpened] = React.useState(false);
+  const [isOpened, setIsOpened] = useState(false);
 
   const duration = 250;
 

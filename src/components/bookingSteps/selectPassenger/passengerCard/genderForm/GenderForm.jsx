@@ -1,6 +1,8 @@
 import PropTypes from "prop-types";
 
-export default function GenderForm({ gender, setGender }) {
+export default function GenderForm({ gender, setGender , index}) {
+  const maleId = `male-${index}`;
+  const femaleId = `female-${index}`;
   return (
     <div className="passenger-card__gender">
       <label className="passenger-card__label passenger-card__label--gender">

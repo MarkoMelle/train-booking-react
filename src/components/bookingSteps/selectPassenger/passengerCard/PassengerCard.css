@@ -72,7 +72,7 @@
   display: flex;
   flex-direction: column;
   border-top: 1px dashed #928f94;
-  padding: 40px 35px 30px;
+  padding: 40px 35px 35px;
 }
 
 .passenger-card__label {
@@ -91,9 +91,17 @@
   font-size: 1.5rem;
 }
 
-.passenger-card__select {
+/* .passenger-card__select {
   margin-bottom: 45px;
+} */
+
+.passenger-card__age-type{
+  margin-bottom: 45px;
+  color: #292929;
+font-size: 1.5rem;
+font-weight: 400;
 }
+
 
 .passenger-card__name {
   width: 100%;
@@ -104,6 +112,8 @@
   margin-bottom: 50px;
 }
 .passenger-card__group {
+  position: relative;
+  z-index: 1000;
   display: flex;
   gap: 35px;
   margin-bottom: 45px;
@@ -188,6 +198,14 @@
   background: #fff;
 }
 
+.passenger-card__checkbox:focus-visible {
+  outline: none ;
+}
+
+.passenger-card__checkbox:hover, .passenger-card__accessibility-text:hover {
+  cursor: pointer;
+}
+
 .passenger-card__accessibility {
   display: flex;
   align-items: center;
@@ -215,6 +233,7 @@
   width: calc(100% + 70px);
   height: 0;
   border-top: 1px dashed #928f94;
+  z-index: 999;
 }
 
 .passenger-card__document::after {
@@ -258,7 +277,11 @@
 }
 
 .passenger-card__input-document--number-birthCertificate {
-  width: 334px;
+  width: 175px;
+}
+
+.passenger-card__input-document--series-birthCertificate {
+  max-width: 175px;
 }
 
 .passenger-card__document-validation {
@@ -266,13 +289,11 @@
   display: flex;
   align-items: center;
   position: absolute;
-  width: calc(100% + 70px);
-  height: 120px;
+  width: 100%;
+  height: 110px;
   margin-left: -35px;
   background: #b2f6a1;
-
   bottom: 0;
-  transform: translateY(100%);
   z-index: 1;
 }
 
@@ -296,6 +317,17 @@
   font-weight: 700;
 }
 
-.passenger-card__next-btn--disabled {
-  visibility: hidden;
+.passenger-card__document-validation-text--valid {
+  color: #FFF;
+font-size: 1.125rem;
 }
+
+  .passenger-card__next-btn--disabled {
+    background: #928f94 !important;
+    cursor: auto !important;
+    color: rgba(16, 16, 16, 0.3) !important;
+  }
+
+  .passenger-card__next-btn--disabled:hover {
+    color: rgba(16, 16, 16, 0.3) !important;
+  }

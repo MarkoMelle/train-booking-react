@@ -5,20 +5,24 @@ import "./SearchResults.css";
 import {
   setFilter,
   fetchRoutes,
+  setCurrentPage,
 } from "../../../redux/features/searchResultsSlice";
 import { useSelector, useDispatch } from "react-redux";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 export default function SearchResults({ setIsSelectSeats, setCurrentTrip }) {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.searchResults);
-  const [currentPage, setCurrentPage] = useState(1);
+  // const [currentPage, setCurrentPage] = useState(1);
+  const { currentPage} = useSelector((state) => state.searchResults);
   const { totalCount, items, limit, sort } = useSelector(
     (state) => state.searchResults
   );
 
+ 
+
   const handlePageChange = (pageNumber) => {
-    setCurrentPage(pageNumber);
+    dispatch(setCurrentPage(pageNumber));
     const offset = pageNumber * limit - limit;
     dispatch(setFilter({ offset }));
     dispatch(fetchRoutes({ ...filters, offset }));

@@ -23,6 +23,7 @@ export const fetchRoutes = createAsyncThunk(
           minPrice: "",
           maxPrice: "",
           totalCount: "",
+          currentPage: "",
         };
         const data = await apiClient.searchRoutes(requestParams);
         if (data.error) {
@@ -53,6 +54,7 @@ export const fetchRoutes = createAsyncThunk(
           minPrice: "",
           maxPrice: "",
           totalCount: "",
+          currentPage: "",
         };
         const data = await apiClient.searchRoutes(requestParams);
         if (data.error) {
@@ -76,6 +78,7 @@ export const fetchRoutes = createAsyncThunk(
 );
 
 const searchResultsInitialState = {
+  currentPage: 1,
   fromCity: {
     id: "",
     name: "",
@@ -124,6 +127,12 @@ const searchResultsSlice = createSlice({
   name: "searchResults",
   initialState: searchResultsInitialState,
   reducers: {
+    setCurrentPage: (state, action) => {
+      return {
+        ...state,
+        currentPage: action.payload,
+      };
+    },
     setFilter: (state, action) => {
       return {
         ...state,
@@ -143,6 +152,13 @@ const searchResultsSlice = createSlice({
       };
     },
     resetFilters: () => searchResultsInitialState,
+    resetPagination: (state) => {
+      return {
+        ...state,
+        currentPage: 1,
+        offset: 0,
+      };
+    },
   },
 
   extraReducers: (builder) => {
@@ -160,8 +176,13 @@ const searchResultsSlice = createSlice({
   },
 });
 
-export const { setFilter, setRoutes, resetFilters } =
-  searchResultsSlice.actions;
+export const {
+  setCurrentPage,
+  setFilter,
+  setRoutes,
+  resetFilters,
+  resetPagination,
+} = searchResultsSlice.actions;
 export default searchResultsSlice.reducer;
 
 export const searchResultsPropTypes = {

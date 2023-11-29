@@ -18,7 +18,8 @@
   width: 20.25rem;
   border: none;
   position: absolute;
-  top: -6.875rem;
+  /* top: -6.875rem; */
+  top: 0;
 }
 
 .passenger-card .react-datepicker__triangle {
@@ -89,6 +90,13 @@
 .passenger-card .react-datepicker__day {
   color: #515151;
   font-weight: 400;
+}
+
+.react-datepicker__day:hover {
+  outline: 2px solid #ffa800;
+  background-color: rgba(255, 168, 0, 0.31);
+  color: #333333;
+  font-weight: 600;
 }
 
 .passenger-card .react-datepicker__day--weekend {

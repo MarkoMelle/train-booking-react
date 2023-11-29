@@ -1,31 +1,74 @@
 import DataPickerComponent from "../../../dataPicker/DataPickerComponent";
 import "./TicketsDate.css";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilter } from "../../../../redux/features/searchResultsSlice";
+import {
+  setFilter,
+  fetchRoutes,
+  resetPagination,
+} from "../../../../redux/features/searchResultsSlice";
 import { stringifyDate } from "../../../../utils";
+import { useCallback } from "react";
+import { debounce } from "../../../../utils";
 
 export default function TicketsDate() {
   const { dateStartArrival: departureString, dateEndArrival: returnString } =
     useSelector((state) => state.searchResults);
   const departureDate = departureString ? new Date(departureString) : "";
   const returnDate = returnString ? new Date(returnString) : "";
-
   const dispatch = useDispatch();
 
+  const debouncedFetchRoutes = useCallback(
+    debounce((updatedFilters) => {
+      dispatch(resetPagination());
+      dispatch(fetchRoutes({ ...updatedFilters, offset: 0 }));
+    }, 500),
+    []
+  );
+
   const setDepartureDate = (date) => {
-    dispatch(
-      setFilter({
-        dateStartArrival: stringifyDate(date),
-      })
-    );
+    let newDate;
+    if (date === null) {
+      newDate = "";
+      dispatch(
+        setFilter({
+          dateStartArrival: newDate,
+        })
+      );
+    } else {
+      newDate = stringifyDate(date);
+      dispatch(
+        setFilter({
+          dateStartArrival: newDate,
+        })
+      );
+    }
+    debouncedFetchRoutes({
+      ...filters,
+      dateStartArrival: newDate,
+    });
   };
 
   const setReturnDate = (date) => {
-    dispatch(
-      setFilter({
-        dateEndArrival: stringifyDate(date),
-      })
-    );
+    let newDate;
+    if (date === null) {
+      newDate = "";
+      dispatch(
+        setFilter({
+          dateEndArrival: newDate,
+        })
+      );
+    } else {
+      newDate = stringifyDate(date);
+      dispatch(
+        setFilter({
+          dateEndArrival: newDate,
+        })
+      );
+    }
+    debouncedFetchRoutes({
+      ...filters,
+      dateEndArrival: newDate,
+    });
   };
 
   return (

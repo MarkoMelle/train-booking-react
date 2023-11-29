@@ -73,6 +73,7 @@
 
 .seat-selector__info--departure {
   display: flex;
+  flex: 1;
 }
 
 .seat-selector__info-container {
@@ -132,7 +133,7 @@
 }
 
 .seat-selector__info__duration {
-  margin-left: 80px;
+  margin-left: auto;
   order: 1;
   color: #000;
   white-space: pre-line;

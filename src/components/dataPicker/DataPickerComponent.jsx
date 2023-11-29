@@ -5,6 +5,7 @@ import "react-datepicker/dist/react-datepicker.css";
 import ru from "date-fns/locale/ru";
 import { format } from "date-fns";
 import "./DataPickerComponent.css";
+import { de } from "date-fns/locale";
 registerLocale("ru", ru);
 
 const handleDateChange = (newDate, setDate) => {
@@ -70,6 +71,7 @@ const CustomHeader = ({
 };
 
 export default function DataPickerComponent({
+  direction = "departure",
   date,
   setDate,
   block,
@@ -90,7 +92,7 @@ export default function DataPickerComponent({
     if (
       hoveredDate &&
       departureDate &&
-      date >= departureDate &&
+      date >= departureDate - 86400000 &&
       date <= hoveredDate
     ) {
       return "highlighted-range";
@@ -121,7 +123,7 @@ export default function DataPickerComponent({
           },
         },
       ]}
-      dayClassName={(date) => dayClassNames(date, minDate)}
+      dayClassName={(date) => dayClassNames(date, direction === "departure" ? null : minDate)}
       onDayMouseEnter={onDayMouseEnter}
       onDayMouseLeave={onDayMouseLeave}
     />

@@ -35,8 +35,8 @@ const seatsSlice = createSlice({
   name: "seats",
   initialState: seatsInitialState,
   reducers: {
-    toggleSelectSeats(state) {
-      state.isSelectSeats = !state.isSelectSeats;
+    setSelectSeats(state, action) {
+      state.isSelectSeats = action.payload;
     },
     setCurrentRoute(state, action) {
       state.currentRoute = action.payload;
@@ -74,7 +74,7 @@ const seatsSlice = createSlice({
 });
 
 export const {
-  toggleSelectSeats,
+  setSelectSeats,
   setCurrentRoute,
   setCurrentRouteBack,
   setRouteId,

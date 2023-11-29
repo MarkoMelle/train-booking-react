@@ -46,7 +46,6 @@ export default function Scheme({
     return acc;
   }, []);
   const handleClick = (placeNumber, placePrice) => {
-    console.log(placeNumber, placePrice);
     const wagonId = wagon.coach._id;
     if (
       selectedSeats.some(

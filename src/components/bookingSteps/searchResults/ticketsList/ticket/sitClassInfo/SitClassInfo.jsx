@@ -13,7 +13,6 @@ import {
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
-
 export default function SitClassInfo({
   setIsSelectSeats,
   ticket,
@@ -21,8 +20,7 @@ export default function SitClassInfo({
 }) {
   const [activeIndex, setActiveIndex] = useState(null);
   const dispatch = useDispatch();
-  const { currentRoute , currentRouteBack } = useSelector((state) => state.seats);
-
+  const { dateStart, dateEnd } = useSelector((state) => state.searchResults);
   const handleSitClassClick = (index) => {
     if (activeIndex === index) {
       setActiveIndex(null);
@@ -78,15 +76,15 @@ export default function SitClassInfo({
   // };
 
   const handleSelectButtonClick = () => {
-          dispatch(setCurrentRoute(ticket.departure));
-          dispatch(setRouteId(ticket.departure._id));
-      if (Object.prototype.hasOwnProperty.call(ticket, "arrival")) {
-          dispatch(setCurrentRouteBack(ticket.arrival));
-          dispatch(setRouteIdBack(ticket.arrival._id));
-      } 
-      setIsSelectSeats();
-  }
-  
+    dispatch(setCurrentRoute(ticket.departure));
+    dispatch(setRouteId(ticket.departure._id));
+    if (Object.prototype.hasOwnProperty.call(ticket, "arrival")) {
+      dispatch(setCurrentRouteBack(ticket.arrival));
+      dispatch(setRouteIdBack(ticket.arrival._id));
+    }
+    setIsSelectSeats();
+  };
+
   return (
     <>
       <ul className="ticket__sit-classes">

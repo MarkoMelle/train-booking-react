@@ -1,9 +1,14 @@
 import "./TicketsOptions.css";
 import Switch from "@mui/base/Switch";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilter } from "../../../../redux/features/searchResultsSlice";
+import {
+  setFilter,
+  fetchRoutes,
+  resetPagination,
+} from "../../../../redux/features/searchResultsSlice";
 
 export default function TicketsOptions() {
+  const filters = useSelector((state) => state.searchResults);
   const {
     haveFirstClass,
     haveSecondClass,
@@ -12,6 +17,7 @@ export default function TicketsOptions() {
     haveWifi,
     isExpress,
   } = useSelector((state) => state.searchResults);
+  const { isSelectSeats } = useSelector((state) => state.seats);
 
   const dispatch = useDispatch();
 
@@ -21,6 +27,14 @@ export default function TicketsOptions() {
         [optionName]: !currentValue,
       })
     );
+    if (!isSelectSeats) {
+      const updatedFilters = {
+        ...filters,
+        [optionName]: !currentValue,
+      };
+      dispatch(resetPagination());
+      dispatch(fetchRoutes({ ...updatedFilters , offset: 0}));
+    }
   };
 
   return (

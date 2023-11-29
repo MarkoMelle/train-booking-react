@@ -1,20 +1,11 @@
-import * as React from "react";
+import { useState } from "react";
 import PropTypes from "prop-types";
 import { plusIcon, minusIcon } from "../iconsSvg/iconsSvg";
 import { Transition } from "react-transition-group";
 import "./PassengerDetails.css";
 
-export default function PassengerDetails({
-  passengers = {
-    adult: 2,
-    children: 1,
-  },
-  price = {
-    adult: 5840,
-    children: 1920,
-  },
-}) {
-  const [isOpened, setIsOpened] = React.useState(false);
+export default function PassengerDetails({ passengersInfo }) {
+  const [isOpened, setIsOpened] = useState(false);
 
   const duration = 250;
 
@@ -61,20 +52,22 @@ export default function PassengerDetails({
             <div className="passenger-details__container">
               <div className="passenger-details__content">
                 <span className="passenger-details__count">
-                  {passengers.adult === 1
-                    ? `${passengers.adult} Взрослый`
-                    : `${passengers.adult} Взрослых`}
+                  {passengersInfo.passengers.adult === 1
+                    ? `${passengersInfo.passengers.adult} Взрослый`
+                    : `${passengersInfo.passengers.adult} Взрослых`}
                 </span>
-                <span className="passenger-details__price">{price.adult}</span>
+                <span className="passenger-details__price">
+                  {passengersInfo.price.adult}
+                </span>
               </div>
               <div className="passenger-details__content">
                 <span className="passenger-details__count">
-                  {passengers.children === 1
-                    ? `${passengers.children} Ребенок`
-                    : `${passengers.children} Детей`}
+                  {passengersInfo.passengers.children === 1
+                    ? `${passengersInfo.passengers.children} Ребенок`
+                    : `${passengersInfo.passengers.children} Детей`}
                 </span>
                 <span className="passenger-details__price">
-                  {price.children}
+                  {passengersInfo.price.children}
                 </span>
               </div>
             </div>

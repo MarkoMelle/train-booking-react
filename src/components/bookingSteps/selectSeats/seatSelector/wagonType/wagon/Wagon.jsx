@@ -42,7 +42,9 @@ export default function Wagon({
 
           {wagon.coach.top_price !== 0 && (
             <p className="seat-selector__seat-group">
-              <span className="seat-selector__seat-text">Верхние</span>
+              <span className="seat-selector__seat-text">
+                {type === "fourth" ? "В проходе" : "Верхние"}
+                </span>
               <span className="seat-selector__seat-number">
               {wagon.coach.upper_available_seats}
             </span>
@@ -50,7 +52,9 @@ export default function Wagon({
           )}
           {wagon.coach.bottom_price !== 0 && (
             <p className="seat-selector__seat-group">
-              <span className="seat-selector__seat-text">Нижние</span>
+              <span className="seat-selector__seat-text">
+                {type === "fourth" ? "У окна" : "Нижние"}
+                </span>
               <span className="seat-selector__seat-number">
               {wagon.coach.lower_available_seats}
             </span>

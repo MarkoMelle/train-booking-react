@@ -1,7 +1,8 @@
+import { useState } from "react";
 import PropTypes from "prop-types";
 import "./SelectSeats.css";
 import SeatSelector from "./seatSelector/SeatSelector";
-import {  useSelector } from "react-redux";
+import { useSelector, useDispatch } from "react-redux";
 import {
   setSeatsInfo,
   setSeatsInfoBack,
@@ -9,6 +10,7 @@ import {
   setSelectedSeatsBack,
   resetRoute,
 } from "../../../redux/features/seatsSlice";
+import { initializePassengers } from "../../../redux/features/orderSlice";
 
 export default function SelectSeats({ setActiveStep }) {
   const {
@@ -23,6 +25,45 @@ export default function SelectSeats({ setActiveStep }) {
     selectedSeats,
     selectedSeatsBack,
   } = useSelector((state) => state.seats);
+  const [selectedSeatsLocal, setSelectedSeatsLocal] = useState([]);
+  const [selectedSeatsLocalBack, setSelectedSeatsLocalBack] = useState([]);
+  const [passengerCounts, setPassengerCounts] = useState({
+    adults: 0,
+    children: 0,
+    infants: 0,
+  });
+  const dispatch = useDispatch();
+
+  const handleSubmit = () => {
+    if ( selectedSeatsLocal.length === 0) {
+      console.log("Не выбраны места");
+      return;
+    }
+    if (
+      selectedSeatsLocal.length ===
+        passengerCounts.adults + passengerCounts.children &&
+      (!routeIdBack ||
+        selectedSeatsLocalBack.length ===
+          passengerCounts.adults + passengerCounts.children)
+    ) {
+      dispatch(
+        setSelectedSeats({
+          departure: selectedSeatsLocal,
+          arrival: selectedSeatsLocalBack,
+        })
+      );
+      setActiveStep(2);
+      const element = document.getElementById('progress-bar');
+      if (element) {
+        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+      console.log(selectedSeatsLocal);
+      dispatch(initializePassengers(selectedSeatsLocal));
+    } else {
+      console.log("Не все места выбраны");
+      return;
+    }
+  };
 
   return (
     <div className="select-seats">
@@ -38,6 +79,10 @@ export default function SelectSeats({ setActiveStep }) {
           setSeatsInfo,
           setSelectedSeats: setSelectedSeatsBack,
           resetRoute,
+          selectedSeatsLocal,
+          setSelectedSeatsLocal,
+          passengerCounts,
+          setPassengerCounts,
         }}
       />
       {routeIdBack && (
@@ -53,6 +98,10 @@ export default function SelectSeats({ setActiveStep }) {
             setSeatsInfo: setSeatsInfoBack,
             setSelectedSeats,
             resetRoute,
+            selectedSeatsLocal: selectedSeatsLocalBack,
+            setSelectedSeatsLocal: setSelectedSeatsLocalBack,
+            passengerCounts,
+            setPassengerCounts,
           }}
         />
       )}
@@ -60,7 +109,7 @@ export default function SelectSeats({ setActiveStep }) {
         className="select-seats__button
       primary-btn primary-btn--white
       "
-        onClick={() => setActiveStep(2)}
+        onClick={handleSubmit}
       >
         Далее
       </button>

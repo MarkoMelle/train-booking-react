@@ -81,12 +81,15 @@ export function classifySeats(wagon) {
         isUpperSeat ? upperAvailableSeats++ : lowerAvailableSeats++;
       }
     } else if (coach.class_type === "fourth") {
-      seatPrice = coach.bottom_price;
-      (seat.index <= 31 &&
-        ((seat.index + 1) % 4 === 0 || seat.index % 4 === 0)) ||
-      (seat.index >= 33 && seat.index % 2 === 1)
-        ? upperAvailableSeats++
-        : lowerAvailableSeats++;
+      let isLowerSeat;
+      if (seat.index <= 32) {
+        isLowerSeat = [1, 4, 5, 8, 9, 12, 13, 16, 17, 20, 21, 24, 25, 28, 29, 32].includes(seat.index);
+      } else {
+        isLowerSeat = seat.index !== 62 && seat.index % 2 === 0;
+      }
+
+      seatPrice = isLowerSeat ? coach.bottom_price : coach.top_price;
+      isLowerSeat ? upperAvailableSeats++ : lowerAvailableSeats++;
     }
 
     return { ...seat, price: seatPrice };
@@ -104,4 +107,48 @@ export function classifySeats(wagon) {
       }),
     },
   };
+}
+
+export function debounce(func, delay) {
+  let timer;
+  return function (...args) {
+    clearTimeout(timer);
+    timer = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+
+export function calculateTicketInfo(data) {
+  const ticketInfo = {
+    passengers: {
+      adult: 0,
+      children: 0,
+    },
+    price: {
+      adult: 0,
+      children: 0,
+    },
+    totalPrice: 0,
+  };
+
+  const processTickets = (tickets, countPassengers) => {
+    tickets.forEach((ticket) => {
+      const type = ticket.type === "adult" ? "adult" : "children";
+      if (countPassengers) {
+        ticketInfo.passengers[type]++;
+      }
+      ticketInfo.price[type] += ticket.resultPrice;
+    });
+  };
+
+  processTickets(data.departure, true);
+
+  if (data.arrival) {
+    processTickets(data.arrival, false);
+  }
+
+  ticketInfo.totalPrice = ticketInfo.price.adult + ticketInfo.price.children;
+
+  return ticketInfo;
 }

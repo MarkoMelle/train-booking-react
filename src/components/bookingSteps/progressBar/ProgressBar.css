@@ -16,6 +16,17 @@
   background: #3e3c41;
 }
 
+.progress-bar__item--completed:hover:not(.progress-bar__item--active) {
+  background: #5b595f;
+  cursor: pointer;
+}
+
+.progress-bar__item--completed:hover:not(.progress-bar__item--active) .progress-bar__item-line {
+  fill: #5b595f;
+}
+
+
+
 .progress-bar__item:first-child {
   padding-left: 14.375rem;
   flex-basis: 36.5625rem;

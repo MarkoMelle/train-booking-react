@@ -7,6 +7,7 @@ import "./App.css";
 import Footer from "./components/footer/Footer";
 import SwitchStyles from "./components/bookingSteps/ticketsDetails/switchStyles";
 import { store } from "./redux/store";
+import SnackbarComponent from "./components/snackbar/SnackbarComponent";
 
 export default function App() {
   console.log(import.meta.env.VITE_PUBLIC_URL);
@@ -14,6 +15,7 @@ export default function App() {
     <Provider store={store}>
       <Router basename={import.meta.env.VITE_PUBLIC_URL}>
         <SwitchStyles />
+        <SnackbarComponent />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/tickets" element={<TicketsPage />} />

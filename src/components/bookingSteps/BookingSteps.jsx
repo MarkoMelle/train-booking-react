@@ -8,7 +8,7 @@ import SelectSeats from "./selectSeats/SelectSeats";
 import SelectPassenger from "./selectPassenger/SelectPassenger";
 import Payment from "./payment/Payment";
 import Verification from "./verification/Verification";
-import {  toggleSelectSeats } from "../../redux/features/seatsSlice";
+import {  setSelectSeats } from "../../redux/features/seatsSlice";
 import { useDispatch, useSelector } from "react-redux";
 
 
@@ -19,12 +19,12 @@ export default function BookingSteps() {
   const isSelectSeats = useSelector((state) => state.seats.isSelectSeats);
 
   const setIsSelectSeats = () => {
-    dispatch(toggleSelectSeats());
+    dispatch(setSelectSeats(true));
   }
 
   return (
     <div className="booking-steps wrapper">
-      <ProgressBar activeStep={activeStep} />
+      <ProgressBar activeStep={activeStep} setActiveStep={setActiveStep} />
       <aside className="booking-steps__aside">
         <TicketsDetails activeStep={activeStep}/>
         <LastTickets />

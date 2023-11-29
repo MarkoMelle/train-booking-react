@@ -8,7 +8,7 @@ import "./SeatSelector.css";
 import { apiClient } from "../../../../api/apiClient";
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState, useMemo, useRef } from "react";
-import { toggleSelectSeats } from "../../../../redux/features/seatsSlice";
+import { setSelectSeats } from "../../../../redux/features/seatsSlice";
 import { addSeatsToWagons, classifySeats } from "../../../../utils";
 import { sitting, platzcart, coupe, lux } from "./wagonType/iconsSvg";
 
@@ -40,13 +40,14 @@ export default function SeatSelector({
   currentRoute,
   routeId,
   seatsInfo,
-  selectedSeats,
   setSeatsInfo,
   setSelectedSeats,
   resetRoute,
+  selectedSeatsLocal,
+  setSelectedSeatsLocal,
+  passengerCounts,
+  setPassengerCounts,
 }) {
-  const [passengerCounts, setPassengerCounts] = useState({ adults: 0, children: 0, infants: 0 });
-  const [selectedSeatsLocal, setSelectedSeatsLocal] = useState([]);
   const [totalPrice, setTotalPrice] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [filteredSeats, setFilteredSeats] = useState([]);
@@ -178,7 +179,7 @@ export default function SeatSelector({
 
 
   const changePrice = (price, type) => {
-    console.log(price, type);
+    
     if (typeof price !== "number") {
       console.error("Ошибка: price должно быть числом");
       return;
@@ -300,19 +301,10 @@ export default function SeatSelector({
     }
   };
   
-  
-
-  const handleSubmit = () => {
-    if (selectedSeatsLocal.length === passengerCounts.adults + passengerCounts.children) {
-      dispatch(setSelectedSeats(selectedSeatsLocal));
-    } else {
-      console.log("Не все места выбраны");
-    }
-  };
 
   const handleBack = () => {
     dispatch(resetRoute());
-    dispatch(toggleSelectSeats());
+    dispatch(setSelectSeats(false));
     window.scrollTo({
       top: 0,
       behavior: "smooth",
@@ -402,6 +394,7 @@ export default function SeatSelector({
             <SelectSeatComponent
               className="seat-selector__quantity-select"
               onChange={handleAdultsChange}
+              value={passengerCounts.adults}
               option={[
                 { label: "Взрослых — 0", value: 0 },
                 { label: "Взрослых — 1", value: 1 },
@@ -416,6 +409,7 @@ export default function SeatSelector({
             <SelectSeatComponent
               className="seat-selector__quantity-select"
               onChange={handleChildrenChange}
+              value={passengerCounts.children}
               option={[
                 { label: "Детских — 0", value: 0 },
                 { label: "Детских — 1", value: 1 },
@@ -431,6 +425,7 @@ export default function SeatSelector({
             <SelectSeatComponent
               className="seat-selector__quantity-select"
               onChange={handleInfantsChange}
+              value={passengerCounts.infants}
               option={[
                 { label: "Детских «без места» — 0", value: 0 },
                 { label: "Детских «без места» — 1", value: 1 },

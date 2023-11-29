@@ -1,7 +1,7 @@
 import PropTypes from "prop-types";
 
 function formatTime(time, inWords = false) {
-  const date = new Date(time);
+  const date = new Date(time * 1000);
   const hours = date.getHours();
   const minutes = date.getMinutes();
   if (inWords) {

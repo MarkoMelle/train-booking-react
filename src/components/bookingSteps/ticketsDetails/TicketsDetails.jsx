@@ -1,4 +1,5 @@
 import "./TicketsDetails.css";
+import { useSelector } from "react-redux";
 import TicketsDate from "./ticketsDate/TicketsDate";
 import TicketsOptions from "./ticketsOptions/TicketsOptions";
 import PriceSlider from "./priceSlider/PriceSlider";
@@ -7,8 +8,33 @@ import TicketDetails from "./ticketDetails/TicketDetails";
 import PassengerDetails from "./passengerDetails/PassengerDetails";
 import TotalPrice from "./totalPrice/TotalPrice";
 import PropTypes from "prop-types";
+import { useState, useEffect } from "react";
+import { calculateTicketInfo } from "../../../utils";
 
-export default function TicketsDetails({ activeStep, currentTrip }) {
+export default function TicketsDetails({ activeStep }) {
+  const { currentRoute, currentRouteBack } = useSelector(
+    (state) => state.seats
+  );
+  const { selectedSeats } = useSelector((state) => state.seats);
+  const [passengersInfo, setPassengersInfo] = useState({
+    passengers: {
+      adult: 0,
+      children: 0,
+    },
+    price: {
+      adult: 0,
+      children: 0,
+    },
+    totalPrice: 0,
+  });
+
+    
+    useEffect(() => {
+      if (activeStep >= 2) {
+        setPassengersInfo(calculateTicketInfo(selectedSeats));
+      }
+    }, [selectedSeats, activeStep]);
+  
   return (
     <div className="tickets-details">
       {activeStep === 1 && (
@@ -20,16 +46,20 @@ export default function TicketsDetails({ activeStep, currentTrip }) {
           <TimeSliders direction="arrival" />
         </>
       )}
-      {/* {(activeStep === 2 || activeStep === 3) && (
+      {(activeStep === 2 || activeStep === 3) && (
         <>
-          {console.log(currentTrip)}
           <h2 className="tickets-details__title">Детали поездки</h2>
-          <TicketDetails direction="departure" currentTrip={currentTrip} />
-          <TicketDetails direction="arrival" currentTrip={currentTrip} />
-          <PassengerDetails />
-          <TotalPrice />
+          <TicketDetails direction="departure" currentRoute={currentRoute} />
+          {currentRouteBack && (
+            <TicketDetails
+              direction="arrival"
+              currentRoute={currentRouteBack}
+            />
+          )}
+          <PassengerDetails passengersInfo={passengersInfo} />
+          <TotalPrice passengersInfo={passengersInfo} />
         </>
-      )} */}
+      )}
     </div>
   );
 }

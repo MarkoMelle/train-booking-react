@@ -1,32 +1,25 @@
 import "./TicketDetails.css";
-import { useSelector, useDispatch } from "react-redux";
-
 import { plusIcon, minusIcon } from "../iconsSvg/iconsSvg";
 import TimeInfo from "../../timeInfo/TimeInfo";
-import { formatDate } from "../../../../utils";
-
+// import { formatDate } from "../../../../utils";
 import * as React from "react";
-import PropTypes from "prop-types";
 import { Transition } from "react-transition-group";
 
-const today = new Date();
-const weekFromToday = new Date();
-weekFromToday.setDate(today.getDate() + 7);
+export const formatDate = (timestamp) => {
+  const date = new Date(timestamp * 1000);
+  return date.toLocaleDateString("ru-RU", {
+    day: "2-digit",
+    month: "2-digit",
+    year: "numeric",
+  });
+};
 
-const defaultDepartureDate = today;
-const defaultReturnDate = weekFromToday;
 
-export default function TicketDetails({ direction, currentTrip }) {
-  const state = useSelector((state) => state.test.currentTrip);
-  // eslint-disable-next-line no-unused-vars
-  const dispatch = useDispatch();
+
+export default function TicketDetails({ direction, currentRoute }) {
   const [isOpened, setIsOpened] = React.useState(false);
 
-  const departureDate = state.departureDate || defaultDepartureDate;
-  const returnDate = state.returnDate || defaultReturnDate;
-
   const duration = 250;
-
   const defaultStyle = {
     transition: `max-height ${duration}ms ease-in-out`,
     maxHeight: 0,
@@ -66,8 +59,8 @@ export default function TicketDetails({ direction, currentTrip }) {
         </h3>
         <span className="ticket-details__date">
           {direction === "departure"
-            ? formatDate(departureDate)
-            : formatDate(returnDate)}
+            ? formatDate(currentRoute.from.datetime)
+            : formatDate(currentRoute.to.datetime)}
         </span>
         <button
           className="transition__button ticket-details__button"
@@ -79,50 +72,40 @@ export default function TicketDetails({ direction, currentTrip }) {
       </div>
       <Transition in={isOpened} timeout={duration}>
         {(state) => (
-          <div
-            style={{
-              ...defaultStyle,
-              ...transitionStyles[state],
-            }}
-          >
-            <p className="ticket-details__train-number">
-              <span className="ticket-details__train-number-text">
-                № Поезда
+          <div style={{ ...defaultStyle, ...transitionStyles[state] }}>
+          <p className="ticket-details__train-number">
+            <span className="ticket-details__train-number-text">№ Поезда</span>
+            <span className="ticket-details__train-number-number">
+              {currentRoute.train.name}
+            </span>
+          </p>
+          <div className="ticket-details__direction">
+            <span className="ticket-details__direction-text">Название</span>
+            <p className="ticket-details__direction-city">
+              <span className="ticket-details__direction-city-text">
+                {currentRoute.from.city.name}
               </span>
-              <span className="ticket-details__train-number-number">
-                {currentTrip.trainNumber}
+              <span className="ticket-details__direction-city-text">
+                {currentRoute.to.city.name}
               </span>
             </p>
-            <div className="ticket-details__direction">
-              <span className="ticket-details__direction-text">Название</span>
-              <p className="ticket-details__direction-city">
-                <span className="ticket-details__direction-city-text">
-                  {currentTrip.direction[0]}
-                </span>
-                <span className="ticket-details__direction-city-text">
-                  {currentTrip.direction[1]}
-                </span>
-              </p>
-            </div>
-            <TimeInfo
-              time={currentTrip.departureTime}
-              station={currentTrip.departureStation}
-              city={currentTrip.direction}
-              modifier={direction === "departure" ? "departure" : "arrival"}
-              date={{
-                left: formatDate(departureDate),
-                right: formatDate(returnDate),
-              }}
-              block="ticket-details-time-info"
-            />
           </div>
+          <TimeInfo
+            time={[ currentRoute.from.datetime, currentRoute.to.datetime ]}
+            station={[ currentRoute.from.railway_station_name, currentRoute.to.railway_station_name ]}
+            city={[ currentRoute.from.city.name, currentRoute.to.city.name ]}
+            modifier={direction === "departure" ? "departure" : "arrival"}
+            duration={currentRoute.duration}
+            date={{
+              left: formatDate(currentRoute.from.datetime),
+              right: formatDate(currentRoute.to.datetime),
+            }}
+            block="ticket-details-time-info"
+          />
+        </div>
         )}
       </Transition>
     </div>
   );
 }
 
-TicketDetails.propTypes = {
-  direction: PropTypes.string.isRequired,
-  currentTrip: PropTypes.object.isRequired,
-};
