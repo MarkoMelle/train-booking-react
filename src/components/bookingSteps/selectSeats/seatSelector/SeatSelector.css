@@ -2,6 +2,12 @@
   margin-bottom: 30px;
 }
 
+.seat-selector--loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .seat-selector:last-of-type {
   margin-bottom: 100px;
 }
@@ -31,7 +37,6 @@
 .seat-selector__btn {
   padding: 15px 30px;
   border-radius: 5px;
-  border: 1px solid #292929;
   background: transparent;
   color: #292929;
   font-size: 1.5rem;

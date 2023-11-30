@@ -12,6 +12,7 @@ import { useEffect, useState, useMemo, useRef } from "react";
 import { setSelectSeats } from "../../../../redux/features/seatsSlice";
 import { addSeatsToWagons, classifySeats } from "../../../../utils";
 import { sitting, platzcart, coupe, lux } from "./wagonType/iconsSvg";
+import Loader from "../../../loader/Loader";
 
 const usePrevious = (value) => {
   const ref = useRef();
@@ -332,154 +333,162 @@ export default function SeatSelector({
     });
   };
 
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
-
   return (
-    <div className="booking-steps__container seat-selector">
-      <div
-        className={`seat-selector__header seat-selector__header--${direction}`}
-      >
-        <img
-          className={`seat-selector__arrow seat-selector__arrow--${direction}`}
-          src={arrowBig}
-          alt="arrow"
-        />
-        <button
-          className="seat-selector__btn
+    <div
+      className={`booking-steps__container seat-selector ${
+        isLoading ? "seat-selector--loading" : ""
+      }`}
+    >
+      {isLoading ? (
+        <Loader isTicketsLoading={true} />
+      ) : (
+        <>
+          <div
+            className={`seat-selector__header seat-selector__header--${direction}`}
+          >
+            <img
+              className={`seat-selector__arrow seat-selector__arrow--${direction}`}
+              src={arrowBig}
+              alt="arrow"
+            />
+            <button
+              className="seat-selector__btn
         secondary-btn
         "
-          onClick={handleBack}
-        >
-          Выбрать другой поезд
-        </button>
-      </div>
-      <div className="seat-selector__info">
-        <div className="seat-selector__info-train">
-          <div className="info-train__number">
-            {currentRoute.train.name.includes("undefined")
-              ? currentRoute.train.name.replace("undefined", "Поезд")
-              : currentRoute.train.name}
-          </div>
-          <span className="info-train__direction">
-            {currentRoute.from.city.name}
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              width="14"
-              height="8"
-              viewBox="0 0 14 8"
-              fill="none"
+              onClick={handleBack}
             >
-              <path
-                d="M13.3536 4.35355C13.5488 4.15829 13.5488 3.84171 13.3536 3.64645L10.1716 0.464466C9.97631 0.269204 9.65973 0.269204 9.46447 0.464466C9.2692 0.659728 9.2692 0.976311 9.46447 1.17157L12.2929 4L9.46447 6.82843C9.2692 7.02369 9.2692 7.34027 9.46447 7.53553C9.65973 7.7308 9.97631 7.7308 10.1716 7.53553L13.3536 4.35355ZM0 4.5H13V3.5H0V4.5Z"
-                fill="currentColor"
-              />
-            </svg>
-          </span>
-          <span className="info-train__direction">
-            {currentRoute.to.city.name}
-          </span>
-        </div>
-        <TimeInfo
-          modifier={direction}
-          duration={currentRoute.duration}
-          time={
-            direction === "departure"
-              ? [currentRoute.from.datetime, currentRoute.to.datetime]
-              : [currentRoute.to.datetime, currentRoute.from.datetime]
-          }
-          city={
-            direction === "departure"
-              ? [currentRoute.from.city.name, currentRoute.to.city.name]
-              : [currentRoute.to.city.name, currentRoute.from.city.name]
-          }
-          station={
-            direction === "departure"
-              ? [
-                  currentRoute.from.railway_station_name,
-                  currentRoute.to.railway_station_name,
-                ]
-              : [
-                  currentRoute.to.railway_station_name,
-                  currentRoute.from.railway_station_name,
-                ]
-          }
-          block="seat-selector__info"
-        />
-      </div>
-      <div className="seat-selector__quantity">
-        <h3 className="seat-selector__quantity-title">Количество билетов</h3>
-        <div className="seat-selector__quantity-container">
-          <div className="seat-selector__quantity-select-group">
-            <SelectSeatComponent
-              className="seat-selector__quantity-select"
-              onChange={handleAdultsChange}
-              value={passengerCounts.adults}
-              option={[
-                { label: "Взрослых — 0", value: 0 },
-                { label: "Взрослых — 1", value: 1 },
-                { label: "Взрослых — 2", value: 2 },
-              ]}
-            />
-            <p className="seat-selector__quantity-text">
-              Можно добавить еще 3 пассажира
-            </p>
+              Выбрать другой поезд
+            </button>
           </div>
-          <div className="seat-selector__quantity-select-group">
-            <SelectSeatComponent
-              className="seat-selector__quantity-select"
-              onChange={handleChildrenChange}
-              value={passengerCounts.children}
-              option={[
-                { label: "Детских — 0", value: 0 },
-                { label: "Детских — 1", value: 1 },
-                { label: "Детских — 2", value: 2 },
-              ]}
+          <div className="seat-selector__info">
+            <div className="seat-selector__info-train">
+              <div className="info-train__number">
+                {currentRoute.train.name.includes("undefined")
+                  ? currentRoute.train.name.replace("undefined", "Поезд")
+                  : currentRoute.train.name}
+              </div>
+              <span className="info-train__direction">
+                {currentRoute.from.city.name}
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  width="14"
+                  height="8"
+                  viewBox="0 0 14 8"
+                  fill="none"
+                >
+                  <path
+                    d="M13.3536 4.35355C13.5488 4.15829 13.5488 3.84171 13.3536 3.64645L10.1716 0.464466C9.97631 0.269204 9.65973 0.269204 9.46447 0.464466C9.2692 0.659728 9.2692 0.976311 9.46447 1.17157L12.2929 4L9.46447 6.82843C9.2692 7.02369 9.2692 7.34027 9.46447 7.53553C9.65973 7.7308 9.97631 7.7308 10.1716 7.53553L13.3536 4.35355ZM0 4.5H13V3.5H0V4.5Z"
+                    fill="currentColor"
+                  />
+                </svg>
+              </span>
+              <span className="info-train__direction">
+                {currentRoute.to.city.name}
+              </span>
+            </div>
+            <TimeInfo
+              modifier={direction}
+              duration={currentRoute.duration}
+              time={
+                direction === "departure"
+                  ? [currentRoute.from.datetime, currentRoute.to.datetime]
+                  : [currentRoute.to.datetime, currentRoute.from.datetime]
+              }
+              city={
+                direction === "departure"
+                  ? [currentRoute.from.city.name, currentRoute.to.city.name]
+                  : [currentRoute.to.city.name, currentRoute.from.city.name]
+              }
+              station={
+                direction === "departure"
+                  ? [
+                      currentRoute.from.railway_station_name,
+                      currentRoute.to.railway_station_name,
+                    ]
+                  : [
+                      currentRoute.to.railway_station_name,
+                      currentRoute.from.railway_station_name,
+                    ]
+              }
+              block="seat-selector__info"
             />
-            <p className="seat-selector__quantity-text">
-              Можно добавить еще 3 детей до 10 лет.Свое место в вагоне, как у
-              взрослых, но дешевле в среднем на 50-65%
-            </p>
           </div>
-          <div className="seat-selector__quantity-select-group">
-            <SelectSeatComponent
-              className="seat-selector__quantity-select"
-              onChange={handleInfantsChange}
-              value={passengerCounts.infants}
-              option={[
-                { label: "Детских «без места» — 0", value: 0 },
-                { label: "Детских «без места» — 1", value: 1 },
-                { label: "Детских «без места» — 2", value: 2 },
-              ]}
-            />
-            <p className="seat-selector__quantity-text">
-              Можно добавить еще 3 младенца до 2 лет. Без места. Скидка 100%
-            </p>
+          <div className="seat-selector__quantity">
+            <h3 className="seat-selector__quantity-title">
+              Количество билетов
+            </h3>
+            <div className="seat-selector__quantity-container">
+              <div className="seat-selector__quantity-select-group">
+                <SelectSeatComponent
+                  className="seat-selector__quantity-select"
+                  onChange={handleAdultsChange}
+                  value={passengerCounts.adults}
+                  option={[
+                    { label: "Взрослых — 0", value: 0 },
+                    { label: "Взрослых — 1", value: 1 },
+                    { label: "Взрослых — 2", value: 2 },
+                  ]}
+                />
+                <p className="seat-selector__quantity-text">
+                  Можно добавить еще 3 пассажира
+                </p>
+              </div>
+              <div className="seat-selector__quantity-select-group">
+                <SelectSeatComponent
+                  className="seat-selector__quantity-select"
+                  onChange={handleChildrenChange}
+                  value={passengerCounts.children}
+                  option={[
+                    { label: "Детских — 0", value: 0 },
+                    { label: "Детских — 1", value: 1 },
+                    { label: "Детских — 2", value: 2 },
+                  ]}
+                />
+                <p className="seat-selector__quantity-text">
+                  Можно добавить еще 3 детей до 10 лет.Свое место в вагоне, как
+                  у взрослых, но дешевле в среднем на 50-65%
+                </p>
+              </div>
+              <div className="seat-selector__quantity-select-group">
+                <SelectSeatComponent
+                  className="seat-selector__quantity-select"
+                  onChange={handleInfantsChange}
+                  value={passengerCounts.infants}
+                  option={[
+                    { label: "Детских «без места» — 0", value: 0 },
+                    { label: "Детских «без места» — 1", value: 1 },
+                    { label: "Детских «без места» — 2", value: 2 },
+                  ]}
+                />
+                <p className="seat-selector__quantity-text">
+                  Можно добавить еще 3 младенца до 2 лет. Без места. Скидка 100%
+                </p>
+              </div>
+            </div>
           </div>
-        </div>
-      </div>
-      <WagonTypes
-        currentTrip={currentRoute}
-        seatsInfo={filteredSeats}
-        seatsFilter={seatsFilter}
-        handleSelectSeat={handleSelectSeat}
-        handleDeselectSeat={handleDeselectSeat}
-        selectedSeats={selectedSeatsLocal}
-        services={services}
-        updateService={updateService}
-        changePrice={changePrice}
-        activeType={activeType}
-        setActiveType={setActiveType}
-        activeWagonId={activeWagonId}
-        setActiveWagonId={setActiveWagonId}
-        filteredWagonTypes={filteredWagonTypes}
-      />
-      <div className="seat-selector__sum">
-        <span className="seat-selector__sum-text">Итого:</span>
-        <span className="seat-selector__sum-count">{totalPrice}</span>
-        <span className="seat-selector__sum-currency">{currency}</span>
-      </div>
+          <WagonTypes
+            currentTrip={currentRoute}
+            seatsInfo={filteredSeats}
+            seatsFilter={seatsFilter}
+            handleSelectSeat={handleSelectSeat}
+            handleDeselectSeat={handleDeselectSeat}
+            selectedSeats={selectedSeatsLocal}
+            services={services}
+            updateService={updateService}
+            changePrice={changePrice}
+            activeType={activeType}
+            setActiveType={setActiveType}
+            activeWagonId={activeWagonId}
+            setActiveWagonId={setActiveWagonId}
+            filteredWagonTypes={filteredWagonTypes}
+          />
+          <div className="seat-selector__sum">
+            <span className="seat-selector__sum-text">Итого:</span>
+            <span className="seat-selector__sum-count">{totalPrice}</span>
+            <span className="seat-selector__sum-currency">{currency}</span>
+          </div>
+        </>
+      )}
     </div>
   );
 }

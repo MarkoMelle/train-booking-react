@@ -15,15 +15,16 @@ export default function PriceSlider() {
   const { minPrice, maxPrice, priceFrom, priceTo } = useSelector(
     (state) => state.searchResults
   );
+  console.log(minPrice, maxPrice, priceFrom, priceTo);
   const [value, setValue] = useState([
     priceFrom || minPrice,
     priceTo || maxPrice,
   ]);
-  console.log(minPrice, maxPrice, priceFrom, priceTo);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
-    setValue([minPrice, maxPrice]);
+    setValue([priceFrom || minPrice, priceTo || maxPrice]);
   }, [minPrice, maxPrice]);
 
   const debouncedFetchRoutes = useCallback(
@@ -89,7 +90,7 @@ export default function PriceSlider() {
           },
           {
             value: marks[1].value / value[1] === 1 ? 0 : marks[1].value,
-            label: marks[1].value / value[1] < 1.2 ? `` : marks[1].label,
+            label: marks[1].value / value[1] < 1.15 ? `` : marks[1].label,
           },
         ]}
       />

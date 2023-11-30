@@ -1,7 +1,43 @@
-/* eslint-disable no-unused-vars */
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 import PropTypes from "prop-types";
 import { apiClient } from "../../api/apiClient";
+
+const excludedFields = new Set([
+  "minPrice",
+  "maxPrice",
+  "totalCount",
+  "currentPage",
+  "isLoading",
+]);
+
+const cleanFilters = (filters) => {
+  return Object.fromEntries(
+    Object.entries(filters).filter(
+      ([key, value]) =>
+        value !== "" &&
+        value !== undefined &&
+        value !== null &&
+        !excludedFields.has(key)
+    )
+  );
+};
+
+const prepareRequestParams = (newFilters, isRouteChanged) => {
+  let requestParams = {
+    ...newFilters,
+    minPrice: "",
+    maxPrice: "",
+    totalCount: "",
+    currentPage: "",
+  };
+
+  if (isRouteChanged) {
+    requestParams.priceFrom = "";
+    requestParams.priceTo = "";
+  }
+
+  return cleanFilters(requestParams);
+};
 
 export const fetchRoutes = createAsyncThunk(
   "searchResults/fetchRoutes",
@@ -13,24 +49,16 @@ export const fetchRoutes = createAsyncThunk(
         newFilters.toCity.id !== searchResults.lastFilters.toCityId ||
         newFilters.dateStart !== searchResults.lastFilters.dateStart ||
         newFilters.dateEnd !== searchResults.lastFilters.dateEnd;
+      console.log("isRouteChanged", isRouteChanged);
+      const requestParams = prepareRequestParams(newFilters, isRouteChanged);
+
+      const data = await apiClient.searchRoutes(requestParams);
+      if (data.error) {
+        console.error("Error from server:", data.error);
+        return;
+      }
 
       if (isRouteChanged) {
-        dispatch(setFilter({ priceFrom: "", priceTo: "" }));
-        const requestParams = {
-          ...newFilters,
-          priceFrom: "",
-          priceTo: "",
-          minPrice: "",
-          maxPrice: "",
-          totalCount: "",
-          currentPage: "",
-        };
-        const data = await apiClient.searchRoutes(requestParams);
-        if (data.error) {
-          console.error("Error from server:", data.error);
-          return;
-        }
-
         let minPrice = Infinity;
         let maxPrice = -Infinity;
         data.items.forEach((item) => {
@@ -43,28 +71,14 @@ export const fetchRoutes = createAsyncThunk(
           setFilter({
             minPrice,
             maxPrice,
+            priceFrom: minPrice,
+            priceTo: maxPrice,
           })
         );
-        dispatch(
-          setRoutes({ totalCount: data.total_count, items: data.items })
-        );
-      } else {
-        const requestParams = {
-          ...newFilters,
-          minPrice: "",
-          maxPrice: "",
-          totalCount: "",
-          currentPage: "",
-        };
-        const data = await apiClient.searchRoutes(requestParams);
-        if (data.error) {
-          console.error("Error from server:", data.error);
-          return;
-        }
-        dispatch(
-          setRoutes({ totalCount: data.total_count, items: data.items })
-        );
       }
+
+      dispatch(setRoutes({ totalCount: data.total_count, items: data.items }));
+
       return {
         fromCityId: newFilters.fromCity.id,
         toCityId: newFilters.toCity.id,
@@ -78,6 +92,7 @@ export const fetchRoutes = createAsyncThunk(
 );
 
 const searchResultsInitialState = {
+  isLoading: false,
   currentPage: 1,
   fromCity: {
     id: "",
@@ -163,8 +178,11 @@ const searchResultsSlice = createSlice({
 
   extraReducers: (builder) => {
     builder
-      .addCase(fetchRoutes.pending, (state) => {})
+      .addCase(fetchRoutes.pending, (state) => {
+        state.isLoading = true;
+      })
       .addCase(fetchRoutes.fulfilled, (state, action) => {
+        state.isLoading = false;
         state.lastFilters = {
           fromCityId: action.meta.arg.fromCity.id,
           toCityId: action.meta.arg.toCity.id,
@@ -172,7 +190,10 @@ const searchResultsSlice = createSlice({
           dateEnd: action.meta.arg.dateEnd,
         };
       })
-      .addCase(fetchRoutes.rejected, (state, action) => {});
+      .addCase(fetchRoutes.rejected, (state, action) => {
+        state.isLoading = false;
+        console.error("Error from server:", action.error);
+      });
   },
 });
 
@@ -186,6 +207,7 @@ export const {
 export default searchResultsSlice.reducer;
 
 export const searchResultsPropTypes = {
+  isLoading: PropTypes.bool,
   fromCity: PropTypes.object,
   toCity: PropTypes.object,
   dateStart: PropTypes.string,
