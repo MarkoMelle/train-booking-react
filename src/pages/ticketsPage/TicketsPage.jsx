@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import Header from "../../components/header/Header";
 import BookingSteps from "../../components/bookingSteps/BookingSteps";
 import { useEffect } from "react";

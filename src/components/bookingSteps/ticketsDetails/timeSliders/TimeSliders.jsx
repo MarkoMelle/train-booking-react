@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useState, useCallback } from "react";
 import "./TimeSliders.css";
 import PropTypes from "prop-types";

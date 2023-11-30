@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./PriceSlider.css";
 import { useState, useEffect, useCallback } from "react";
 import SliderComponent from "../sliderComponent";

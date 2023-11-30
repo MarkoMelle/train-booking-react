@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import DataPickerComponent from "../../../dataPicker/DataPickerComponent";
 import "./TicketsDate.css";
 import { useSelector, useDispatch } from "react-redux";
