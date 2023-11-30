@@ -5,11 +5,15 @@ import DataPickerComponent from "../../dataPicker/DataPickerComponent";
 import swapIcon from "../../../assets/icons/swap-icon.svg";
 import { useNavigate } from "react-router-dom";
 import InputWithSuggestions from "./inputWithSuggestions/InputWithSuggestions";
-import {fetchRoutes, setFilter ,resetPagination } from "../../../redux/features/searchResultsSlice";
+import {
+  fetchRoutes,
+  setFilter,
+  resetPagination,
+} from "../../../redux/features/searchResultsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import { stringifyDate } from "../../../utils";
 import { showSnackBar } from "../../../redux/features/notificationsSlice";
-import {setSelectSeats} from "../../../redux/features/seatsSlice";
+import { setSelectSeats } from "../../../redux/features/seatsSlice";
 
 export default function SelectionForm({ modifier }) {
   const block = "selection-form";
@@ -92,15 +96,14 @@ export default function SelectionForm({ modifier }) {
       dispatch(showSnackBar({ message: "Выберите город прибытия" }));
       return;
     }
-    // if (!dateStart) {
-    //   dispatch(showSnackBar({ message: "Выберите дату отправления" }));
-    //   return;
-    // }
+    if (!dateStart) {
+      dispatch(showSnackBar({ message: "Выберите дату отправления" }));
+      return;
+    }
     navigate("/tickets");
     dispatch(resetPagination());
     dispatch(fetchRoutes({ ...filters, offset: 0 }));
   };
-  
 
   const handleSwapButtonClick = () => {
     const temp = { ...fromCity };

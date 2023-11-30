@@ -95,13 +95,12 @@
   margin-bottom: 45px;
 } */
 
-.passenger-card__age-type{
+.passenger-card__age-type {
   margin-bottom: 45px;
   color: #292929;
-font-size: 1.5rem;
-font-weight: 400;
+  font-size: 1.5rem;
+  font-weight: 400;
 }
-
 
 .passenger-card__name {
   width: 100%;
@@ -199,10 +198,11 @@ font-weight: 400;
 }
 
 .passenger-card__checkbox:focus-visible {
-  outline: none ;
+  outline: none;
 }
 
-.passenger-card__checkbox:hover, .passenger-card__accessibility-text:hover {
+.passenger-card__checkbox:hover,
+.passenger-card__accessibility-text:hover {
   cursor: pointer;
 }
 
@@ -318,16 +318,16 @@ font-weight: 400;
 }
 
 .passenger-card__document-validation-text--valid {
-  color: #FFF;
-font-size: 1.125rem;
+  color: #fff;
+  font-size: 1.125rem;
 }
 
-  .passenger-card__next-btn--disabled {
-    background: #928f94 !important;
-    cursor: auto !important;
-    color: rgba(16, 16, 16, 0.3) !important;
-  }
+.passenger-card__next-btn--disabled {
+  background: #928f94 !important;
+  cursor: auto !important;
+  color: rgba(16, 16, 16, 0.3) !important;
+}
 
-  .passenger-card__next-btn--disabled:hover {
-    color: rgba(16, 16, 16, 0.3) !important;
-  }
+.passenger-card__next-btn--disabled:hover {
+  color: rgba(16, 16, 16, 0.3) !important;
+}

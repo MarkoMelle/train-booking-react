@@ -1,10 +1,9 @@
 import Passenger from "./passenger/Passenger";
-import { passengers as passengersList } from "../../../../tempoDate";
 import PropTypes from "prop-types";
 
 export default function PassengerList({
-  passengers = passengersList,
-  totalPrice = "7760",
+  passengers,
+  totalPrice,
   handlePassengerChange,
 }) {
   return (
@@ -27,7 +26,10 @@ export default function PassengerList({
               {totalPrice}
             </span>
           </p>
-          <button className="secondary-btn passenger-list__btn verification__btn" onClick={handlePassengerChange}>
+          <button
+            className="secondary-btn passenger-list__btn verification__btn"
+            onClick={handlePassengerChange}
+          >
             Изменить
           </button>
         </div>
@@ -39,4 +41,5 @@ export default function PassengerList({
 PassengerList.propTypes = {
   passengers: PropTypes.arrayOf(PropTypes.object).isRequired,
   totalPrice: PropTypes.string.isRequired,
+  handlePassengerChange: PropTypes.func.isRequired,
 };

@@ -2,11 +2,12 @@ import "./PriceSlider.css";
 import { useState, useEffect, useCallback } from "react";
 import SliderComponent from "../sliderComponent";
 import { useSelector, useDispatch } from "react-redux";
-import { setFilter
-  , fetchRoutes
-  , resetPagination
+import {
+  setFilter,
+  fetchRoutes,
+  resetPagination,
 } from "../../../../redux/features/searchResultsSlice";
-import {debounce} from "../../../../utils";
+import { debounce } from "../../../../utils";
 
 export default function PriceSlider() {
   const filters = useSelector((state) => state.searchResults);
@@ -23,13 +24,12 @@ export default function PriceSlider() {
     setValue([minPrice, maxPrice]);
   }, [minPrice, maxPrice]);
 
-
   const debouncedFetchRoutes = useCallback(
     debounce((updatedFilters) => {
       dispatch(resetPagination());
       dispatch(fetchRoutes({ ...updatedFilters, offset: 0 }));
     }, 500),
-    [] 
+    []
   );
 
   const handleChange = (event, newValue) => {

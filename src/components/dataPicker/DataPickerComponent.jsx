@@ -5,7 +5,6 @@ import "react-datepicker/dist/react-datepicker.css";
 import ru from "date-fns/locale/ru";
 import { format } from "date-fns";
 import "./DataPickerComponent.css";
-import { de } from "date-fns/locale";
 registerLocale("ru", ru);
 
 const handleDateChange = (newDate, setDate) => {
@@ -123,7 +122,9 @@ export default function DataPickerComponent({
           },
         },
       ]}
-      dayClassName={(date) => dayClassNames(date, direction === "departure" ? null : minDate)}
+      dayClassName={(date) =>
+        dayClassNames(date, direction === "departure" ? null : minDate)
+      }
       onDayMouseEnter={onDayMouseEnter}
       onDayMouseLeave={onDayMouseLeave}
     />
@@ -145,38 +146,5 @@ DataPickerComponent.propTypes = {
   block: PropTypes.string.isRequired,
   minDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
   maxDate: PropTypes.oneOfType([PropTypes.string, PropTypes.instanceOf(Date)]),
+  direction: PropTypes.string,
 };
-
-// import React, { useState, useEffect } from 'react';
-// import DatePicker from 'react-datepicker';
-// import 'react-datepicker/dist/react-datepicker.css';
-
-// const YourComponent = () => {
-//   const [startDate, setStartDate] = useState(new Date());
-//   const [highlightedDates, setHighlightedDates] = useState([]);
-
-//   useEffect(() => {
-//     const newHighlightedDates = [/* массив дат */];
-//     setHighlightedDates(newHighlightedDates);
-//   }, [/* зависимости */]);
-
-//   const isHighlighted = (date) => {
-//     return highlightedDates.some(highlightedDate =>
-//       date.getDate() === highlightedDate.getDate() &&
-//       date.getMonth() === highlightedDate.getMonth() &&
-//       date.getFullYear() === highlightedDate.getFullYear()
-//     );
-//   };
-
-//   return (
-//     <DatePicker
-//       selected={startDate}
-//       onChange={(date) => setStartDate(date)}
-//       dayClassName={(date) =>
-//         isHighlighted(date) ? 'highlighted-range' : undefined
-//       }
-//     />
-//   );
-// };
-
-// export default YourComponent;

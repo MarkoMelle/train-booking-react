@@ -36,9 +36,8 @@ export default function SelectSeats({ setActiveStep }) {
   });
   const dispatch = useDispatch();
 
-
   const handleSubmit = () => {
-    if ( selectedSeatsLocal.length === 0) {
+    if (selectedSeatsLocal.length === 0) {
       console.log("Не выбраны места");
       return;
     }
@@ -56,16 +55,20 @@ export default function SelectSeats({ setActiveStep }) {
         })
       );
       setActiveStep(2);
-      const element = document.getElementById('progress-bar');
+      const element = document.getElementById("progress-bar");
       if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        element.scrollIntoView({ behavior: "smooth", block: "start" });
       }
       console.log(selectedSeatsLocal);
       dispatch(initializePassengers(selectedSeatsLocal));
-      dispatch(setPassengersInfo(calculateTicketInfo({
-        departure: selectedSeatsLocal,
-        arrival: selectedSeatsLocalBack,
-      })));
+      dispatch(
+        setPassengersInfo(
+          calculateTicketInfo({
+            departure: selectedSeatsLocal,
+            arrival: selectedSeatsLocalBack,
+          })
+        )
+      );
     } else {
       console.log("Не все места выбраны");
       return;

@@ -1,4 +1,4 @@
-import { plusCircleIcon, minusCircleIcon, deleteIcon } from "../iconSvg";
+import { plusCircleIcon, minusCircleIcon } from "../iconSvg";
 import PropTypes from "prop-types";
 
 export default function Header({ isOpened, handleToggleOpen, number }) {
@@ -28,4 +28,5 @@ export default function Header({ isOpened, handleToggleOpen, number }) {
 Header.propTypes = {
   isOpened: PropTypes.bool.isRequired,
   handleToggleOpen: PropTypes.func.isRequired,
+  number: PropTypes.number.isRequired,
 };

@@ -79,6 +79,5 @@ export default function PassengerDetails({ passengersInfo }) {
 }
 
 PassengerDetails.propTypes = {
-  passengers: PropTypes.object.isRequired,
-  price: PropTypes.object.isRequired,
+  passengersInfo: PropTypes.object.isRequired,
 };

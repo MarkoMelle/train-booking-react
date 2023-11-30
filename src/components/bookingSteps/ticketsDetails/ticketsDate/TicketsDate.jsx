@@ -11,6 +11,7 @@ import { useCallback } from "react";
 import { debounce } from "../../../../utils";
 
 export default function TicketsDate() {
+  const filters = useSelector((state) => state.searchResults);
   const { dateStartArrival: departureString, dateEndArrival: returnString } =
     useSelector((state) => state.searchResults);
   const departureDate = departureString ? new Date(departureString) : "";

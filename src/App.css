@@ -90,3 +90,11 @@
 .error-highlight {
   border: 1px solid red;
 }
+
+.page404__text {
+  padding: 50px 20px;
+  text-align: center;
+  color: #000;
+  font-size: 72px;
+  font-weight: 700;
+}

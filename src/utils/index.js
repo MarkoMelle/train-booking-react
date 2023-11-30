@@ -6,7 +6,8 @@ export const handleScroll = (id) => {
   });
 };
 
-export const formatDate = (date) => {
+export const formatDate = (timestamp) => {
+  const date = new Date(timestamp * 1000);
   return date.toLocaleDateString("ru-RU", {
     day: "2-digit",
     month: "2-digit",
@@ -83,7 +84,9 @@ export function classifySeats(wagon) {
     } else if (coach.class_type === "fourth") {
       let isLowerSeat;
       if (seat.index <= 32) {
-        isLowerSeat = [1, 4, 5, 8, 9, 12, 13, 16, 17, 20, 21, 24, 25, 28, 29, 32].includes(seat.index);
+        isLowerSeat = [
+          1, 4, 5, 8, 9, 12, 13, 16, 17, 20, 21, 24, 25, 28, 29, 32,
+        ].includes(seat.index);
       } else {
         isLowerSeat = seat.index !== 62 && seat.index % 2 === 0;
       }
@@ -153,25 +156,26 @@ export function calculateTicketInfo(data) {
   return ticketInfo;
 }
 
-
 export function formatPassengerData(data) {
   const fullName = `${data.lastName} ${data.firstName} ${data.patronymic}`;
 
-  const birthDateFormatted = new Date(data.birthDate).toLocaleDateString('ru-RU');
+  const birthDateFormatted = new Date(data.birthDate).toLocaleDateString(
+    "ru-RU"
+  );
 
-  const gender = data.gender === 'male' ? 'мужской' : 'женский';
+  const gender = data.gender === "male" ? "мужской" : "женский";
 
-  const documentType = data.documentType === 'passport' ? 'Паспорт' : 'Свидетельство о рождении';
+  const documentType =
+    data.documentType === "passport" ? "Паспорт" : "Свидетельство о рождении";
 
   let documentNumber;
-  if (data.documentType === 'passport') {
+  if (data.documentType === "passport") {
     documentNumber = `${data.passportSeries} ${data.passportNumber}`;
   } else {
     documentNumber = data.birthCertificateNumber;
   }
 
-
-  const ageCategory = data.ageType === 'adult' ? 'Взрослый' : 'Детский';
+  const ageCategory = data.ageType === "adult" ? "Взрослый" : "Детский";
 
   return {
     ageCategory,

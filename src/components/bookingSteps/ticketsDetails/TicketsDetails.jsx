@@ -27,13 +27,12 @@ export default function TicketsDetails({ activeStep }) {
   //   totalPrice: 0,
   // });
 
-    
   //   useEffect(() => {
   //     if (activeStep >= 2) {
   //       setPassengersInfo(calculateTicketInfo(selectedSeats));
   //     }
   //   }, [selectedSeats, activeStep]);
-  
+
   return (
     <div className="tickets-details">
       {activeStep === 1 && (
@@ -45,7 +44,7 @@ export default function TicketsDetails({ activeStep }) {
           <TimeSliders direction="arrival" />
         </>
       )}
-      {(activeStep >= 2 && currentRoute) && (
+      {activeStep >= 2 && currentRoute && (
         <>
           <h2 className="tickets-details__title">Детали поездки</h2>
           <TicketDetails direction="departure" currentRoute={currentRoute} />

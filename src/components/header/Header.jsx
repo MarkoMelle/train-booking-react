@@ -18,7 +18,7 @@ export default function Header() {
       modifier = "success";
       break;
     default:
-      modifier = "";
+      modifier = "404";
   }
 
   return (
@@ -38,7 +38,9 @@ export default function Header() {
             <span className="header__title--bold">путешествие!</span>
           </h2>
         ) : null}
-        {modifier !== "success" ? <SelectionForm modifier={modifier} /> : null}
+        {(modifier === "home" || modifier === "tickets") && (
+          <SelectionForm modifier={modifier} />
+        )}
       </div>
     </header>
   );

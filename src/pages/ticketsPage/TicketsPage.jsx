@@ -7,7 +7,6 @@ import { resetOrder } from "../../redux/features/orderSlice";
 import { resetFilters } from "../../redux/features/searchResultsSlice";
 import { resetSeats } from "../../redux/features/seatsSlice";
 
-
 export default function TicketsPage() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -16,12 +15,10 @@ export default function TicketsPage() {
     dispatch(resetOrder());
     dispatch(resetFilters());
     dispatch(resetSeats());
-  }
-
+  };
 
   useEffect(() => {
     return () => {
-      console.log("unmounting");
       resetState();
     };
   }, [navigate, dispatch]);

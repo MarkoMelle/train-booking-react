@@ -17,8 +17,7 @@ export default function ProgressBar({ activeStep, setActiveStep }) {
             if (index + 1 < activeStep) {
               setActiveStep(index + 1);
             }
-          }
-          }
+          }}
         >
           <span className="progress-bar__item-number">{index + 1}</span>
           <span className="progress-bar__item-text">{step}</span>

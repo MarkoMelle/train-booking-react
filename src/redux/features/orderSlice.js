@@ -11,8 +11,7 @@ const initialState = {
   },
   passengers: [],
   orderPassengers: [],
-}
-
+};
 
 export const orderSlice = createSlice({
   name: "order",
@@ -82,7 +81,11 @@ export const orderSlice = createSlice({
   },
 });
 
-export const { updateUserInfo, updatePassenger, initializePassengers, resetOrder } =
-  orderSlice.actions;
+export const {
+  updateUserInfo,
+  updatePassenger,
+  initializePassengers,
+  resetOrder,
+} = orderSlice.actions;
 
 export default orderSlice.reducer;

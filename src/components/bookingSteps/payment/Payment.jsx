@@ -54,12 +54,17 @@ export default function Payment({ setActiveStep }) {
     if (inputElement && inputElement.classList.contains("error-highlight")) {
       inputElement.classList.remove("error-highlight");
     }
-    
+
     if (/^[a-zA-Z\s]*$/.test(value)) {
       const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
       setValue(capitalizedValue);
     } else {
-      dispatch(showSnackBar({ message: "Используйте только латинские буквы", type: "info" }));
+      dispatch(
+        showSnackBar({
+          message: "Используйте только латинские буквы",
+          type: "info",
+        })
+      );
     }
   };
 
@@ -68,7 +73,7 @@ export default function Payment({ setActiveStep }) {
     if (inputElement && inputElement.classList.contains("error-highlight")) {
       inputElement.classList.remove("error-highlight");
     }
-      setPhone(e.target.value);
+    setPhone(e.target.value);
   };
 
   const handleEmailChange = (e, inputId) => {
@@ -83,7 +88,6 @@ export default function Payment({ setActiveStep }) {
     }
   };
 
-
   const handlePaymentTypeChange = (e) => {
     setPaymentType(e.target.value);
   };
@@ -95,10 +99,10 @@ export default function Payment({ setActiveStep }) {
       dispatch(showSnackBar({ message: formErrors[0].message, type: "error" }));
       const errorField = document.getElementById(formErrors[0].id);
       if (errorField) {
-        errorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
-        errorField.classList.add("error-highlight"); 
-      return;
-    }
+        errorField.scrollIntoView({ behavior: "smooth", block: "center" });
+        errorField.classList.add("error-highlight");
+        return;
+      }
     }
     dispatch(
       updateUserInfo({
@@ -111,10 +115,10 @@ export default function Payment({ setActiveStep }) {
       })
     );
     setActiveStep(4);
-    const element = document.getElementById('progress-bar');
-      if (element) {
-        element.scrollIntoView({ behavior: 'smooth', block: 'start' });
-      }
+    const element = document.getElementById("progress-bar");
+    if (element) {
+      element.scrollIntoView({ behavior: "smooth", block: "start" });
+    }
   };
 
   return (
@@ -149,7 +153,9 @@ export default function Payment({ setActiveStep }) {
                 type="text"
                 placeholder="Фамилия"
                 value={lastName}
-                onChange={(e) => handleInputChange(e.target.value, setLastName, "last-name")}
+                onChange={(e) =>
+                  handleInputChange(e.target.value, setLastName, "last-name")
+                }
               />
             </label>
             <label className="payment__label payment__label--name">

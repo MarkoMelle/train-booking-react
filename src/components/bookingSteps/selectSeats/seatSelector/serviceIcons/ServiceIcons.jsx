@@ -1,13 +1,11 @@
 import PropTypes from "prop-types";
-import { climate, wifi, linen, drinks } from "./icons";
+import { climate, wifi, linen } from "./icons";
 
 export default function ServiceIcons({
   wagon,
   services,
   updateService,
-  seatsFilter,
   changePrice,
-  // setSeatsFilter,
 }) {
   return (
     <ul className="seat-selector__options-list">
@@ -27,23 +25,36 @@ export default function ServiceIcons({
             : "disabled"
         }`}
         onClick={
-          wagon.have_wifi ? () =>  {
-            changePrice(wagon.wifi_price, !services.wifi ? 'add' : 'remove')
-            updateService("wifi", !services.wifi)} : null
+          wagon.have_wifi
+            ? () => {
+                changePrice(
+                  wagon.wifi_price,
+                  !services.wifi ? "add" : "remove"
+                );
+                updateService("wifi", !services.wifi);
+              }
+            : null
         }
       >
         {wifi}
       </li>
       <li
         className={`seat-selector__options-item service-icon service-icon--${
-          wagon.is_linens_included ? "selected--disabled" : services.linens ? "selected" : "not-selected"
+          wagon.is_linens_included
+            ? "selected--disabled"
+            : services.linens
+            ? "selected"
+            : "not-selected"
         }`}
         onClick={
           !wagon.is_linens_included
-            ? () => 
-            {
-              changePrice(wagon.linens_price, !services.linens ? 'add' : 'remove')
-            updateService("linens", !services.linens)}
+            ? () => {
+                changePrice(
+                  wagon.linens_price,
+                  !services.linens ? "add" : "remove"
+                );
+                updateService("linens", !services.linens);
+              }
             : null
         }
       >
@@ -53,3 +64,10 @@ export default function ServiceIcons({
     </ul>
   );
 }
+
+ServiceIcons.propTypes = {
+  wagon: PropTypes.object.isRequired,
+  services: PropTypes.object.isRequired,
+  updateService: PropTypes.func.isRequired,
+  changePrice: PropTypes.func.isRequired,
+};

@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useRef } from "react";
 import SelectComponent from "../../selectComponent/SelectComponent";
 
 import PropTypes from "prop-types";
@@ -13,7 +13,6 @@ export default function DocumentForm({
   setPassportForeignNumber,
   setBirthCertificateNumber,
   age,
-  errors,
   setErrors,
   documentType,
   setDocumentType,
@@ -38,7 +37,6 @@ export default function DocumentForm({
     setDocumentType(value);
     resetData();
   };
-
 
   const getDocumentOptions = () => {
     if (age === "adult") {
@@ -151,7 +149,6 @@ export default function DocumentForm({
           </label>
         </>
       )}
-      
     </div>
   );
 }
@@ -166,6 +163,11 @@ DocumentForm.propTypes = {
   setPassportForeignNumber: PropTypes.func.isRequired,
   setBirthCertificateNumber: PropTypes.func.isRequired,
   age: PropTypes.string.isRequired,
-  errors: PropTypes.object.isRequired,
   setErrors: PropTypes.func.isRequired,
+  documentType: PropTypes.string.isRequired,
+  setDocumentType: PropTypes.func.isRequired,
+  handleSeriesChange: PropTypes.func.isRequired,
+  handleNumberChange: PropTypes.func.isRequired,
+  handleSeriesBlur: PropTypes.func.isRequired,
+  handleNumberOnBlur: PropTypes.func.isRequired,
 };

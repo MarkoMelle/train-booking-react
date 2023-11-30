@@ -11,6 +11,7 @@ import { errorIcon, validIcon } from "./iconSvg";
 import { useSelector, useDispatch } from "react-redux";
 import { updatePassenger } from "../../../../redux/features/orderSlice";
 import { stringifyDate } from "../../../../utils";
+import PropTypes from "prop-types";
 
 function findFirstNonEmptyField(obj) {
   for (let key in obj) {
@@ -53,142 +54,149 @@ export default function PassengerCard({ seat, number, onFormValidityChange }) {
   const [validationAttempted, setValidationAttempted] = useState(false);
   const [errorMessage, setErrorMessage] = useState("");
   const dispatch = useDispatch();
-    useEffect(() => {
-      if (errorMessage) {
-        const timer = setTimeout(() => {
-          setErrorMessage("");
-          setValidationAttempted(false);
-        }, 3000);
-        return () => clearTimeout(timer);
-      }
-    }, [errorMessage, errors]);
-
-    const validateSeries = (value) => {
-      if (documentType === "passport") {
-        return value.length === 4 && /^[0-9]{4}$/.test(value)
-          ? ""
-          : "Неверная серия";
-      } else if (documentType === "birthCertificate") {
-        return /^M{0,3}(D?C{0,3}|C[DM])(L?X{0,3}|X[LC])(V?I{0,3}|I[VX])\b-?[А-Я]{2}$/i.test(
-          value
-        )
-          ? ""
-          : "Неверная серия";
-      }
-    };
-  
-    const validateNumber = (value) => {
-      // if (isSeriesValidated || documentType === "foreignPassport") {
-      //   setValidationAttempted(true);
-      // }
-      switch (documentType) {
-        case "passport":
-          return value.length === 6 && /^[0-9]{6}$/.test(value)
-            ? ""
-            : "Неверный номер";
-        case "foreignPassport":
-          return /^[0-9]{2}\s[0-9]{7}$/.test(value)
-            ? ""
-            : "Неверный номер загранпаспорта";
-        case "birthCertificate":
-          return value.length === 6 && /^[0-9]{6}$/.test(value)
-            ? ""
-            : "Неверный номер свидетельства о рождении";
-        default:
-          return false;
-      }
-    };
-  
-    const handleSeriesChange = (e) => {
-      const value = e.target.value;
-      switch (documentType) {
-        case "passport":
-          if (value.length <= 4) {
-            setPassportSeries(value);
-          }
-          if (value.length === 4) {
-            const seriesError = validateSeries(value);
-            setErrors({ ...errors, series: seriesError });
-          }
-          break;
-        case "birthCertificate":
-          if (value.length <= 6) {
-            setPassportSeries(value);
-          }
-          if (value.length <= 6) {
-            const seriesError = validateSeries(value);
-            setErrors({ ...errors, series: seriesError });
-          }
-          break;
-        default:
-          break;
-      }
-      console.log(errors);
-    };
-  
-    const handleSeriesBlur = (e) => {
-      const value = e.target.value;
-      const seriesError = validateSeries(value);
-      setErrors({ ...errors, series: seriesError });
-    };
-  
-    const handleNumberOnBlur = (e) => {
-      const value = e.target.value;
-      const numberError = validateNumber(value);
-      setErrors({ ...errors, number: numberError });
-    };
-  
-    const handleNumberChange = (e) => {
-      let value = e.target.value;
-      switch (documentType) {
-        case "passport":
-          if (value.length <= 6) {
-            setPassportNumber(value);
-          }
-          break;
-        case "foreignPassport":
-          value = value.replace(/[^\d]/g, "").replace(/(\d{2})(\d)/, "$1 $2");
-          if (value.length <= 10) {
-            setPassportForeignNumber(value);
-          }
-          break;
-        case "birthCertificate":
-          if (value.length <= 6) {
-            setBirthCertificateNumber(value);
-          }
-          break;
-        default:
-          break;
-      }
-      const numberError = validateNumber(value);
-      setErrors({ ...errors, number: numberError });
-    };
-
-    const validateForm = () => {
-      let newErrors = {
-        firstName: !firstName.trim() ? "Введите имя" : "",
-        lastName: !lastName.trim() ? "Введите фамилию" : "",
-        patronymic: !patronymic.trim() ? "Введите отчество" : "",
-        birthDate: !birthDate ? "Введите дату рождения" : "",
-        gender: !gender.trim() ? "Выберите пол" : "",
-        series: (documentType === "passport" || documentType === "birthCertificate") ? validateSeries(passportSeries) : "",
-        number: (documentType === "passport" || documentType === "birthCertificate") ? validateNumber(passportNumber) : (documentType === "foreignPassport" ? validateNumber(passportForeignNumber) : "")
-      };
-    
-      setErrors(newErrors);
-    
-      const firstError = findFirstNonEmptyField(newErrors);
-      if (firstError) {
-        setErrorMessage(firstError);
-        onFormValidityChange(false);
-        return false;
-      } else {
+  useEffect(() => {
+    if (errorMessage) {
+      const timer = setTimeout(() => {
         setErrorMessage("");
-        onFormValidityChange(true);
-        return true;
-      }
+        setValidationAttempted(false);
+      }, 3000);
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage, errors]);
+
+  const validateSeries = (value) => {
+    if (documentType === "passport") {
+      return value.length === 4 && /^[0-9]{4}$/.test(value)
+        ? ""
+        : "Неверная серия";
+    } else if (documentType === "birthCertificate") {
+      return /^M{0,3}(D?C{0,3}|C[DM])(L?X{0,3}|X[LC])(V?I{0,3}|I[VX])\b-?[А-Я]{2}$/i.test(
+        value
+      )
+        ? ""
+        : "Неверная серия";
+    }
+  };
+
+  const validateNumber = (value) => {
+    // if (isSeriesValidated || documentType === "foreignPassport") {
+    //   setValidationAttempted(true);
+    // }
+    switch (documentType) {
+      case "passport":
+        return value.length === 6 && /^[0-9]{6}$/.test(value)
+          ? ""
+          : "Неверный номер";
+      case "foreignPassport":
+        return /^[0-9]{2}\s[0-9]{7}$/.test(value)
+          ? ""
+          : "Неверный номер загранпаспорта";
+      case "birthCertificate":
+        return value.length === 6 && /^[0-9]{6}$/.test(value)
+          ? ""
+          : "Неверный номер свидетельства о рождении";
+      default:
+        return false;
+    }
+  };
+
+  const handleSeriesChange = (e) => {
+    const value = e.target.value;
+    switch (documentType) {
+      case "passport":
+        if (value.length <= 4) {
+          setPassportSeries(value);
+        }
+        if (value.length === 4) {
+          const seriesError = validateSeries(value);
+          setErrors({ ...errors, series: seriesError });
+        }
+        break;
+      case "birthCertificate":
+        if (value.length <= 6) {
+          setPassportSeries(value);
+        }
+        if (value.length <= 6) {
+          const seriesError = validateSeries(value);
+          setErrors({ ...errors, series: seriesError });
+        }
+        break;
+      default:
+        break;
+    }
+    console.log(errors);
+  };
+
+  const handleSeriesBlur = (e) => {
+    const value = e.target.value;
+    const seriesError = validateSeries(value);
+    setErrors({ ...errors, series: seriesError });
+  };
+
+  const handleNumberOnBlur = (e) => {
+    const value = e.target.value;
+    const numberError = validateNumber(value);
+    setErrors({ ...errors, number: numberError });
+  };
+
+  const handleNumberChange = (e) => {
+    let value = e.target.value;
+    switch (documentType) {
+      case "passport":
+        if (value.length <= 6) {
+          setPassportNumber(value);
+        }
+        break;
+      case "foreignPassport":
+        value = value.replace(/[^\d]/g, "").replace(/(\d{2})(\d)/, "$1 $2");
+        if (value.length <= 10) {
+          setPassportForeignNumber(value);
+        }
+        break;
+      case "birthCertificate":
+        if (value.length <= 6) {
+          setBirthCertificateNumber(value);
+        }
+        break;
+      default:
+        break;
+    }
+    const numberError = validateNumber(value);
+    setErrors({ ...errors, number: numberError });
+  };
+
+  const validateForm = () => {
+    let newErrors = {
+      firstName: !firstName.trim() ? "Введите имя" : "",
+      lastName: !lastName.trim() ? "Введите фамилию" : "",
+      patronymic: !patronymic.trim() ? "Введите отчество" : "",
+      birthDate: !birthDate ? "Введите дату рождения" : "",
+      gender: !gender.trim() ? "Выберите пол" : "",
+      series:
+        documentType === "passport" || documentType === "birthCertificate"
+          ? validateSeries(passportSeries)
+          : "",
+      number:
+        documentType === "passport" || documentType === "birthCertificate"
+          ? validateNumber(passportNumber)
+          : documentType === "foreignPassport"
+          ? validateNumber(passportForeignNumber)
+          : "",
     };
-    
+
+    setErrors(newErrors);
+
+    const firstError = findFirstNonEmptyField(newErrors);
+    if (firstError) {
+      setErrorMessage(firstError);
+      onFormValidityChange(false);
+      return false;
+    } else {
+      setErrorMessage("");
+      onFormValidityChange(true);
+      return true;
+    }
+  };
 
   useEffect(() => {
     const updatedData = {
@@ -212,7 +220,7 @@ export default function PassengerCard({ seat, number, onFormValidityChange }) {
         setErrorMessage(firstError);
       }
     } else {
-      setErrorMessage(""); 
+      setErrorMessage("");
     }
   }, [
     firstName,
@@ -431,3 +439,9 @@ export default function PassengerCard({ seat, number, onFormValidityChange }) {
     </form>
   );
 }
+
+PassengerCard.propTypes = {
+  seat: PropTypes.object.isRequired,
+  number: PropTypes.number.isRequired,
+  onFormValidityChange: PropTypes.func.isRequired,
+};

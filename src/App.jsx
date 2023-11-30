@@ -1,9 +1,10 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Provider } from "react-redux";
+import "./App.css";
 import HomePage from "./pages/homePage";
 import TicketsPage from "./pages/ticketsPage/TicketsPage";
 import SuccessPage from "./pages/successPage";
-import "./App.css";
+import Page404 from "./pages/page404";
 import Footer from "./components/footer/Footer";
 import SwitchStyles from "./components/bookingSteps/ticketsDetails/switchStyles";
 import { store } from "./redux/store";
@@ -20,6 +21,8 @@ export default function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/tickets" element={<TicketsPage />} />
           <Route path="/success" element={<SuccessPage />} />
+          <Route path="/404" element={<Page404 />} />
+          <Route path="*" element={<Page404 />} />
         </Routes>
         <Footer />
       </Router>

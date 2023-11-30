@@ -1,4 +1,3 @@
-import { order as orderInfo } from "../../tempoDate";
 import "./OrderSuccess.css";
 import ticketsOnEmail from "../../assets/images/tickets-on-email.svg";
 import tickets from "../../assets/images/tickets.svg";
@@ -22,7 +21,7 @@ const starSvg = (
   </svg>
 );
 
-export default function OrderSuccess({ order = orderInfo }) {
+export default function OrderSuccess({ totalPrice }) {
   const [rating, setRating] = useState(0);
   return (
     <main className="order-success wrapper">
@@ -31,12 +30,12 @@ export default function OrderSuccess({ order = orderInfo }) {
         <div className="order-success__card">
           <div className="order-success__order-info">
             <span className="order-success__order-info--bold">
-              №Заказа {order.number}
+              №Заказа 285АА
             </span>
             <p className="order-success__order-info--text">
               сумма
               <span className="order-success__order-info--sum">
-                {order.totalPrice}
+                {totalPrice}
               </span>
             </p>
           </div>
@@ -121,5 +120,5 @@ export default function OrderSuccess({ order = orderInfo }) {
 }
 
 OrderSuccess.propTypes = {
-  order: PropTypes.object.isRequired,
+  totalPrice: PropTypes.string.isRequired,
 };

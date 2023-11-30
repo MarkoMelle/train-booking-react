@@ -12,7 +12,7 @@ import { useSelector, useDispatch } from "react-redux";
 export default function SearchResults({ handleSeatSelection, setCurrentTrip }) {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.searchResults);
-  const { currentPage} = useSelector((state) => state.searchResults);
+  const { currentPage } = useSelector((state) => state.searchResults);
   const { totalCount, items, limit, sort } = useSelector(
     (state) => state.searchResults
   );

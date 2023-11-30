@@ -9,9 +9,9 @@ import {
   setCurrentRouteBack,
   setRouteId,
   setRouteIdBack,
-  setCurrentTrip, 
+  setCurrentTrip,
 } from "../../../../../../redux/features/seatsSlice";
-import { useSelector, useDispatch } from "react-redux";
+import { useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
 export default function SitClassInfo({
@@ -86,7 +86,6 @@ export default function SitClassInfo({
     }
     handleSeatSelection(true);
   };
-
 
   return (
     <>
@@ -164,7 +163,10 @@ export default function SitClassInfo({
           Выбрать места
         </button>
       ) : (
-        <button className="secondary-btn ticket__select-button" onClick={handleTripChange}>
+        <button
+          className="secondary-btn ticket__select-button"
+          onClick={handleTripChange}
+        >
           Изменить
         </button>
       )}

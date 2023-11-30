@@ -46,7 +46,7 @@ export default function TimeInfo({
           {city[0]}
         </span>
         <span className={`${block}__station ${block}__station--${modifier}`}>
-          {station[0] == 'Адлер' ? 'Вокзал Адлер' : `${station[0]} вокзал`}
+          {station[0] == "Адлер" ? "Вокзал Адлер" : `${station[0]} вокзал`}
         </span>
       </div>
       <span className={`${block}__duration ${block}__duration--${modifier}`}>
@@ -54,7 +54,9 @@ export default function TimeInfo({
           ? formatTime(duration, true)
           : formatTime(duration)}
       </span>
-      <div className={`${block}-container ${block}-container--right ${block}-container--${modifier}`}>
+      <div
+        className={`${block}-container ${block}-container--right ${block}-container--${modifier}`}
+      >
         <span className={`${block}__time ${block}__time--${modifier}`}>
           {formatTime(time[1])}
         </span>
@@ -67,7 +69,7 @@ export default function TimeInfo({
           {city[1]}
         </span>
         <span className={`${block}__station ${block}__station--${modifier}`}>
-        {station[1] == 'Адлер' ? 'Вокзал Адлер' : `${station[1]} вокзал`}
+          {station[1] == "Адлер" ? "Вокзал Адлер" : `${station[1]} вокзал`}
         </span>
       </div>
     </div>

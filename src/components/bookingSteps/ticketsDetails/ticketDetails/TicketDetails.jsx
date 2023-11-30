@@ -1,20 +1,10 @@
 import "./TicketDetails.css";
 import { plusIcon, minusIcon } from "../iconsSvg/iconsSvg";
 import TimeInfo from "../../timeInfo/TimeInfo";
-// import { formatDate } from "../../../../utils";
+import { formatDate } from "../../../../utils";
+import PropTypes from "prop-types";
 import * as React from "react";
 import { Transition } from "react-transition-group";
-
-export const formatDate = (timestamp) => {
-  const date = new Date(timestamp * 1000);
-  return date.toLocaleDateString("ru-RU", {
-    day: "2-digit",
-    month: "2-digit",
-    year: "numeric",
-  });
-};
-
-
 
 export default function TicketDetails({ direction, currentRoute }) {
   const [isOpened, setIsOpened] = React.useState(false);
@@ -73,39 +63,67 @@ export default function TicketDetails({ direction, currentRoute }) {
       <Transition in={isOpened} timeout={duration}>
         {(state) => (
           <div style={{ ...defaultStyle, ...transitionStyles[state] }}>
-          <p className="ticket-details__train-number">
-            <span className="ticket-details__train-number-text">№ Поезда</span>
-            <span className="ticket-details__train-number-number">
-              {currentRoute.train.name}
-            </span>
-          </p>
-          <div className="ticket-details__direction">
-            <span className="ticket-details__direction-text">Название</span>
-            <p className="ticket-details__direction-city">
-              <span className="ticket-details__direction-city-text">
-                {currentRoute.from.city.name}
+            <p className="ticket-details__train-number">
+              <span className="ticket-details__train-number-text">
+                № Поезда
               </span>
-              <span className="ticket-details__direction-city-text">
-                {currentRoute.to.city.name}
+              <span className="ticket-details__train-number-number">
+                {currentRoute.train.name}
               </span>
             </p>
+            <div className="ticket-details__direction">
+              <span className="ticket-details__direction-text">Название</span>
+              <p className="ticket-details__direction-city">
+                <span className="ticket-details__direction-city-text">
+                  {currentRoute.from.city.name}
+                </span>
+                <span className="ticket-details__direction-city-text">
+                  {currentRoute.to.city.name}
+                </span>
+              </p>
+            </div>
+            <TimeInfo
+              time={[currentRoute.from.datetime, currentRoute.to.datetime]}
+              station={[
+                currentRoute.from.railway_station_name,
+                currentRoute.to.railway_station_name,
+              ]}
+              city={[currentRoute.from.city.name, currentRoute.to.city.name]}
+              modifier={direction === "departure" ? "departure" : "arrival"}
+              duration={currentRoute.duration}
+              date={{
+                left: formatDate(currentRoute.from.datetime),
+                right: formatDate(currentRoute.to.datetime),
+              }}
+              block="ticket-details-time-info"
+            />
           </div>
-          <TimeInfo
-            time={[ currentRoute.from.datetime, currentRoute.to.datetime ]}
-            station={[ currentRoute.from.railway_station_name, currentRoute.to.railway_station_name ]}
-            city={[ currentRoute.from.city.name, currentRoute.to.city.name ]}
-            modifier={direction === "departure" ? "departure" : "arrival"}
-            duration={currentRoute.duration}
-            date={{
-              left: formatDate(currentRoute.from.datetime),
-              right: formatDate(currentRoute.to.datetime),
-            }}
-            block="ticket-details-time-info"
-          />
-        </div>
         )}
       </Transition>
     </div>
   );
 }
 
+TicketDetails.propTypes = {
+  direction: PropTypes.string.isRequired,
+  currentRoute: PropTypes.shape({
+    from: PropTypes.shape({
+      city: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      }).isRequired,
+      datetime: PropTypes.string.isRequired,
+      railway_station_name: PropTypes.string.isRequired,
+    }).isRequired,
+    to: PropTypes.shape({
+      city: PropTypes.shape({
+        name: PropTypes.string.isRequired,
+      }).isRequired,
+      datetime: PropTypes.string.isRequired,
+      railway_station_name: PropTypes.string.isRequired,
+    }).isRequired,
+    train: PropTypes.shape({
+      name: PropTypes.string.isRequired,
+    }).isRequired,
+    duration: PropTypes.number.isRequired,
+  }).isRequired,
+};

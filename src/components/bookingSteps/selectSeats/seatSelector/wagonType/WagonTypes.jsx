@@ -16,10 +16,11 @@ export default function WagonTypes({
   activeWagonId,
   setActiveWagonId,
   filteredWagonTypes,
-  wagonTypes,
 }) {
   const handleTypeClick = (type) => {
-    const selectedType = filteredWagonTypes.find(wagonType => wagonType.type === type);
+    const selectedType = filteredWagonTypes.find(
+      (wagonType) => wagonType.type === type
+    );
     const firstWagonOfSelectedType = seatsInfo.find(
       (wagon) => wagon.coach.class_type === type
     );
@@ -127,3 +128,20 @@ export default function WagonTypes({
     </div>
   );
 }
+
+WagonTypes.propTypes = {
+  seatsInfo: PropTypes.array.isRequired,
+  seatsFilter: PropTypes.object.isRequired,
+  handleSelectSeat: PropTypes.func.isRequired,
+  handleDeselectSeat: PropTypes.func.isRequired,
+  selectedSeats: PropTypes.array.isRequired,
+  services: PropTypes.object.isRequired,
+  updateService: PropTypes.func.isRequired,
+  changePrice: PropTypes.func.isRequired,
+  activeType: PropTypes.object.isRequired,
+  setActiveType: PropTypes.func.isRequired,
+  activeWagonId: PropTypes.string,
+  setActiveWagonId: PropTypes.func.isRequired,
+  filteredWagonTypes: PropTypes.array.isRequired,
+  wagonTypes: PropTypes.array.isRequired,
+};

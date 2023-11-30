@@ -33,7 +33,7 @@ export default function TicketsOptions() {
         [optionName]: !currentValue,
       };
       dispatch(resetPagination());
-      dispatch(fetchRoutes({ ...updatedFilters , offset: 0}));
+      dispatch(fetchRoutes({ ...updatedFilters, offset: 0 }));
     }
   };
 

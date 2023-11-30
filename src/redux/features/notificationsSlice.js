@@ -1,12 +1,12 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   open: false,
-  message: ''
+  message: "",
 };
 
 const notificationsSlice = createSlice({
-  name: 'notifications',
+  name: "notifications",
   initialState,
   reducers: {
     showSnackBar: (state, action) => {
@@ -16,10 +16,10 @@ const notificationsSlice = createSlice({
     },
     hideSnackBar: (state) => {
       state.open = false;
-      state.message = '';
-      state.type = '';
-    }
-  }
+      state.message = "";
+      state.type = "";
+    },
+  },
 });
 
 export const { showSnackBar, hideSnackBar } = notificationsSlice.actions;

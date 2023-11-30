@@ -1,6 +1,5 @@
 import PropTypes from "prop-types";
 import "./Scheme.css";
-import { useState } from "react";
 
 const Place = ({
   placeIndex,
@@ -36,7 +35,6 @@ export default function Scheme({
   handleSelectSeat,
   handleDeselectSeat,
   selectedSeats,
-  changePrice,
 }) {
   const places = wagon.seats.reduce((acc, seat) => {
     acc[seat.index - 1] = {
@@ -136,9 +134,12 @@ export default function Scheme({
 }
 
 Scheme.propTypes = {
-  number: PropTypes.string,
+  wagon: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
-  places: PropTypes.array,
+  handleSelectSeat: PropTypes.func.isRequired,
+  handleDeselectSeat: PropTypes.func.isRequired,
+  selectedSeats: PropTypes.array.isRequired,
+  changePrice: PropTypes.func.isRequired,
 };
 
 Place.propTypes = {
@@ -149,4 +150,5 @@ Place.propTypes = {
   type: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   offset: PropTypes.number.isRequired,
+  placePrice: PropTypes.number.isRequired,
 };

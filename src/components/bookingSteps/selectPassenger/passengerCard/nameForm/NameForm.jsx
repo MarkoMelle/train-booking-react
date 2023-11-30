@@ -2,7 +2,6 @@ import PropTypes from "prop-types";
 import { useDispatch } from "react-redux";
 import { showSnackBar } from "../../../../../redux/features/notificationsSlice";
 
-
 export default function NameForm({
   firstName,
   lastName,
@@ -18,10 +17,14 @@ export default function NameForm({
       const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
       setValue(capitalizedValue);
     } else {
-      dispatch(showSnackBar({ message: "Используйте только латинские буквы", type: "info" }));
+      dispatch(
+        showSnackBar({
+          message: "Используйте только латинские буквы",
+          type: "info",
+        })
+      );
     }
   };
-  
 
   return (
     <div className="passenger-card__name">
@@ -60,11 +63,10 @@ export default function NameForm({
 }
 
 NameForm.propTypes = {
-  lastName: PropTypes.string.isRequired,
   firstName: PropTypes.string.isRequired,
-  middleName: PropTypes.string.isRequired,
+  lastName: PropTypes.string.isRequired,
+  patronymic: PropTypes.string.isRequired,
   setLastName: PropTypes.func.isRequired,
   setFirstName: PropTypes.func.isRequired,
-  setMiddleName: PropTypes.func.isRequired,
+  setPatronymic: PropTypes.func.isRequired,
 };
-

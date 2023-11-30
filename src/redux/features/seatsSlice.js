@@ -40,7 +40,7 @@ const seatsInitialState = {
       children: 0,
     },
     totalPrice: 0,
-  }
+  },
 };
 
 const seatsSlice = createSlice({

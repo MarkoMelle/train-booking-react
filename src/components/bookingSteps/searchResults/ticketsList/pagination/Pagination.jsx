@@ -27,7 +27,7 @@ function Pagination({ itemsPerPage, totalItems, currentPage, onPageChange }) {
     const endPage = pageNumbers.length;
 
     if (currentPage < 3) {
-      return [1, 2, 3, 4,5, "...", endPage];
+      return [1, 2, 3, 4, 5, "...", endPage];
     } else if (currentPage === 3) {
       return [
         startPage,
@@ -49,7 +49,15 @@ function Pagination({ itemsPerPage, totalItems, currentPage, onPageChange }) {
         endPage,
       ];
     } else if (currentPage >= pageNumbers.length - 2) {
-      return [startPage, "...",endPage - 4 , endPage - 3, endPage - 2, endPage - 1, endPage];
+      return [
+        startPage,
+        "...",
+        endPage - 4,
+        endPage - 3,
+        endPage - 2,
+        endPage - 1,
+        endPage,
+      ];
     } else if (currentPage === pageNumbers.length - 3) {
       return [
         startPage,

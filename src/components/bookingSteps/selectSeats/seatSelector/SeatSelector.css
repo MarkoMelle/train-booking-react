@@ -306,7 +306,7 @@
 }
 
 .seat-selector__details-group:last-of-type {
- margin-left: auto;
+  margin-left: auto;
 }
 
 .seat-selector__details-group-title {
@@ -397,7 +397,6 @@
 .service-icon--disabled {
   background: #fcdc9d;
   color: #928f94;
-  
 }
 
 .service-icon:hover {
@@ -414,22 +413,19 @@
   border: 1px solid #928f94;
 }
 
-
 .service-icon--selected--disabled {
   cursor: not-allowed;
   background: #ffa800;
-  color: #FFF;
+  color: #fff;
   border: 1px solid #928f94;
 }
 
 .service-icon--selected--disabled:hover {
   cursor: not-allowed;
   background: #ffa800;
-  color: #FFF;
+  color: #fff;
   border: 1px solid #928f94;
-} 
-
-
+}
 
 .seat-selector__scheme {
   margin: auto;
@@ -456,7 +452,6 @@
 .seat-selector__sum-count {
   margin-right: 5px;
 }
-
 
 .seat-selector__sum-currency {
   /* position: absolute;

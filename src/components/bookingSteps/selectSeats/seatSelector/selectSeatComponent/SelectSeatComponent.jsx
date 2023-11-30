@@ -16,13 +16,14 @@ const CustomSelect = React.forwardRef(function CustomSelect(props, ref) {
   return <Select {...props} ref={ref} slots={slots} />;
 });
 
-export default function SelectSeatComponent({ option, onChange, className, value }) {
+export default function SelectSeatComponent({
+  option,
+  onChange,
+  className,
+  value,
+}) {
   return (
-    <CustomSelect
-      className={className}
-      value={value}
-      onChange={onChange}
-    >
+    <CustomSelect className={className} value={value} onChange={onChange}>
       {option.map((item) => (
         <StyledOption key={item.value} value={item.value}>
           {item.label}
@@ -48,6 +49,8 @@ SelectSeatComponent.propTypes = {
     })
   ).isRequired,
   className: PropTypes.string,
+  onChange: PropTypes.func.isRequired,
+  value: PropTypes.string.isRequired,
 };
 
 const blue = {

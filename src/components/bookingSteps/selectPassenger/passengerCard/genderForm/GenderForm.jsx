@@ -1,6 +1,6 @@
 import PropTypes from "prop-types";
 
-export default function GenderForm({ gender, setGender , index}) {
+export default function GenderForm({ gender, setGender, index }) {
   const maleId = `male-${index}`;
   const femaleId = `female-${index}`;
   return (
@@ -13,22 +13,22 @@ export default function GenderForm({ gender, setGender , index}) {
           type="radio"
           name="gender"
           value="male"
-          id="male"
+          id={maleId}
           checked={gender === "male"}
           onChange={(e) => setGender(e.target.value)}
         />
-        <label htmlFor="male" className="gender-label male-label">
+        <label htmlFor={maleId} className="gender-label male-label">
           М
         </label>
         <input
           type="radio"
           name="gender"
           value="female"
-          id="female"
+          id={femaleId}
           checked={gender === "female"}
           onChange={(e) => setGender(e.target.value)}
         />
-        <label htmlFor="female" className="gender-label female-label">
+        <label htmlFor={femaleId} className="gender-label female-label">
           Ж
         </label>
       </div>
@@ -39,4 +39,5 @@ export default function GenderForm({ gender, setGender , index}) {
 GenderForm.propTypes = {
   gender: PropTypes.string.isRequired,
   setGender: PropTypes.func.isRequired,
+  index: PropTypes.number.isRequired,
 };

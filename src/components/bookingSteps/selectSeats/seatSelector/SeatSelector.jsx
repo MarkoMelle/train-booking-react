@@ -41,7 +41,6 @@ export default function SeatSelector({
   routeId,
   seatsInfo,
   setSeatsInfo,
-  setSelectedSeats,
   resetRoute,
   selectedSeatsLocal,
   setSelectedSeatsLocal,
@@ -103,12 +102,15 @@ export default function SeatSelector({
         const data = await apiClient.getSeatsInfo(routeId);
         dispatch(setSeatsInfo(data));
         const availableTypes = getAvailableWagonTypes(data);
-        const firstAvailableType = availableTypes.length > 0 ? availableTypes[0] : null;
+        const firstAvailableType =
+          availableTypes.length > 0 ? availableTypes[0] : null;
         setActiveType(firstAvailableType);
         const wagonsOfFirstType = data.filter(
           (wagon) => wagon.coach.class_type === firstAvailableType
         );
-        setActiveWagonId(wagonsOfFirstType.length > 0 ? wagonsOfFirstType[0].coach._id : null);
+        setActiveWagonId(
+          wagonsOfFirstType.length > 0 ? wagonsOfFirstType[0].coach._id : null
+        );
       } catch (error) {
         console.error(error);
       } finally {
@@ -117,14 +119,13 @@ export default function SeatSelector({
     };
     fetchSeats();
   }, [routeId, dispatch]);
-  
 
   useEffect(() => {
     const filterWagons = () => {
       if (!Array.isArray(seatsInfo)) {
         return [];
       }
-  
+
       return seatsInfo.filter((wagon) => {
         const classType = wagon.coach.class_type;
 
@@ -157,24 +158,24 @@ export default function SeatSelector({
     const firstAvailableType = filteredWagonTypes[0] || wagonTypes[0];
     setActiveType(firstAvailableType);
     let wagonsOfFirstType = [];
-   if (!Array.isArray(seatsInfo)) {
-     wagonsOfFirstType = []
-   } else {
-     wagonsOfFirstType = seatsInfo.filter(
-      (wagon) => wagon.coach.class_type === firstAvailableType.type
-    );
+    if (!Array.isArray(seatsInfo)) {
+      wagonsOfFirstType = [];
+    } else {
+      wagonsOfFirstType = seatsInfo.filter(
+        (wagon) => wagon.coach.class_type === firstAvailableType.type
+      );
     }
     setActiveWagonId(
       wagonsOfFirstType.length > 0 ? wagonsOfFirstType[0].coach._id : null
     );
-    setFilteredWagonTypes(wagonTypes.filter((wagonType) =>
-      getAvailableWagonTypes(newFilteredSeats).includes(wagonType.type)
-    ));
+    setFilteredWagonTypes(
+      wagonTypes.filter((wagonType) =>
+        getAvailableWagonTypes(newFilteredSeats).includes(wagonType.type)
+      )
+    );
   }, [seatsInfo, seatsFilter]);
 
-
   const changePrice = (price, type) => {
-    
     if (typeof price !== "number") {
       console.error("Ошибка: price должно быть числом");
       return;
@@ -206,18 +207,21 @@ export default function SeatSelector({
       ...prevCounts,
       infants: Math.min(prevCounts.infants, prevCounts.adults),
     }));
-  }, [passengerCounts.adults,  prevAdults]);
+  }, [passengerCounts.adults, prevAdults]);
 
   useEffect(() => {
     const difference = (prev, current) => prev - current;
-    handleSeatsChange("child", difference(prevChildren, passengerCounts.children));
+    handleSeatsChange(
+      "child",
+      difference(prevChildren, passengerCounts.children)
+    );
   }, [passengerCounts.children, prevChildren]);
 
   const handleAdultsChange = (e, value) => {
     setPassengerCounts((prevCounts) => ({
       ...prevCounts,
       adults: value,
-      infants: Math.min(prevCounts.infants, value), 
+      infants: Math.min(prevCounts.infants, value),
     }));
   };
 
@@ -235,7 +239,6 @@ export default function SeatSelector({
       infants: value > maxInfants ? maxInfants : value,
     }));
   };
-  
 
   const determineSeatType = () => {
     let adultSeats = selectedSeatsLocal.filter(
@@ -259,7 +262,7 @@ export default function SeatSelector({
         const indexToRemove = newSelectedSeats
           .map((seat) => seat.type)
           .lastIndexOf(type);
-  
+
         if (indexToRemove !== -1) {
           console.log(newSelectedSeats);
           const priceOfSeatToRemove = newSelectedSeats[indexToRemove].price;
@@ -271,49 +274,53 @@ export default function SeatSelector({
       setSelectedSeatsLocal(newSelectedSeats);
     }
   };
-  
+
   const handleSelectSeat = (seatNumber, wagonId, price) => {
     let type = determineSeatType();
     const isSeatAlreadySelected = selectedSeatsLocal.some(
       (seat) => seat.seatNumber === seatNumber && seat.wagonId === wagonId
     );
-  
+
     if (type && !isSeatAlreadySelected) {
       const resultPrice = type === "child" ? Math.round(price / 2) : price;
       const newSeat = { seatNumber, type, wagonId, resultPrice, infant: false };
-  
+
       if (type === "adult") {
-        const infantCount = passengerCounts.infants - selectedSeatsLocal.filter(seat => seat.infant).length;
+        const infantCount =
+          passengerCounts.infants -
+          selectedSeatsLocal.filter((seat) => seat.infant).length;
         if (infantCount > 0) {
           newSeat.infant = true;
         }
       }
-  
+
       setSelectedSeatsLocal([...selectedSeatsLocal, newSeat]);
       changePrice(resultPrice, "add");
     }
   };
-  
+
   const handleDeselectSeat = (seatNumber, wagonId, price) => {
     const seatToDeselect = selectedSeatsLocal.find(
       (seat) => seat.seatNumber === seatNumber && seat.wagonId === wagonId
     );
-  
+
     if (seatToDeselect) {
       if (seatToDeselect.type === "adult" && seatToDeselect.infant) {
         seatToDeselect.infant = false;
       }
-  
+
       setSelectedSeatsLocal(
         selectedSeatsLocal.filter(
-          (seat) => !(seat.seatNumber === seatNumber && seat.wagonId === wagonId)
+          (seat) =>
+            !(seat.seatNumber === seatNumber && seat.wagonId === wagonId)
         )
       );
-      changePrice(seatToDeselect.type === "child" ? Math.round(price / 2) : price, "remove");
+      changePrice(
+        seatToDeselect.type === "child" ? Math.round(price / 2) : price,
+        "remove"
+      );
     }
   };
-  
-  
 
   const handleBack = () => {
     dispatch(resetRoute());
@@ -475,3 +482,17 @@ export default function SeatSelector({
     </div>
   );
 }
+
+SeatSelector.propTypes = {
+  direction: PropTypes.string.isRequired,
+  currentRoute: PropTypes.object.isRequired,
+  routeId: PropTypes.string.isRequired,
+  seatsInfo: PropTypes.array.isRequired,
+  setSeatsInfo: PropTypes.func.isRequired,
+  setSelectedSeats: PropTypes.func.isRequired,
+  resetRoute: PropTypes.func.isRequired,
+  selectedSeatsLocal: PropTypes.array.isRequired,
+  setSelectedSeatsLocal: PropTypes.func.isRequired,
+  passengerCounts: PropTypes.object.isRequired,
+  setPassengerCounts: PropTypes.func.isRequired,
+};

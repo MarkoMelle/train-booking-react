@@ -14,7 +14,6 @@ export default function Wagon({
   updateService,
   changePrice,
 }) {
-
   const countAvailableSeats = (wagon) => {
     let count = 0;
     wagon.seats.forEach((seat) => {
@@ -44,28 +43,28 @@ export default function Wagon({
             <p className="seat-selector__seat-group">
               <span className="seat-selector__seat-text">
                 {type === "fourth" ? "В проходе" : "Верхние"}
-                </span>
+              </span>
               <span className="seat-selector__seat-number">
-              {wagon.coach.upper_available_seats}
-            </span>
+                {wagon.coach.upper_available_seats}
+              </span>
             </p>
           )}
           {wagon.coach.bottom_price !== 0 && (
             <p className="seat-selector__seat-group">
               <span className="seat-selector__seat-text">
                 {type === "fourth" ? "У окна" : "Нижние"}
-                </span>
+              </span>
               <span className="seat-selector__seat-number">
-              {wagon.coach.lower_available_seats}
-            </span>
+                {wagon.coach.lower_available_seats}
+              </span>
             </p>
           )}
           {wagon.coach.side_price !== 0 && (
             <p className="seat-selector__seat-group">
               <span className="seat-selector__seat-text">Боковые</span>
               <span className="seat-selector__seat-number">
-              {wagon.coach.side_available_seats}
-            </span>
+                {wagon.coach.side_available_seats}
+              </span>
             </p>
           )}
         </div>
@@ -127,9 +126,13 @@ export default function Wagon({
 }
 
 Wagon.propTypes = {
-  currentTrip: PropTypes.object.isRequired,
-  services: PropTypes.object.isRequired,
+  wagon: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
+  seatsFilter: PropTypes.string.isRequired,
+  handleSelectSeat: PropTypes.func.isRequired,
+  handleDeselectSeat: PropTypes.func.isRequired,
+  selectedSeats: PropTypes.array.isRequired,
+  services: PropTypes.object.isRequired,
+  updateService: PropTypes.func.isRequired,
+  changePrice: PropTypes.func.isRequired,
 };
-
-

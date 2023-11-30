@@ -151,7 +151,8 @@
   text-transform: capitalize;
 }
 
-.ticket-details-time-info-container--right .ticket-details-time-info__city , .ticket-details-time-info-container--right .ticket-details-time-info__station {
+.ticket-details-time-info-container--right .ticket-details-time-info__city,
+.ticket-details-time-info-container--right .ticket-details-time-info__station {
   text-align: right;
 }
 

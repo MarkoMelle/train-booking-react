@@ -18,7 +18,9 @@ export default function Ticket({
       <div className="ticket__train-info">
         <div className="ticket__train-info-icon">{trainIconSvg}</div>
         <div className="ticket__train-info__train-number">
-          {ticket.departure.train.name.includes("undefined") ? ticket.departure.train.name.replace("undefined", "Поезд") : ticket.departure.train.name}
+          {ticket.departure.train.name.includes("undefined")
+            ? ticket.departure.train.name.replace("undefined", "Поезд")
+            : ticket.departure.train.name}
         </div>
         <span className="ticket__train-info__direction">
           {ticket.departure.from.city.name}
@@ -68,7 +70,13 @@ export default function Ticket({
       </div>
       <div className="ticket__price-info">
         <SitClassInfo
-          {...{ handleSeatSelection, setCurrentTrip, ticket, isVerification , handleTripChange}}
+          {...{
+            handleSeatSelection,
+            setCurrentTrip,
+            ticket,
+            isVerification,
+            handleTripChange,
+          }}
         />
       </div>
     </div>

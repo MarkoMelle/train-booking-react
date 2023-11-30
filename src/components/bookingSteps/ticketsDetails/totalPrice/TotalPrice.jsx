@@ -13,5 +13,5 @@ export default function TotalPrice({ passengersInfo }) {
 }
 
 TotalPrice.propTypes = {
-  price: PropTypes.object.isRequired,
+  passengersInfo: PropTypes.object.isRequired,
 };
