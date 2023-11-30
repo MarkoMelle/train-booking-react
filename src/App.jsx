@@ -6,7 +6,6 @@ import TicketsPage from "./pages/ticketsPage/TicketsPage";
 import SuccessPage from "./pages/successPage";
 import Page404 from "./pages/page404";
 import Footer from "./components/footer/Footer";
-import SwitchStyles from "./components/bookingSteps/ticketsDetails/switchStyles";
 import { store } from "./redux/store";
 import SnackbarComponent from "./components/snackbar/SnackbarComponent";
 

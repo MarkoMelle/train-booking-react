@@ -7,7 +7,6 @@ import "./Ticket.css";
 export default function Ticket({
   ticket,
   handleSeatSelection,
-  setCurrentTrip,
   handleTripChange,
   isVerification = false,
 }) {
@@ -85,6 +84,6 @@ export default function Ticket({
 Ticket.propTypes = {
   ticket: PropTypes.object.isRequired,
   handleSeatSelection: PropTypes.func.isRequired,
+  handleTripChange: PropTypes.func.isRequired,
   isVerification: PropTypes.bool,
-  handleTripChange: PropTypes.func,
 };

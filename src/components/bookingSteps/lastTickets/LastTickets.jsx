@@ -1,4 +1,3 @@
-// eslint-disable-next-line
 import LastTicket from "./lastTicket/LastTicket";
 import "./LastTickets.css";
 import { apiClient } from "../../../api/apiClient";
