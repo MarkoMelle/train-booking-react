@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import "./PriceSlider.css";
 import { useState, useEffect, useCallback } from "react";
 import SliderComponent from "../sliderComponent";
@@ -18,6 +19,7 @@ export default function PriceSlider() {
     priceFrom || minPrice,
     priceTo || maxPrice,
   ]);
+  console.log(minPrice, maxPrice, priceFrom, priceTo);
   const dispatch = useDispatch();
 
   useEffect(() => {

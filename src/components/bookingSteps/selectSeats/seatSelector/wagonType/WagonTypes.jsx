@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useEffect } from "react";
 import PropTypes from "prop-types";
 import Wagon from "./wagon/Wagon";

@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import PropTypes from "prop-types";
 import arrowBig from "../../../../assets/icons/arrow-seat-big.svg";
 import TimeInfo from "../../timeInfo/TimeInfo";

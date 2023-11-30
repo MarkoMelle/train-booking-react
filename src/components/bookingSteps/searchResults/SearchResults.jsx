@@ -9,7 +9,7 @@ import {
 } from "../../../redux/features/searchResultsSlice";
 import { useSelector, useDispatch } from "react-redux";
 
-export default function SearchResults({ handleSeatSelection, setCurrentTrip }) {
+export default function SearchResults({ handleSeatSelection }) {
   const dispatch = useDispatch();
   const filters = useSelector((state) => state.searchResults);
   const { currentPage } = useSelector((state) => state.searchResults);
@@ -48,7 +48,6 @@ export default function SearchResults({ handleSeatSelection, setCurrentTrip }) {
       <TicketsList
         {...{
           handleSeatSelection,
-          setCurrentTrip,
           currentPage,
           handlePageChange,
           itemsPerPage: limit,
@@ -62,5 +61,4 @@ export default function SearchResults({ handleSeatSelection, setCurrentTrip }) {
 
 SearchResults.propTypes = {
   handleSeatSelection: PropTypes.func.isRequired,
-  setCurrentTrip: PropTypes.func.isRequired,
 };

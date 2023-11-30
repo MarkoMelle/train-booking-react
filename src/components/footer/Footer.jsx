@@ -2,13 +2,42 @@ import { Link } from "react-router-dom";
 import { useState } from "react";
 import "./Footer.css";
 import { handleScroll } from "../../utils";
+import { apiClient } from "../../api/apiClient";
+import { showSnackBar } from "../../redux/features/notificationsSlice";
+import { useDispatch } from "react-redux";
 
 export default function Footer() {
+  const dispatch = useDispatch();
   const [email, setEmail] = useState("");
+
+  const validateEmail = (email) => {
+    const re = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+    return re.test(email);
+  };
 
   const handleSubmit = (event) => {
     event.preventDefault();
-    console.log("Отправлено");
+
+    if (!validateEmail(email)) {
+      dispatch(
+        showSnackBar({ message: "Неверный формат email", type: "error" })
+      );
+      return;
+    }
+
+    apiClient
+      .subscribe(email)
+      .then((res) => {
+        console.log(res);
+        setEmail("");
+        dispatch(
+          showSnackBar({ message: "Вы успешно подписались!", type: "success" })
+        );
+      })
+      .catch((err) => {
+        console.log(err);
+        dispatch(showSnackBar({ message: "Ошибка подписки", type: "error" }));
+      });
   };
 
   const handleInputChange = (event) => {

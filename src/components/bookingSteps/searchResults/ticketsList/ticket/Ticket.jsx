@@ -72,7 +72,6 @@ export default function Ticket({
         <SitClassInfo
           {...{
             handleSeatSelection,
-            setCurrentTrip,
             ticket,
             isVerification,
             handleTripChange,
@@ -86,7 +85,6 @@ export default function Ticket({
 Ticket.propTypes = {
   ticket: PropTypes.object.isRequired,
   handleSeatSelection: PropTypes.func.isRequired,
-  setCurrentTrip: PropTypes.func.isRequired,
   isVerification: PropTypes.bool,
   handleTripChange: PropTypes.func,
 };

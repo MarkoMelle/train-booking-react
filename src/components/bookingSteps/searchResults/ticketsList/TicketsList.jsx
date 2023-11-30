@@ -5,7 +5,6 @@ import PropTypes from "prop-types";
 
 export default function TicketsList({
   handleSeatSelection,
-  setCurrentTrip,
   currentPage,
   handlePageChange,
   itemsPerPage,
@@ -15,11 +14,7 @@ export default function TicketsList({
   return (
     <div className="tickets-list">
       {items.map((ticket, index) => (
-        <Ticket
-          key={index}
-          ticket={ticket}
-          {...{ handleSeatSelection, setCurrentTrip }}
-        />
+        <Ticket key={index} ticket={ticket} {...{ handleSeatSelection }} />
       ))}
       {totalItems / itemsPerPage > 1 && (
         <Pagination
@@ -35,7 +30,6 @@ export default function TicketsList({
 
 TicketsList.propTypes = {
   handleSeatSelection: PropTypes.func.isRequired,
-  setCurrentTrip: PropTypes.func.isRequired,
   currentPage: PropTypes.number.isRequired,
   handlePageChange: PropTypes.func.isRequired,
   itemsPerPage: PropTypes.number.isRequired,

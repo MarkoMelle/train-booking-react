@@ -32,6 +32,12 @@
   box-shadow: 0px 2px 2px 0px rgba(62, 60, 65, 0.25);
 }
 
+.last-ticket:hover {
+  border: 1px solid #ffa800;
+  cursor: pointer;
+  box-shadow: 0px 2px 2px 0px rgba(62, 60, 65, 0.25);
+}
+
 .last-ticket__cities {
   display: flex;
   flex-basis: 100%;
@@ -54,6 +60,7 @@
   display: block;
   color: #292929;
   font-size: 1.25rem;
+  text-transform: capitalize;
 }
 
 .last-ticket__station {
@@ -61,16 +68,31 @@
   flex-direction: column;
   color: #928f94;
   font-size: 1rem;
+  text-transform: capitalize;
 }
 
 .last-ticket__options {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 10px;
+  /* margin-bottom: 25px; */
+}
+
+.last-ticket__option {
+  color: #c4c4c4;
+}
+
+.last-ticket__option--active {
+  color: #ffa800;
 }
 
 .last-ticket__price {
   position: relative;
   display: flex;
   align-items: center;
-  margin-left: 95px;
+  margin-left: auto;
+  margin-right: 20px;
 }
 
 .last-ticket__price-value {

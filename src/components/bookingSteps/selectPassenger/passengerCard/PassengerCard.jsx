@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 // import SelectComponent from "../selectComponent/SelectComponent";
 import "./PassengerCard.css";
 import { useState, useEffect } from "react";

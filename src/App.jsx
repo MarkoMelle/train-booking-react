@@ -15,7 +15,7 @@ export default function App() {
   return (
     <Provider store={store}>
       <Router basename={import.meta.env.VITE_PUBLIC_URL}>
-        <SwitchStyles />
+        {/* <SwitchStyles /> */}
         <SnackbarComponent />
         <Routes>
           <Route path="/" element={<HomePage />} />
