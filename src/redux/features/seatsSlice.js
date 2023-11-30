@@ -29,12 +29,30 @@ const seatsInitialState = {
   seatsInfoBack: {},
   selectedSeats: [],
   selectedSeatsBack: [],
+  currentTrip: null,
+  passengersInfo: {
+    passengers: {
+      adult: 0,
+      children: 0,
+    },
+    price: {
+      adult: 0,
+      children: 0,
+    },
+    totalPrice: 0,
+  }
 };
 
 const seatsSlice = createSlice({
   name: "seats",
   initialState: seatsInitialState,
   reducers: {
+    setCurrentTrip(state, action) {
+      state.currentTrip = action.payload;
+    },
+    setPassengersInfo(state, action) {
+      state.passengersInfo = action.payload;
+    },
     setSelectSeats(state, action) {
       state.isSelectSeats = action.payload;
     },
@@ -70,10 +88,13 @@ const seatsSlice = createSlice({
       state.seatsInfo = {};
       state.selectedSeats = [];
     },
+    resetSeats: () => seatsInitialState,
   },
 });
 
 export const {
+  setCurrentTrip,
+  setPassengersInfo,
   setSelectSeats,
   setCurrentRoute,
   setCurrentRouteBack,
@@ -84,5 +105,6 @@ export const {
   setSelectedSeats,
   setSelectedSeatsBack,
   resetRoute,
+  resetSeats,
 } = seatsSlice.actions;
 export default seatsSlice.reducer;

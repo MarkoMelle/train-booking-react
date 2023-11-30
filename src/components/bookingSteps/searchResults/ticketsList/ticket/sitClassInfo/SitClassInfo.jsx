@@ -9,18 +9,19 @@ import {
   setCurrentRouteBack,
   setRouteId,
   setRouteIdBack,
+  setCurrentTrip, 
 } from "../../../../../../redux/features/seatsSlice";
 import { useSelector, useDispatch } from "react-redux";
 import PropTypes from "prop-types";
 
 export default function SitClassInfo({
-  setIsSelectSeats,
+  handleSeatSelection,
   ticket,
   isVerification = false,
+  handleTripChange,
 }) {
   const [activeIndex, setActiveIndex] = useState(null);
   const dispatch = useDispatch();
-  const { dateStart, dateEnd } = useSelector((state) => state.searchResults);
   const handleSitClassClick = (index) => {
     if (activeIndex === index) {
       setActiveIndex(null);
@@ -72,18 +73,20 @@ export default function SitClassInfo({
   //       dispatch(setRouteId(ticket.departure._id));
   //     }
   //   }
-  //   setIsSelectSeats();
+  //   handleSeatSelection();
   // };
 
   const handleSelectButtonClick = () => {
+    dispatch(setCurrentTrip(ticket));
     dispatch(setCurrentRoute(ticket.departure));
     dispatch(setRouteId(ticket.departure._id));
     if (Object.prototype.hasOwnProperty.call(ticket, "arrival")) {
       dispatch(setCurrentRouteBack(ticket.arrival));
       dispatch(setRouteIdBack(ticket.arrival._id));
     }
-    setIsSelectSeats();
+    handleSeatSelection(true);
   };
+
 
   return (
     <>
@@ -161,7 +164,7 @@ export default function SitClassInfo({
           Выбрать места
         </button>
       ) : (
-        <button className="secondary-btn ticket__select-button">
+        <button className="secondary-btn ticket__select-button" onClick={handleTripChange}>
           Изменить
         </button>
       )}
@@ -171,8 +174,9 @@ export default function SitClassInfo({
 
 SitClassInfo.propTypes = {
   sitClasses: PropTypes.array.isRequired,
-  setIsSelectSeats: PropTypes.func.isRequired,
+  handleSeatSelection: PropTypes.func.isRequired,
   setCurrentTrip: PropTypes.func.isRequired,
   ticket: PropTypes.object.isRequired,
   isVerification: PropTypes.bool,
+  handleTripChange: PropTypes.func.isRequired,
 };

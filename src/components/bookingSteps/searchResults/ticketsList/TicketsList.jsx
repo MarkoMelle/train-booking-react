@@ -4,7 +4,7 @@ import Pagination from "./pagination/Pagination";
 import PropTypes from "prop-types";
 
 export default function TicketsList({
-  setIsSelectSeats,
+  handleSeatSelection,
   setCurrentTrip,
   currentPage,
   handlePageChange,
@@ -18,7 +18,7 @@ export default function TicketsList({
         <Ticket
           key={index}
           ticket={ticket}
-          {...{ setIsSelectSeats, setCurrentTrip }}
+          {...{ handleSeatSelection, setCurrentTrip }}
         />
       ))}
       {totalItems / itemsPerPage > 1 && (
@@ -34,7 +34,7 @@ export default function TicketsList({
 }
 
 TicketsList.propTypes = {
-  setIsSelectSeats: PropTypes.func.isRequired,
+  handleSeatSelection: PropTypes.func.isRequired,
   setCurrentTrip: PropTypes.func.isRequired,
   currentPage: PropTypes.number.isRequired,
   handlePageChange: PropTypes.func.isRequired,

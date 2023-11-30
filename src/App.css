@@ -86,3 +86,7 @@
 .form-input::placeholder {
   color: rgb(229, 229, 229);
 }
+
+.error-highlight {
+  border: 1px solid red;
+}

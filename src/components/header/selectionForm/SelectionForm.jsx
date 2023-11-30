@@ -81,19 +81,19 @@ export default function SelectionForm({ modifier }) {
     event.preventDefault();
     dispatch(setSelectSeats(false));
     if (fromCity.id === toCity.id && fromCity.id !== "") {
-      dispatch(showSnackBar('Города отправления и прибытия не могут совпадать.'));
+      dispatch(showSnackBar({ message: "Выберите разные города" }));
       return;
     }
     if (!fromCity.name) {
-      dispatch(showSnackBar('Выберите город отправления.'));
+      dispatch(showSnackBar({ message: "Выберите город отправления" }));
       return;
     }
     if (fromCity.name && !toCity.name) {
-      dispatch(showSnackBar('Выберите город прибытия.'));
+      dispatch(showSnackBar({ message: "Выберите город прибытия" }));
       return;
     }
     // if (!dateStart) {
-    //   dispatch(showSnackBar('Выберите дату отправления.'));
+    //   dispatch(showSnackBar({ message: "Выберите дату отправления" }));
     //   return;
     // }
     navigate("/tickets");

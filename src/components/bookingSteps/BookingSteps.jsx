@@ -18,8 +18,8 @@ export default function BookingSteps() {
   const dispatch = useDispatch();
   const isSelectSeats = useSelector((state) => state.seats.isSelectSeats);
 
-  const setIsSelectSeats = () => {
-    dispatch(setSelectSeats(true));
+  const handleSeatSelection = (value) => {
+    dispatch(setSelectSeats(value));
   }
 
   return (
@@ -31,14 +31,14 @@ export default function BookingSteps() {
       </aside>
       <main className="booking-steps__main">
         {activeStep === 1 && !isSelectSeats && (
-          <SearchResults {...{setIsSelectSeats }} />
+          <SearchResults {...{handleSeatSelection }} />
         )}
         {activeStep === 1 && isSelectSeats && (
           <SelectSeats {...{ setActiveStep }} />
         )}
         {activeStep === 2 && <SelectPassenger {...{ setActiveStep }} />}
         {activeStep === 3 && <Payment {...{ setActiveStep }} />}
-        {activeStep === 4 && <Verification />}
+        {activeStep === 4 && <Verification  {...{ setActiveStep , handleSeatSelection }} />}
       </main>
     </div>
   );

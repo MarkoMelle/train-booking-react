@@ -11,11 +11,13 @@ const notificationsSlice = createSlice({
   reducers: {
     showSnackBar: (state, action) => {
       state.open = true;
-      state.message = action.payload;
+      state.message = action.payload.message;
+      state.type = action.payload.type;
     },
     hideSnackBar: (state) => {
       state.open = false;
       state.message = '';
+      state.type = '';
     }
   }
 });

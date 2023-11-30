@@ -53,10 +53,8 @@ export default function Scheme({
       )
     ) {
       handleDeselectSeat(placeNumber, wagonId, placePrice);
-      // if (deselection.success) changePrice(deselection.type === 'child' ? placePrice / 2 : placePrice, "remove");
     } else {
       handleSelectSeat(placeNumber, wagonId, placePrice);
-      // if (selection.success) changePrice(selection.type === 'child' ? placePrice / 2 : placePrice, "add");
     }
   };
   const renderPlaces = (

@@ -14,12 +14,14 @@ export default function NameForm({
   const dispatch = useDispatch();
 
   const handleInputChange = (value, setValue) => {
-        if (/^[a-zA-Z\s]*$/.test(value)) {
-          setValue(value);
-        } else {
-          dispatch(showSnackBar("Используйте только латинские буквы"));
-        }
-      };
+    if (/^[a-zA-Z\s]*$/.test(value)) {
+      const capitalizedValue = value.charAt(0).toUpperCase() + value.slice(1);
+      setValue(capitalizedValue);
+    } else {
+      dispatch(showSnackBar({ message: "Используйте только латинские буквы", type: "info" }));
+    }
+  };
+  
 
   return (
     <div className="passenger-card__name">
@@ -66,47 +68,3 @@ NameForm.propTypes = {
   setMiddleName: PropTypes.func.isRequired,
 };
 
-
-// import PropTypes from "prop-types";
-// import { useDispatch } from "react-redux";
-// import { showSnackBar } from "../../../../../redux/features/notificationsSlice";
-
-// export default function NameForm({
-//   lastName,
-//   firstName,
-//   middleName,
-//   setLastName,
-//   setFirstName,
-//   setMiddleName,
-// }) {
-//   const dispatch = useDispatch();
-
-//   const handleInputChange = (value, setValue) => {
-//     if (/^[a-zA-Z\s]*$/.test(value)) {
-//       setValue(value);
-//     } else {
-//       dispatch(showSnackBar("Используйте только латинские буквы"));
-//     }
-//   };
-
-//   return (
-//     <div className="passenger-card__name">
-//       {/* Остальной код */}
-//       <input
-//         type="text"
-//         value={firstName}
-//         onChange={(e) => handleInputChange(e.target.value, setFirstName)}
-//       />
-//       {/* Повторите для lastName и middleName */}
-//     </div>
-//   );
-// }
-
-// NameForm.propTypes = {
-//   lastName: PropTypes.string.isRequired,
-//   firstName: PropTypes.string.isRequired,
-//   middleName: PropTypes.string.isRequired,
-//   setLastName: PropTypes.func.isRequired,
-//   setFirstName: PropTypes.func.isRequired,
-//   setMiddleName: PropTypes.func.isRequired,
-// };

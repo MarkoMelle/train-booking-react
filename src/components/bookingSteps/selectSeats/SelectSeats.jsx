@@ -9,8 +9,10 @@ import {
   setSelectedSeats,
   setSelectedSeatsBack,
   resetRoute,
+  setPassengersInfo,
 } from "../../../redux/features/seatsSlice";
 import { initializePassengers } from "../../../redux/features/orderSlice";
+import { calculateTicketInfo } from "../../../utils";
 
 export default function SelectSeats({ setActiveStep }) {
   const {
@@ -33,6 +35,7 @@ export default function SelectSeats({ setActiveStep }) {
     infants: 0,
   });
   const dispatch = useDispatch();
+
 
   const handleSubmit = () => {
     if ( selectedSeatsLocal.length === 0) {
@@ -59,6 +62,10 @@ export default function SelectSeats({ setActiveStep }) {
       }
       console.log(selectedSeatsLocal);
       dispatch(initializePassengers(selectedSeatsLocal));
+      dispatch(setPassengersInfo(calculateTicketInfo({
+        departure: selectedSeatsLocal,
+        arrival: selectedSeatsLocalBack,
+      })));
     } else {
       console.log("Не все места выбраны");
       return;

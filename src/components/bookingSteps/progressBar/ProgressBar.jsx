@@ -45,4 +45,5 @@ export default function ProgressBar({ activeStep, setActiveStep }) {
 
 ProgressBar.propTypes = {
   activeStep: PropTypes.number.isRequired,
+  setActiveStep: PropTypes.func.isRequired,
 };

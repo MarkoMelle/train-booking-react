@@ -5,6 +5,7 @@ import PropTypes from "prop-types";
 export default function PassengerList({
   passengers = passengersList,
   totalPrice = "7760",
+  handlePassengerChange,
 }) {
   return (
     <div className="passenger-list booking-steps__container">
@@ -26,7 +27,7 @@ export default function PassengerList({
               {totalPrice}
             </span>
           </p>
-          <button className="secondary-btn passenger-list__btn verification__btn">
+          <button className="secondary-btn passenger-list__btn verification__btn" onClick={handlePassengerChange}>
             Изменить
           </button>
         </div>

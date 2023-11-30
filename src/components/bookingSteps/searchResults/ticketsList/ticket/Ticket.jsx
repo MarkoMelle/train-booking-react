@@ -6,8 +6,9 @@ import "./Ticket.css";
 
 export default function Ticket({
   ticket,
-  setIsSelectSeats,
+  handleSeatSelection,
   setCurrentTrip,
+  handleTripChange,
   isVerification = false,
 }) {
   return (
@@ -67,7 +68,7 @@ export default function Ticket({
       </div>
       <div className="ticket__price-info">
         <SitClassInfo
-          {...{ setIsSelectSeats, setCurrentTrip, ticket, isVerification }}
+          {...{ handleSeatSelection, setCurrentTrip, ticket, isVerification , handleTripChange}}
         />
       </div>
     </div>
@@ -76,7 +77,8 @@ export default function Ticket({
 
 Ticket.propTypes = {
   ticket: PropTypes.object.isRequired,
-  setIsSelectSeats: PropTypes.func.isRequired,
+  handleSeatSelection: PropTypes.func.isRequired,
   setCurrentTrip: PropTypes.func.isRequired,
   isVerification: PropTypes.bool,
+  handleTripChange: PropTypes.func,
 };

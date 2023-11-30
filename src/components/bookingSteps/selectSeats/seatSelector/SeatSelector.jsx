@@ -55,10 +55,6 @@ export default function SeatSelector({
   const [activeWagonId, setActiveWagonId] = useState(null);
   const [filteredWagonTypes, setFilteredWagonTypes] = useState(wagonTypes);
 
-  // const filteredWagonTypes = wagonTypes.filter((wagonType) =>
-  //     getAvailableWagonTypes(Object.values(seatsInfo)).includes(wagonType.type)
-  //   );
-
   useEffect(() => {
     setTotalPrice(0);
     setSelectedSeatsLocal([]);
@@ -124,7 +120,6 @@ export default function SeatSelector({
   
 
   useEffect(() => {
-    // Фильтрация вагонов по фильтрам
     const filterWagons = () => {
       if (!Array.isArray(seatsInfo)) {
         return [];
@@ -207,17 +202,22 @@ export default function SeatSelector({
   useEffect(() => {
     const difference = (prev, current) => prev - current;
     handleSeatsChange("adult", difference(prevAdults, passengerCounts.adults));
-  }, [passengerCounts.adults, selectedSeatsLocal, prevAdults]);
+    setPassengerCounts((prevCounts) => ({
+      ...prevCounts,
+      infants: Math.min(prevCounts.infants, prevCounts.adults),
+    }));
+  }, [passengerCounts.adults,  prevAdults]);
 
   useEffect(() => {
     const difference = (prev, current) => prev - current;
     handleSeatsChange("child", difference(prevChildren, passengerCounts.children));
-  }, [passengerCounts.children, selectedSeatsLocal, prevChildren]);
+  }, [passengerCounts.children, prevChildren]);
 
   const handleAdultsChange = (e, value) => {
     setPassengerCounts((prevCounts) => ({
       ...prevCounts,
       adults: value,
+      infants: Math.min(prevCounts.infants, value), 
     }));
   };
 
@@ -229,11 +229,13 @@ export default function SeatSelector({
   };
 
   const handleInfantsChange = (e, value) => {
+    const maxInfants = passengerCounts.adults;
     setPassengerCounts((prevCounts) => ({
       ...prevCounts,
-      infants: value,
+      infants: value > maxInfants ? maxInfants : value,
     }));
   };
+  
 
   const determineSeatType = () => {
     let adultSeats = selectedSeatsLocal.filter(
@@ -269,7 +271,7 @@ export default function SeatSelector({
       setSelectedSeatsLocal(newSelectedSeats);
     }
   };
-
+  
   const handleSelectSeat = (seatNumber, wagonId, price) => {
     let type = determineSeatType();
     const isSeatAlreadySelected = selectedSeatsLocal.some(
@@ -277,12 +279,18 @@ export default function SeatSelector({
     );
   
     if (type && !isSeatAlreadySelected) {
-      const resultPrice = type === "child" ? price / 2 : price;
-      setSelectedSeatsLocal([
-        ...selectedSeatsLocal,
-        { seatNumber, type, wagonId , resultPrice},
-      ]);
-      changePrice(type === "child" ? price / 2 : price, "add");
+      const resultPrice = type === "child" ? Math.round(price / 2) : price;
+      const newSeat = { seatNumber, type, wagonId, resultPrice, infant: false };
+  
+      if (type === "adult") {
+        const infantCount = passengerCounts.infants - selectedSeatsLocal.filter(seat => seat.infant).length;
+        if (infantCount > 0) {
+          newSeat.infant = true;
+        }
+      }
+  
+      setSelectedSeatsLocal([...selectedSeatsLocal, newSeat]);
+      changePrice(resultPrice, "add");
     }
   };
   
@@ -292,14 +300,19 @@ export default function SeatSelector({
     );
   
     if (seatToDeselect) {
+      if (seatToDeselect.type === "adult" && seatToDeselect.infant) {
+        seatToDeselect.infant = false;
+      }
+  
       setSelectedSeatsLocal(
         selectedSeatsLocal.filter(
           (seat) => !(seat.seatNumber === seatNumber && seat.wagonId === wagonId)
         )
       );
-      changePrice(seatToDeselect.type === "child" ? price / 2 : price, "remove");
+      changePrice(seatToDeselect.type === "child" ? Math.round(price / 2) : price, "remove");
     }
   };
+  
   
 
   const handleBack = () => {

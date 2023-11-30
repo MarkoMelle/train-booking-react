@@ -15,24 +15,23 @@ export default function DocumentForm({
   age,
   errors,
   setErrors,
-  validationAttempted,
-  setValidationAttempted,
   documentType,
   setDocumentType,
+  handleSeriesChange,
+  handleNumberChange,
+  handleSeriesBlur,
+  handleNumberOnBlur,
 }) {
   const seriesInputRef = useRef(null);
   const numberInputRef = useRef(null);
   const numberInputForeignRef = useRef(null);
   const numberInputBirthCertificateRef = useRef(null);
-  const [isSeriesValidated, setIsSeriesValidated] = useState(false);
   const resetData = () => {
     setPassportSeries("");
     setPassportNumber("");
     setPassportForeignNumber("");
     setBirthCertificateNumber("");
     setErrors({ series: "", number: "" });
-    setIsSeriesValidated(false);
-    setValidationAttempted(false);
   };
 
   const handleDocumentTypeChange = (event, value) => {
@@ -40,115 +39,6 @@ export default function DocumentForm({
     resetData();
   };
 
-  const validateSeries = (value) => {
-    setIsSeriesValidated(true);
-    if (documentType === "passport") {
-      return value.length === 4 && /^[0-9]{4}$/.test(value)
-        ? ""
-        : "Неверная серия";
-    } else if (documentType === "birthCertificate") {
-      return /^M{0,3}(D?C{0,3}|C[DM])(L?X{0,3}|X[LC])(V?I{0,3}|I[VX])\b-?[А-Я]{2}$/i.test(
-        value
-      )
-        ? ""
-        : "Неверная серия";
-    }
-  };
-
-  const validateNumber = (value) => {
-    if (isSeriesValidated || documentType === "foreignPassport") {
-      setValidationAttempted(true);
-    }
-    switch (documentType) {
-      case "passport":
-        return value.length === 6 && /^[0-9]{6}$/.test(value)
-          ? ""
-          : "Неверный номер";
-      case "foreignPassport":
-        return /^[0-9]{2}\s[0-9]{7}$/.test(value)
-          ? ""
-          : "Неверный номер загранпаспорта";
-      case "birthCertificate":
-        return value.length === 6 && /^[0-9]{6}$/.test(value)
-          ? ""
-          : "Неверный номер свидетельства о рождении";
-      default:
-        return false;
-    }
-  };
-
-  const handleSeriesChange = (e) => {
-    const value = e.target.value;
-    switch (documentType) {
-      case "passport":
-        if (value.length <= 4) {
-          setPassportSeries(value);
-        }
-        if (value.length === 4) {
-          const seriesError = validateSeries(value);
-          setErrors({ ...errors, series: seriesError });
-        }
-        break;
-      case "birthCertificate":
-        if (value.length <= 6) {
-          setPassportSeries(value);
-        }
-        if (value.length <= 6) {
-          const seriesError = validateSeries(value);
-          setErrors({ ...errors, series: seriesError });
-        }
-        break;
-      default:
-        break;
-    }
-  };
-
-  const handleSeriesBlur = (e) => {
-    const value = e.target.value;
-    const seriesError = validateSeries(value);
-    setErrors({ ...errors, series: seriesError });
-  };
-
-  const handleNumberOnBlur = (e) => {
-    const value = e.target.value;
-    const numberError = validateNumber(value);
-    setErrors({ ...errors, number: numberError });
-  };
-
-  const handleNumberChange = (e) => {
-    let value = e.target.value;
-    switch (documentType) {
-      case "passport":
-        if (value.length <= 6) {
-          setPassportNumber(value);
-        }
-        if (value.length === 6) {
-          setErrors({ ...errors, number: validateNumber(value) });
-        }
-        break;
-      case "foreignPassport":
-        value = value.replace(/[^\d]/g, "").replace(/(\d{2})(\d)/, "$1 $2");
-        if (value.length <= 10) {
-          setPassportForeignNumber(value);
-        }
-        if (value.length === 10) {
-          setErrors({ ...errors, number: validateNumber(value) });
-        }
-        break;
-      case "birthCertificate":
-        if (value.length <= 6) {
-          setBirthCertificateNumber(value);
-        }
-        if (value.length === 6) {
-          setErrors({ ...errors, number: validateNumber(value) });
-        }
-        break;
-      default:
-        break;
-    }
-  };
-
-  
 
   const getDocumentOptions = () => {
     if (age === "adult") {

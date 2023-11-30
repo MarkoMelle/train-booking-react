@@ -152,3 +152,33 @@ export function calculateTicketInfo(data) {
 
   return ticketInfo;
 }
+
+
+export function formatPassengerData(data) {
+  const fullName = `${data.lastName} ${data.firstName} ${data.patronymic}`;
+
+  const birthDateFormatted = new Date(data.birthDate).toLocaleDateString('ru-RU');
+
+  const gender = data.gender === 'male' ? 'мужской' : 'женский';
+
+  const documentType = data.documentType === 'passport' ? 'Паспорт' : 'Свидетельство о рождении';
+
+  let documentNumber;
+  if (data.documentType === 'passport') {
+    documentNumber = `${data.passportSeries} ${data.passportNumber}`;
+  } else {
+    documentNumber = data.birthCertificateNumber;
+  }
+
+
+  const ageCategory = data.ageType === 'adult' ? 'Взрослый' : 'Детский';
+
+  return {
+    ageCategory,
+    fullName,
+    gender,
+    birthDate: birthDateFormatted,
+    documentType,
+    documentNumber,
+  };
+}

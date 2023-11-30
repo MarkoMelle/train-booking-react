@@ -1,99 +1,257 @@
+// import SelectComponent from "../selectComponent/SelectComponent";
 import "./PassengerCard.css";
 import { useState, useEffect } from "react";
 import { Transition } from "react-transition-group";
-// import SelectComponent from "../selectComponent/SelectComponent";
 import BirthDatePicker from "./birthDatePicker/BirthDatePicker";
 import Header from "./header/Header";
 import NameForm from "./nameForm/NameForm";
 import GenderForm from "./genderForm/GenderForm";
 import DocumentForm from "./documentForm/DocumentForm";
 import { errorIcon, validIcon } from "./iconSvg";
+import { useSelector, useDispatch } from "react-redux";
+import { updatePassenger } from "../../../../redux/features/orderSlice";
+import { stringifyDate } from "../../../../utils";
 
-export default function PassengerCard({ seat, number }) {
-  const [firstName, setFirstName] = useState("");
-  const [lastName, setLastName] = useState("");
-  const [patronymic, setPatronymic] = useState("");
-  const [birthDate, setBirthDate] = useState("");
-  const [gender, setGender] = useState("");
-  const [passportSeries, setPassportSeries] = useState("");
-  const [passportNumber, setPassportNumber] = useState("");
-  const [passportForeignNumber, setPassportForeignNumber] = useState("");
-  const [birthCertificateNumber, setBirthCertificateNumber] = useState("");
+function findFirstNonEmptyField(obj) {
+  for (let key in obj) {
+    if (obj[key] !== null && obj[key] !== undefined && obj[key] !== "") {
+      return obj[key];
+    }
+  }
+  return null;
+}
+
+export default function PassengerCard({ seat, number, onFormValidityChange }) {
+  const passenger = useSelector((state) => state.order.passengers[number - 1]);
+  const [firstName, setFirstName] = useState(passenger.firstName || "");
+  const [lastName, setLastName] = useState(passenger.lastName || "");
+  const [patronymic, setPatronymic] = useState(passenger.patronymic || "");
+  const [birthDate, setBirthDate] = useState(
+    passenger.birthDate ? new Date(passenger.birthDate) : ""
+  );
+  const [gender, setGender] = useState(passenger.gender || "");
+  const [passportSeries, setPassportSeries] = useState(
+    passenger.passportSeries || ""
+  );
+  const [passportNumber, setPassportNumber] = useState(
+    passenger.passportNumber || ""
+  );
+  const [passportForeignNumber, setPassportForeignNumber] = useState(
+    passenger.passportForeignNumber || ""
+  );
+  const [birthCertificateNumber, setBirthCertificateNumber] = useState(
+    passenger.birthCertificateNumber || ""
+  );
+  const ageType = seat.type;
+  const [documentType, setDocumentType] = useState(
+    passenger.documentType || ageType === "adult"
+      ? "passport"
+      : "birthCertificate"
+  );
   const [errors, setErrors] = useState({ series: "", number: "" });
   const [isOpened, setIsOpened] = useState(true);
   const [validationAttempted, setValidationAttempted] = useState(false);
-  const ageType = seat.type;
-  const [documentType, setDocumentType] = useState(
-    ageType === "adult" ? "passport" : "birthCertificate"
-  );
   const [errorMessage, setErrorMessage] = useState("");
-  useEffect(() => {
-    if (errorMessage) {
-      const timer = setTimeout(() => {
+  const dispatch = useDispatch();
+    useEffect(() => {
+      if (errorMessage) {
+        const timer = setTimeout(() => {
+          setErrorMessage("");
+          setValidationAttempted(false);
+        }, 3000);
+        return () => clearTimeout(timer);
+      }
+    }, [errorMessage, errors]);
+
+    const validateSeries = (value) => {
+      if (documentType === "passport") {
+        return value.length === 4 && /^[0-9]{4}$/.test(value)
+          ? ""
+          : "Неверная серия";
+      } else if (documentType === "birthCertificate") {
+        return /^M{0,3}(D?C{0,3}|C[DM])(L?X{0,3}|X[LC])(V?I{0,3}|I[VX])\b-?[А-Я]{2}$/i.test(
+          value
+        )
+          ? ""
+          : "Неверная серия";
+      }
+    };
+  
+    const validateNumber = (value) => {
+      // if (isSeriesValidated || documentType === "foreignPassport") {
+      //   setValidationAttempted(true);
+      // }
+      switch (documentType) {
+        case "passport":
+          return value.length === 6 && /^[0-9]{6}$/.test(value)
+            ? ""
+            : "Неверный номер";
+        case "foreignPassport":
+          return /^[0-9]{2}\s[0-9]{7}$/.test(value)
+            ? ""
+            : "Неверный номер загранпаспорта";
+        case "birthCertificate":
+          return value.length === 6 && /^[0-9]{6}$/.test(value)
+            ? ""
+            : "Неверный номер свидетельства о рождении";
+        default:
+          return false;
+      }
+    };
+  
+    const handleSeriesChange = (e) => {
+      const value = e.target.value;
+      switch (documentType) {
+        case "passport":
+          if (value.length <= 4) {
+            setPassportSeries(value);
+          }
+          if (value.length === 4) {
+            const seriesError = validateSeries(value);
+            setErrors({ ...errors, series: seriesError });
+          }
+          break;
+        case "birthCertificate":
+          if (value.length <= 6) {
+            setPassportSeries(value);
+          }
+          if (value.length <= 6) {
+            const seriesError = validateSeries(value);
+            setErrors({ ...errors, series: seriesError });
+          }
+          break;
+        default:
+          break;
+      }
+      console.log(errors);
+    };
+  
+    const handleSeriesBlur = (e) => {
+      const value = e.target.value;
+      const seriesError = validateSeries(value);
+      setErrors({ ...errors, series: seriesError });
+    };
+  
+    const handleNumberOnBlur = (e) => {
+      const value = e.target.value;
+      const numberError = validateNumber(value);
+      setErrors({ ...errors, number: numberError });
+    };
+  
+    const handleNumberChange = (e) => {
+      let value = e.target.value;
+      switch (documentType) {
+        case "passport":
+          if (value.length <= 6) {
+            setPassportNumber(value);
+          }
+          break;
+        case "foreignPassport":
+          value = value.replace(/[^\d]/g, "").replace(/(\d{2})(\d)/, "$1 $2");
+          if (value.length <= 10) {
+            setPassportForeignNumber(value);
+          }
+          break;
+        case "birthCertificate":
+          if (value.length <= 6) {
+            setBirthCertificateNumber(value);
+          }
+          break;
+        default:
+          break;
+      }
+      const numberError = validateNumber(value);
+      setErrors({ ...errors, number: numberError });
+    };
+
+    const validateForm = () => {
+      let newErrors = {
+        firstName: !firstName.trim() ? "Введите имя" : "",
+        lastName: !lastName.trim() ? "Введите фамилию" : "",
+        patronymic: !patronymic.trim() ? "Введите отчество" : "",
+        birthDate: !birthDate ? "Введите дату рождения" : "",
+        gender: !gender.trim() ? "Выберите пол" : "",
+        series: (documentType === "passport" || documentType === "birthCertificate") ? validateSeries(passportSeries) : "",
+        number: (documentType === "passport" || documentType === "birthCertificate") ? validateNumber(passportNumber) : (documentType === "foreignPassport" ? validateNumber(passportForeignNumber) : "")
+      };
+    
+      setErrors(newErrors);
+    
+      const firstError = findFirstNonEmptyField(newErrors);
+      if (firstError) {
+        setErrorMessage(firstError);
+        onFormValidityChange(false);
+        return false;
+      } else {
         setErrorMessage("");
-        setValidationAttempted(false);
-      }, 5000); 
+        onFormValidityChange(true);
+        return true;
+      }
+    };
+    
 
-      return () => clearTimeout(timer); 
-    }
-  }, [errorMessage]);
-  const validateForm = () => {
-    setValidationAttempted(true);
-    let formIsValid = true;
-    setErrorMessage("");
-    let newErrors = {};
-
-    if (!firstName.trim()) {
-      setErrorMessage("Введите имя");
-      formIsValid = false;
+  useEffect(() => {
+    const updatedData = {
+      firstName,
+      lastName,
+      patronymic,
+      birthDate: birthDate ? stringifyDate(birthDate) : "",
+      gender,
+      documentType,
+      passportSeries,
+      passportNumber,
+      passportForeignNumber,
+      birthCertificateNumber,
+      ageType,
+    };
+    dispatch(updatePassenger({ index: number - 1, data: updatedData }));
+    const isFormValid = validateForm();
+    if (!isFormValid) {
+      const firstError = findFirstNonEmptyField(errors);
+      if (firstError) {
+        setErrorMessage(firstError);
+      }
     } else {
-      newErrors.firstName = "";
+      setErrorMessage(""); 
     }
-
-    if (!lastName.trim()) {
-      setErrorMessage("Введите фамилию");
-      formIsValid = false;
-    } else {
-      newErrors.lastName = "";
-    }
-
-    if (!patronymic.trim()) {
-      setErrorMessage("Введите отчество");
-      formIsValid = false;
-    } else {
-      newErrors.patronymic = "";
-    }
-
-    if (!birthDate) {
-      setErrorMessage("Введите дату рождения");
-      formIsValid = false;
-    } else {
-      newErrors.birthDate = "";
-    }
-    if (!gender.trim()) {
-      setErrorMessage("Выберите пол");
-      formIsValid = false;
-    } else {
-      newErrors.gender = "";
-    }
-    if (errors.series || errors.number) {
-      formIsValid = false;
-    }
-    setErrors(newErrors);
-    console.log(newErrors);
-    return formIsValid;
-  };
+  }, [
+    firstName,
+    lastName,
+    patronymic,
+    birthDate,
+    gender,
+    documentType,
+    passportSeries,
+    passportNumber,
+    passportForeignNumber,
+    birthCertificateNumber,
+  ]);
 
   const handleSubmit = (event) => {
+    console.log(errors);
     event.preventDefault();
+    setValidationAttempted(true);
     if (!validateForm()) {
+      const firstError = findFirstNonEmptyField(errors);
+      if (firstError) {
+        setErrorMessage(firstError);
+      }
       return;
     }
-    console.log(
-      `Фамилия: ${lastName}, Имя: ${firstName}, Отчество: ${patronymic}, Дата рождения: ${birthDate}, Пол: ${gender}, Паспорт: ${passportSeries} ${passportNumber}
-        Ограниченная подвижность: ${event.target.accessibility.checked}
-        `
-    );
+    const passengerData = {
+      firstName,
+      lastName,
+      patronymic,
+      birthDate: birthDate ? stringifyDate(birthDate) : "",
+      gender,
+      documentType,
+      passportSeries,
+      passportNumber,
+      passportForeignNumber,
+      birthCertificateNumber,
+      ageType,
+    };
+    dispatch(updatePassenger({ index: number - 1, data: passengerData }));
   };
 
   const duration = 250;
@@ -176,7 +334,7 @@ export default function PassengerCard({ seat, number }) {
                   />
                 </label>
               </div>
-              <label className="passenger-card__label passenger-card__accessibility">
+              {/* <label className="passenger-card__label passenger-card__accessibility">
                 <input
                   className="passenger-card__checkbox"
                   type="checkbox"
@@ -185,7 +343,7 @@ export default function PassengerCard({ seat, number }) {
                 <span className="passenger-card__accessibility-text">
                   ограниченная подвижность
                 </span>
-              </label>
+              </label> */}
               <>
                 <DocumentForm
                   passportSeries={passportSeries}
@@ -199,10 +357,13 @@ export default function PassengerCard({ seat, number }) {
                   age={ageType}
                   errors={errors}
                   setErrors={setErrors}
-                  validationAttempted={validationAttempted}
                   setValidationAttempted={setValidationAttempted}
                   documentType={documentType}
                   setDocumentType={setDocumentType}
+                  handleNumberChange={handleNumberChange}
+                  handleNumberOnBlur={handleNumberOnBlur}
+                  handleSeriesChange={handleSeriesChange}
+                  handleSeriesBlur={handleSeriesBlur}
                 />
                 {validationAttempted && (
                   <div
@@ -212,7 +373,7 @@ export default function PassengerCard({ seat, number }) {
                         : ""
                     }`}
                   >
-                    {errorMessage || errors.series || errors.number 
+                    {errorMessage || errors.series || errors.number
                       ? errorIcon
                       : validIcon}
                     <div className="passenger-card__document-validation-text">
@@ -258,12 +419,7 @@ export default function PassengerCard({ seat, number }) {
                 )}
               </>
               <button
-                className={`secondary-btn passenger-card__next-btn passenger-card__next-btn--${
-                   errors.series || errors.number
-                    ? "disabled"
-                    : "active"
-                }`}
-                disabled={errors.series || errors.number}
+                className={`secondary-btn passenger-card__next-btn `}
                 type="submit"
               >
                 Следующий пассажир

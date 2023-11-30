@@ -8,32 +8,31 @@ import TicketDetails from "./ticketDetails/TicketDetails";
 import PassengerDetails from "./passengerDetails/PassengerDetails";
 import TotalPrice from "./totalPrice/TotalPrice";
 import PropTypes from "prop-types";
-import { useState, useEffect } from "react";
-import { calculateTicketInfo } from "../../../utils";
 
 export default function TicketsDetails({ activeStep }) {
   const { currentRoute, currentRouteBack } = useSelector(
     (state) => state.seats
   );
-  const { selectedSeats } = useSelector((state) => state.seats);
-  const [passengersInfo, setPassengersInfo] = useState({
-    passengers: {
-      adult: 0,
-      children: 0,
-    },
-    price: {
-      adult: 0,
-      children: 0,
-    },
-    totalPrice: 0,
-  });
+  const { passengersInfo } = useSelector((state) => state.seats);
+
+  // const [passengersInfo, setPassengersInfo] = useState({
+  //   passengers: {
+  //     adult: 0,
+  //     children: 0,
+  //   },
+  //   price: {
+  //     adult: 0,
+  //     children: 0,
+  //   },
+  //   totalPrice: 0,
+  // });
 
     
-    useEffect(() => {
-      if (activeStep >= 2) {
-        setPassengersInfo(calculateTicketInfo(selectedSeats));
-      }
-    }, [selectedSeats, activeStep]);
+  //   useEffect(() => {
+  //     if (activeStep >= 2) {
+  //       setPassengersInfo(calculateTicketInfo(selectedSeats));
+  //     }
+  //   }, [selectedSeats, activeStep]);
   
   return (
     <div className="tickets-details">
@@ -46,7 +45,7 @@ export default function TicketsDetails({ activeStep }) {
           <TimeSliders direction="arrival" />
         </>
       )}
-      {(activeStep === 2 || activeStep === 3) && (
+      {(activeStep >= 2 && currentRoute) && (
         <>
           <h2 className="tickets-details__title">Детали поездки</h2>
           <TicketDetails direction="departure" currentRoute={currentRoute} />
