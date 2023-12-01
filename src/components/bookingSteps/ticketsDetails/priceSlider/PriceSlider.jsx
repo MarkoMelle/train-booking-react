@@ -15,7 +15,6 @@ export default function PriceSlider() {
   const { minPrice, maxPrice, priceFrom, priceTo } = useSelector(
     (state) => state.searchResults
   );
-  console.log(minPrice, maxPrice, priceFrom, priceTo);
   const [value, setValue] = useState([
     priceFrom || minPrice,
     priceTo || maxPrice,

@@ -125,7 +125,6 @@ export default function PassengerCard({ seat, number, onFormValidityChange }) {
       default:
         break;
     }
-    console.log(errors);
   };
 
   const handleSeriesBlur = (e) => {
@@ -237,7 +236,6 @@ export default function PassengerCard({ seat, number, onFormValidityChange }) {
   ]);
 
   const handleSubmit = (event) => {
-    console.log(errors);
     event.preventDefault();
     setValidationAttempted(true);
     if (!validateForm()) {

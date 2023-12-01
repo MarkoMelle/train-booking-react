@@ -83,7 +83,7 @@ export default function Ticket({
 
 Ticket.propTypes = {
   ticket: PropTypes.object.isRequired,
-  handleSeatSelection: PropTypes.func.isRequired,
-  handleTripChange: PropTypes.func.isRequired,
+  handleSeatSelection: PropTypes.func,
+  handleTripChange: PropTypes.func,
   isVerification: PropTypes.bool,
 };

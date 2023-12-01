@@ -150,5 +150,5 @@ Place.propTypes = {
   type: PropTypes.string.isRequired,
   onClick: PropTypes.func.isRequired,
   offset: PropTypes.number.isRequired,
-  placePrice: PropTypes.number.isRequired,
+  placePrice: PropTypes.number
 };

@@ -175,10 +175,8 @@ export default function SitClassInfo({
 }
 
 SitClassInfo.propTypes = {
-  sitClasses: PropTypes.array.isRequired,
-  handleSeatSelection: PropTypes.func.isRequired,
-  setCurrentTrip: PropTypes.func.isRequired,
-  ticket: PropTypes.object.isRequired,
+  handleSeatSelection: PropTypes.func,
+  ticket: PropTypes.object,
   isVerification: PropTypes.bool,
-  handleTripChange: PropTypes.func.isRequired,
+  handleTripChange: PropTypes.func,
 };

@@ -60,6 +60,8 @@ export default function PassengerDetails({ passengersInfo }) {
                   {passengersInfo.price.adult}
                 </span>
               </div>
+              {passengersInfo.passengers.children > 0 && (
+                <>
               <div className="passenger-details__content">
                 <span className="passenger-details__count">
                   {passengersInfo.passengers.children === 1
@@ -70,6 +72,8 @@ export default function PassengerDetails({ passengersInfo }) {
                   {passengersInfo.price.children}
                 </span>
               </div>
+              </>
+              )}
             </div>
           </div>
         )}

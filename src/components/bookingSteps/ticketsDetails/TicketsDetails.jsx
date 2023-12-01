@@ -15,24 +15,6 @@ export default function TicketsDetails({ activeStep }) {
   );
   const { passengersInfo } = useSelector((state) => state.seats);
 
-  // const [passengersInfo, setPassengersInfo] = useState({
-  //   passengers: {
-  //     adult: 0,
-  //     children: 0,
-  //   },
-  //   price: {
-  //     adult: 0,
-  //     children: 0,
-  //   },
-  //   totalPrice: 0,
-  // });
-
-  //   useEffect(() => {
-  //     if (activeStep >= 2) {
-  //       setPassengersInfo(calculateTicketInfo(selectedSeats));
-  //     }
-  //   }, [selectedSeats, activeStep]);
-
   return (
     <div className="tickets-details">
       {activeStep === 1 && (
@@ -64,5 +46,4 @@ export default function TicketsDetails({ activeStep }) {
 
 TicketsDetails.propTypes = {
   activeStep: PropTypes.number.isRequired,
-  currentTrip: PropTypes.object.isRequired,
 };

@@ -49,7 +49,6 @@ export const fetchRoutes = createAsyncThunk(
         newFilters.toCity.id !== searchResults.lastFilters.toCityId ||
         newFilters.dateStart !== searchResults.lastFilters.dateStart ||
         newFilters.dateEnd !== searchResults.lastFilters.dateEnd;
-      console.log("isRouteChanged", isRouteChanged);
       const requestParams = prepareRequestParams(newFilters, isRouteChanged);
 
       const data = await apiClient.searchRoutes(requestParams);

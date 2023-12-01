@@ -138,6 +138,6 @@ CustomHeader.propTypes = {
 };
 
 BirthDatePicker.propTypes = {
-  date: PropTypes.instanceOf(Date).isRequired,
+  date: PropTypes.oneOfType([PropTypes.instanceOf(Date), PropTypes.string]),
   setDate: PropTypes.func.isRequired,
 };

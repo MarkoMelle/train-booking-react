@@ -44,13 +44,13 @@ CustomSelect.propTypes = {
 SelectSeatComponent.propTypes = {
   option: PropTypes.arrayOf(
     PropTypes.shape({
-      value: PropTypes.string.isRequired,
+      value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
       label: PropTypes.string.isRequired,
     })
   ).isRequired,
   className: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  value: PropTypes.string.isRequired,
+  value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 };
 
 const blue = {

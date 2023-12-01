@@ -27,8 +27,7 @@ export default function Footer() {
 
     apiClient
       .subscribe(email)
-      .then((res) => {
-        console.log(res);
+      .then(() => {
         setEmail("");
         dispatch(
           showSnackBar({ message: "Вы успешно подписались!", type: "success" })

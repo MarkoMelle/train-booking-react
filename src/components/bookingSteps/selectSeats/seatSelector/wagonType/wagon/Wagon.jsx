@@ -128,7 +128,7 @@ export default function Wagon({
 Wagon.propTypes = {
   wagon: PropTypes.object.isRequired,
   type: PropTypes.string.isRequired,
-  seatsFilter: PropTypes.string.isRequired,
+  seatsFilter: PropTypes.object.isRequired,
   handleSelectSeat: PropTypes.func.isRequired,
   handleDeselectSeat: PropTypes.func.isRequired,
   selectedSeats: PropTypes.array.isRequired,

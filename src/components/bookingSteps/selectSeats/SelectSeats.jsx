@@ -13,6 +13,7 @@ import {
 } from "../../../redux/features/seatsSlice";
 import { initializePassengers } from "../../../redux/features/orderSlice";
 import { calculateTicketInfo } from "../../../utils";
+import { showSnackBar } from "../../../redux/features/notificationsSlice";
 
 export default function SelectSeats({ setActiveStep }) {
   const {
@@ -36,9 +37,21 @@ export default function SelectSeats({ setActiveStep }) {
   });
   const dispatch = useDispatch();
 
+  function calculatePassengerCounts() {
+    let total = 0;
+    Object.values(passengerCounts).forEach((count) => {
+      total += count;
+    });
+    return total;
+  }
+
   const handleSubmit = () => {
+    if (calculatePassengerCounts() === 0) {
+      dispatch(showSnackBar({ message: "Выберите количество пассажиров" }));
+      return;
+    }
     if (selectedSeatsLocal.length === 0) {
-      console.log("Не выбраны места");
+      dispatch(showSnackBar({ message: "Выберите места" }));
       return;
     }
     if (
@@ -59,7 +72,6 @@ export default function SelectSeats({ setActiveStep }) {
       if (element) {
         element.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-      console.log(selectedSeatsLocal);
       dispatch(initializePassengers(selectedSeatsLocal));
       dispatch(
         setPassengersInfo(
@@ -70,7 +82,7 @@ export default function SelectSeats({ setActiveStep }) {
         )
       );
     } else {
-      console.log("Не все места выбраны");
+      dispatch(showSnackBar({ message: "Выберите места" }));
       return;
     }
   };
@@ -80,6 +92,7 @@ export default function SelectSeats({ setActiveStep }) {
       <h2 className="select-seats__title">Выбор мест</h2>
       <SeatSelector
         {...{
+          direction: "departure",
           setActiveStep,
           currentRoute,
           routeId,
@@ -129,5 +142,4 @@ export default function SelectSeats({ setActiveStep }) {
 
 SelectSeats.propTypes = {
   setActiveStep: PropTypes.func.isRequired,
-  currentTrip: PropTypes.object.isRequired,
 };

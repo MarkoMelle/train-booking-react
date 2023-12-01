@@ -10,7 +10,6 @@ export default function LastTickets() {
     apiClient
       .getLastRoutes()
       .then((res) => {
-        console.log(res);
         if (Array.isArray(res)) {
           setTickets(res);
         } else {

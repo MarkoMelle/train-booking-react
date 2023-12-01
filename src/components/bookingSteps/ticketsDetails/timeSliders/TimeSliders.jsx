@@ -15,10 +15,6 @@ import { debounce } from "../../../../utils";
 
 export default function TimeSliders({
   direction,
-  // departureTime,
-  // arrivalTime,
-  // handleDepartureTimeChange,
-  // handleArrivalTimeChange,
 }) {
   const filters = useSelector((state) => state.searchResults);
   const dispatch = useDispatch();
@@ -199,6 +195,4 @@ export default function TimeSliders({
 
 TimeSliders.propTypes = {
   direction: PropTypes.string.isRequired,
-  departureTime: PropTypes.array.isRequired,
-  arrivalTime: PropTypes.array.isRequired,
 };

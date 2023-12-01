@@ -497,7 +497,7 @@ SeatSelector.propTypes = {
   direction: PropTypes.string.isRequired,
   currentRoute: PropTypes.object.isRequired,
   routeId: PropTypes.string.isRequired,
-  seatsInfo: PropTypes.array.isRequired,
+  seatsInfo: PropTypes.oneOfType([PropTypes.array, PropTypes.object]),
   setSeatsInfo: PropTypes.func.isRequired,
   setSelectedSeats: PropTypes.func.isRequired,
   resetRoute: PropTypes.func.isRequired,

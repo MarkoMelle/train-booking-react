@@ -144,5 +144,4 @@ WagonTypes.propTypes = {
   activeWagonId: PropTypes.string,
   setActiveWagonId: PropTypes.func.isRequired,
   filteredWagonTypes: PropTypes.array.isRequired,
-  wagonTypes: PropTypes.array.isRequired,
 };

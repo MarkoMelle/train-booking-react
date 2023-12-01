@@ -106,24 +106,5 @@ export default function TicketDetails({ direction, currentRoute }) {
 
 TicketDetails.propTypes = {
   direction: PropTypes.string.isRequired,
-  currentRoute: PropTypes.shape({
-    from: PropTypes.shape({
-      city: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-      }).isRequired,
-      datetime: PropTypes.string.isRequired,
-      railway_station_name: PropTypes.string.isRequired,
-    }).isRequired,
-    to: PropTypes.shape({
-      city: PropTypes.shape({
-        name: PropTypes.string.isRequired,
-      }).isRequired,
-      datetime: PropTypes.string.isRequired,
-      railway_station_name: PropTypes.string.isRequired,
-    }).isRequired,
-    train: PropTypes.shape({
-      name: PropTypes.string.isRequired,
-    }).isRequired,
-    duration: PropTypes.number.isRequired,
-  }).isRequired,
+  currentRoute: PropTypes.object.isRequired,
 };
